@@ -1,0 +1,179 @@
+[
+  {
+    "Link": "bO28lB1uwp4",
+    "Chords": ["Am", "F", "C", "G", "Em", "Am7/G"],
+    "StrummingPattern": {
+      "Bpm": 116,
+      "Beats": 4,
+      "Pattern": "duxuduxu"
+    },
+    "Capo": -1,
+    "Parts": [
+      { "Section": "[Intro]", "Lines": [["*Am*F*C*G*C*C"]] },
+      {
+        "Section": "[Verse 1]",
+        "Lines": [
+          [
+            "Someone*C",
+            "told",
+            "me",
+            "long",
+            "ago,",
+            "there's",
+            "a",
+            "calm",
+            "before",
+            "the",
+            "storm"
+          ],
+          ["I", "know,*G", "it's", "been", "coming", "for*C", "some", "time,"],
+          [
+            "When*C",
+            "it's",
+            "over",
+            "so",
+            "they",
+            "say,",
+            "it",
+            "will",
+            "rain",
+            "a",
+            "sunny",
+            "day"
+          ],
+          ["I", "know,*G", "shining", "down", "like", "water*C"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          [
+            "*F",
+            "I",
+            "wanna",
+            "know,*G",
+            "have",
+            "you",
+            "ever*C",
+            "seen*Em",
+            "the",
+            "rain*Am*Am7/G"
+          ],
+          [
+            "*F",
+            "I",
+            "wanna",
+            "know,*G",
+            "have",
+            "you",
+            "ever*C",
+            "seen*Em",
+            "the",
+            "rain*Am*Am7/G"
+          ],
+          ["*F", "coming", "down*G", "on", "a", "sunny", "day*C*G"]
+        ]
+      },
+      {
+        "Section": "[Verse 2]",
+        "Lines": [
+          [
+            "*C",
+            "Yesterday",
+            "and",
+            "days",
+            "before,",
+            "sun",
+            "is",
+            "cold",
+            "and",
+            "rain",
+            "is",
+            "hard"
+          ],
+          [
+            "I",
+            "know,*G",
+            "been",
+            "that",
+            "way",
+            "for",
+            "all*C",
+            "my",
+            "time,"
+          ],
+          [
+            "*C",
+            "till",
+            "forever",
+            "on",
+            "it",
+            "goes,",
+            "through",
+            "the",
+            "circle",
+            "fast",
+            "and",
+            "slow"
+          ],
+          ["I", "know,*G", "it", "can't", "stop", "I", "wonder*C"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          [
+            "*F",
+            "I",
+            "wanna",
+            "know,*G",
+            "have",
+            "you",
+            "ever*C",
+            "seen*Em",
+            "the",
+            "rain*Am*Am7/G"
+          ],
+          [
+            "*F",
+            "I",
+            "wanna",
+            "know,*G",
+            "have",
+            "you",
+            "ever*C",
+            "seen*Em",
+            "the",
+            "rain*Am*Am7/G"
+          ],
+          ["*F", "coming", "down*G", "on", "a", "sunny", "day*C", "yeah!*C"],
+          [
+            "*F",
+            "I",
+            "wanna",
+            "know,*G",
+            "have",
+            "you",
+            "ever*C",
+            "seen*Em",
+            "the",
+            "rain*Am*Am7/G"
+          ],
+          [
+            "*F",
+            "I",
+            "wanna",
+            "know,*G",
+            "have",
+            "you",
+            "ever*C",
+            "seen*Em",
+            "the",
+            "rain*Am*Am7/G"
+          ],
+          ["*F", "coming", "down*G", "on", "a", "sunny", "day*C*G"]
+        ]
+      }
+    ]
+  }
+]

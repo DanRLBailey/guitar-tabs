@@ -1,0 +1,148 @@
+[
+  {
+    "Link": "fXw0jcYbqdo",
+    "Chords": ["C", "E7", "Am", "G", "F", "Dm", "G/B", "D"],
+    "StrummingPattern": {
+      "Bpm": 73,
+      "Beats": 4,
+      "Pattern": "dddddddd"
+    },
+    "Capo": 4,
+    "Parts": [
+      { "Section": "[Intro]", "Lines": [["*C*C"]] },
+      {
+        "Section": "[Verse 1]",
+        "Lines": [
+          ["*C", "I", "know", "you're", "somewhere", "out", "there"],
+          ["Somewhere*E7", "far", "away"],
+          ["I", "want*Am", "you", "back*G"],
+          ["I", "want*F", "you", "back"],
+          ["*C", "My", "neighbors", "think", "I'm", "crazy"],
+          ["But", "they*E7", "don't", "understand"],
+          ["You're", "all*Am", "I", "had", "*G"],
+          ["You're", "all*F", "I", "had"]
+        ]
+      },
+      {
+        "Section": "[Pre-Chorus]",
+        "Lines": [
+          ["*Dm", "At", "night", "when", "the", "stars*G"],
+          ["light", "up", "my", "room*Dm"],
+          ["I", "sit", "by", "myself*G"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Talking", "to", "the", "moon*F*G*Am"],
+          ["Tryna", "get", "to", "you*F*G*Am"],
+          [
+            "In",
+            "hopes*F",
+            "you're",
+            "on",
+            "the",
+            "other*G",
+            "side",
+            "talking*C",
+            "to*G/B",
+            "me",
+            "too*Am"
+          ],
+          ["Or", "am*G", "I", "a", "fool*F", "who", "sits", "alone*G"],
+          ["Talking", "to", "the", "moon*Am*G"],
+          ["Oh*D"]
+        ]
+      },
+      {
+        "Section": "[Verse 2]",
+        "Lines": [
+          ["*C", "I'm", "feelin'", "like", "I'm", "famous"],
+          ["The", "talk*E7", "of", "the", "town"],
+          ["They", "say", "I've*Am", "gone", "mad*G"],
+          ["Yeah,", "I've*F", "gone", "mad"],
+          ["*C", "But", "they", "don't", "know", "what", "I", "know"],
+          ["Cause", "when*E7", "the", "sun", "goes", "down"],
+          ["Someone's", "talkin'*Am", "back", "*G"],
+          ["Yeah,", "they're", "talkin'*F", "back,", "oh"]
+        ]
+      },
+      {
+        "Section": "[Pre-Chorus]",
+        "Lines": [
+          ["*Dm", "At", "night", "when", "the", "stars*G"],
+          ["light", "up", "my", "room*Dm"],
+          ["I", "sit", "by", "myself*G"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Talking", "to", "the", "moon*F*G*Am"],
+          ["Tryna", "get", "to", "you*F*G*Am"],
+          [
+            "In",
+            "hopes*F",
+            "you're",
+            "on",
+            "the",
+            "other*G",
+            "side",
+            "talking*C",
+            "to*G/B",
+            "me",
+            "too*Am"
+          ],
+          ["Or", "am*G", "I", "a", "fool*F", "who", "sits", "alone*G"],
+          ["Talking", "to", "the", "moon"]
+        ]
+      },
+      {
+        "Section": "[Interlude]",
+        "Lines": [
+          ["*Dm", "Ah,", "*C", "ah,", "*Dm", "ah"],
+          ["Do*G", "you", "ever", "hear", "me", "calling?"],
+          ["*Dm", "Ah,", "*C", "ah,", "*Dm", "ah"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          [
+            "Cause",
+            "every*G",
+            "night",
+            "I'm",
+            "Talking",
+            "to",
+            "the",
+            "moon*F*G*Am"
+          ],
+          ["Tryna", "get", "to", "you*F*G*Am"],
+          [
+            "In",
+            "hopes*F",
+            "you're",
+            "on",
+            "the",
+            "other*G",
+            "side",
+            "talking*C",
+            "to*G/B",
+            "me",
+            "too*Am"
+          ],
+          ["Or", "am*G", "I", "a", "fool*F", "who", "sits", "alone*G"],
+          ["Talking", "to", "the", "moon*Am*G*D"]
+        ]
+      },
+      {
+        "Section": "[Outro]",
+        "Lines": [
+          ["*C", "I", "know", "you're", "somewhere", "out", "there"],
+          ["Somewhere*E7", "far", "away"]
+        ]
+      }
+    ]
+  }
+]
