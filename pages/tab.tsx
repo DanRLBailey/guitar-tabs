@@ -7,9 +7,12 @@ interface TabProp {
 }
 
 export default function Tab(props: TabProp) {
-  const getStrings = (notes: string[]) => {
+  const getStrings = (notes: string[], chord?: string) => {
     let elements: JSX.Element[] = [];
     const strings = ["e", "B", "G", "D", "A", "E"];
+
+    if (chord) elements.push(<div className={styles.fret}>{chord}</div>);
+    else elements.push(<div className={styles.chordEmpty}>.</div>);
 
     strings.forEach((str: string) => {
       if (notes.some((n) => n[0] == str)) {
@@ -29,6 +32,7 @@ export default function Tab(props: TabProp) {
     <div className={styles.container}>
       <div className={styles.tabContainer}>
         <div className={styles.strings}>
+          <span className={styles.chordEmpty}>.</span>
           <span>e</span>
           <span>B</span>
           <span>G</span>
@@ -37,7 +41,7 @@ export default function Tab(props: TabProp) {
           <span>E</span>
         </div>
         {props.tab.map((item: TabItem, index: number) => {
-          return getStrings(item.Notes);
+          return getStrings(item.Notes, item.Chord);
         })}
         <div className={styles.end} />
       </div>

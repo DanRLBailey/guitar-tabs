@@ -443,19 +443,23 @@
       "CTab": [
         {
           "Beat": 1,
-          "Notes": ["A2"]
+          "Notes": ["A2"],
+          "Chord": "Dm"
         },
         {
           "Beat": 2,
-          "Notes": ["A3"]
+          "Notes": ["A3"],
+          "Chord": ""
         },
         {
           "Beat": 3,
-          "Notes": ["D0"]
+          "Notes": ["D0"],
+          "Chord": "Am"
         },
         {
           "Beat": 4,
-          "Notes": ["D2"]
+          "Notes": ["D2"],
+          "Chord": ""
         }
       ]
     }

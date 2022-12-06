@@ -4,13 +4,10 @@
   background: #f5f5f5;
   border-radius: 1rem;
   color: black;
-  //height: 200px;
-  //padding: 1rem;
 
   .chordContainer {
     table-layout: fixed;
     width: 100%;
-    // background: red;
 
     &,
     td,
@@ -59,6 +56,10 @@
     tbody > tr {
       height: 25px;
 
+      &:first-of-type > td {
+        border-top: 5px solid black;
+      }
+
       td {
         width: 10px;
         border: 1px solid black;
@@ -103,7 +104,7 @@
           span {
             &.barre {
               &::after {
-                width: 15px;
+                width: 0;
               }
             }
           }

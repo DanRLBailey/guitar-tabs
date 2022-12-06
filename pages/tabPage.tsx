@@ -50,13 +50,17 @@ export default function TabPage(props: TabPageProp) {
   const showChord = (chord: string) => {
     const key = chord[0];
     const suffix = chord.slice(1) != "" ? chord.slice(1) : "maj";
-    const c = props.Chords[key].find((x) => x.Suffix == suffix);
 
-    if (c) {
-      setShowChordModal(true);
-      setCurrentChord(c);
-      setCurrentTab(null);
-      return;
+    const temp = props.Chords[key];
+    if (temp) {
+      const c = temp.find((x) => x.Suffix == suffix);
+
+      if (c) {
+        setShowChordModal(true);
+        setCurrentChord(c);
+        setCurrentTab(null);
+        return;
+      }
     }
 
     const t = song.Tabs[chord];
@@ -72,10 +76,6 @@ export default function TabPage(props: TabPageProp) {
     if (index < 0) return;
     setHighlightedIndex(index);
     setHighlightedChord(chordList[index]);
-  };
-
-  const onMouseMove = (e) => {
-    setPosition({ x: e.screenX - 100, y: e.screenY - 75 });
   };
 
   return (
@@ -165,10 +165,7 @@ export default function TabPage(props: TabPageProp) {
           </div>
         )}
         {currentChord && showChordModal && (
-          <div
-            className={styles.popup}
-            style={{ top: `${position.y}px`, left: `${position.x}px` }}
-          >
+          <div className={styles.popup}>
             <Chord chord={currentChord} />
           </div>
         )}

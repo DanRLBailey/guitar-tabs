@@ -10,5 +10,9 @@
   "hotel-california": {
     "Name": "Hotel California",
     "Artist": "Eagles"
+  },
+  "dancing-in-the-moonlight": {
+    "Name": "Dancing In The Moonlight",
+    "Artist": "Toploader"
   }
 }

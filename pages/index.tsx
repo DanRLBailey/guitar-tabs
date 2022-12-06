@@ -16,6 +16,11 @@ export default function Home() {
         <li>
           <Link href="songs/talking-to-the-moon">Talking To The Moon</Link>
         </li>
+        <li>
+          <Link href="songs/dancing-in-the-moonlight">
+            Dancing In The Moonlight
+          </Link>
+        </li>
       </ul>
     </div>
   );

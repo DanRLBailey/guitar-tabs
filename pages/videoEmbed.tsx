@@ -70,17 +70,19 @@ export default function VideoEmbed(props: VideoEmbedProps) {
       if (!playing) return;
 
       setCurrentTime(player.current.getCurrentTime());
-      const l =
-        props.timings.find((t) => t <= currentTime && t > latest) ?? latest;
+      if (props.timings) {
+        const l =
+          props.timings.find((t) => t <= currentTime && t > latest) ?? latest;
 
-      const i = props.timings.filter((t) => {
-        return t <= currentTime;
-      });
+        const i = props.timings.filter((t) => {
+          return t <= currentTime;
+        });
 
-      if (i.length - 1 != count) setCount(i.length - 1);
+        if (i.length - 1 != count) setCount(i.length - 1);
 
-      if (l) {
-        setLatest(l);
+        if (l) {
+          setLatest(l);
+        }
       }
     }, 10);
     return () => clearTimeout(timer);
@@ -93,12 +95,15 @@ export default function VideoEmbed(props: VideoEmbedProps) {
     const suffix =
       props.currentChord.slice(1) != "" ? props.currentChord.slice(1) : "maj";
 
-    const c = props.chords[key].find((x) => x.Suffix == suffix);
+    const temp = props.chords[key];
+    if (temp) {
+      const c = temp.find((x) => x.Suffix == suffix);
 
-    if (c) {
-      setCurrentChord(c);
-      setCurrentTab(null);
-      return;
+      if (c) {
+        setCurrentChord(c);
+        setCurrentTab(null);
+        return;
+      }
     }
 
     const t = props.tabs[props.currentChord];

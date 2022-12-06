@@ -26,6 +26,7 @@ export interface Tab {
 export interface TabItem {
   Beat: number
   Notes: string[]
+  Chord: string
 }
 
 export interface Chords {
