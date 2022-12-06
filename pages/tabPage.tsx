@@ -7,7 +7,7 @@ import {
   SongMetaDetails,
   TabItem,
 } from "../public/Types/interfaces";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chord from "./chord";
 import VideoEmbed from "./videoEmbed";
 import Tab from "./tab";
@@ -77,6 +77,14 @@ export default function TabPage(props: TabPageProp) {
     setHighlightedChord(chordList[index]);
   };
 
+  useEffect(() => {
+    if (highlightedIndex) {
+      document
+        .getElementById(`chord-${highlightedIndex}`)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [highlightedIndex]);
+
   return (
     <div className={styles.container}>
       <div className={styles.songContainer}>
@@ -113,17 +121,18 @@ export default function TabPage(props: TabPageProp) {
                       {lineItem.map((word: string, wordIndex) => {
                         const c = getChords(word);
                         const w = getWord(word);
+
                         return (
                           <div key={wordIndex} className={styles.word}>
                             <div className={styles.chords}>
                               {c.map((chord: string, chordIndex: number) => {
+                                const currentChordIndex =
+                                  chordList.length - c.length + chordIndex;
                                 return (
                                   <span
+                                    id={`chord-${currentChordIndex}`}
                                     className={`${styles.chord} ${
-                                      chordList.length -
-                                        c.length +
-                                        chordIndex ==
-                                      highlightedIndex
+                                      currentChordIndex == highlightedIndex
                                         ? styles.highlight
                                         : ""
                                     }`}

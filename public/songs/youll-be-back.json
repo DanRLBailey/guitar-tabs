@@ -1,0 +1,244 @@
+[
+  {
+    "Link": "eKFN-aqPJH8",
+    "Chords": ["G", "G/F", "C", "Am7", "D", "Em", "G/D", "Cm", "D7", "F"],
+    "StrummingPattern": {
+      "Bpm": 122,
+      "Beats": 4,
+      "Pattern": "d-d-d-du"
+    },
+    "Capo": 4,
+    "Parts": [
+      { "Section": "[Intro]", "Lines": [["*G*G/F*C*Am7*D"]] },
+      {
+        "Section": "[Verse]",
+        "Lines": [
+          ["You", "say*G"],
+          [
+            "The",
+            "price*G/F",
+            "of",
+            "my",
+            "love's",
+            "not",
+            "a",
+            "price*GC",
+            "that",
+            "you're",
+            "willing",
+            "to",
+            "pay*Gm7*D"
+          ],
+          ["You", "cry*G"],
+          [
+            "In",
+            "your",
+            "tea*G/F",
+            "which",
+            "you",
+            "hurl",
+            "in",
+            "the",
+            "sea*C",
+            "when",
+            "you",
+            "see",
+            "me",
+            "go",
+            "by*Am7"
+          ],
+          ["Why*D", "so", "sad?*Em"],
+          [
+            "Remember*D",
+            "we",
+            "made",
+            "an",
+            "arrangement*C",
+            "when",
+            "you",
+            "went",
+            "away*Am7"
+          ],
+          ["Now", "you're", "making*D", "me", "mad*Em"],
+          [
+            "Remember*D",
+            "despite",
+            "our",
+            "estrangement*C,",
+            "I'm",
+            "your",
+            "man*D"
+          ]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["You'll", "be", "back*G,", "soon", "you'll", "see*G/F"],
+          ["You'll", "remember*C", "you", "belong", "to", "me*Am7"],
+          ["You'll*D", "be", "back*G,", "time", "will", "tell*G/F"],
+          ["You'll", "remember*C", "that", "I", "served", "you", "well*Am7"],
+          ["Oceans*D", "rise*Em,", "empires", "fall*G/D"],
+          ["We", "have", "seen*C", "each", "other", "through", "it", "all*Cm"],
+          ["And", "when", "push*Em", "comes", "to", "shove*G/D"],
+          ["I", "will", "send*C", "a", "fully", "armed", "battalion*Am7"],
+          ["To", "remind*D", "you", "of", "my", "love!*G"]
+        ]
+      },
+      {
+        "Section": "[Bridge]",
+        "Lines": [
+          [
+            "Da*G",
+            "da",
+            "da",
+            "dat",
+            "da*G/f",
+            "dat",
+            "da",
+            "da",
+            "da",
+            "da*C",
+            "ya",
+            "da"
+          ],
+          ["Da", "da", "dat*Cm", "dat", "da*D", "ya", "da!*G"],
+          [
+            "Da",
+            "da",
+            "da",
+            "dat",
+            "da*G/F",
+            "dat",
+            "da",
+            "da",
+            "da",
+            "da*C",
+            "ya",
+            "da"
+          ],
+          ["Da", "da", "dat*Cm", "dat", "da."]
+        ]
+      },
+      {
+        "Section": "[Verse]",
+        "Lines": [
+          ["You", "say*Em"],
+          [
+            "Our",
+            "love",
+            "is",
+            "draining*G",
+            "and",
+            "you",
+            "can't",
+            "go",
+            "on!*C*Cm"
+          ],
+          ["You'll", "be*Em"],
+          ["The", "one", "complaining*F", "when", "I", "am", "gone!*C*Cm"],
+          ["And", "NO,*Am7"],
+          ["Don't", "change", "the", "subject!*D7"],
+          ["'Cause", "you're*Am7", "my", "favorite", "subject!*D7"],
+          ["My", "sweet*F,", "submissive", "subject!*C"],
+          ["My", "loyal*F,", "royal", "subject!*C"],
+          ["Forever*G"],
+          ["And", "ever*G/F"],
+          ["And", "ever,*Cm", "and", "ever,", "and", "ever."]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["You'll", "be", "back*G,", "like", "before*G/F"],
+          [
+            "I",
+            "will",
+            "fight*C",
+            "the",
+            "fight",
+            "and",
+            "win",
+            "the",
+            "war*Am7"
+          ],
+          ["For*D7", "your", "love,*G", "for", "your", "praise*G/F"],
+          ["And", "I'll", "love*C", "ya", "'til", "my", "dying", "days*Am7"],
+          ["When*D7", "you're", "gone,*Em", "I'll", "go", "mad*G/D"],
+          ["So", "don't", "throw*C", "away", "this", "thing", "we", "had*Cm"],
+          ["'Cause", "when", "push*Em", "comes", "to", "shove*G/D"],
+          ["I", "will", "kill*C", "your", "friends", "and", "family."],
+          ["To", "remind*D", "you", "of", "my", "love!*G"]
+        ]
+      },
+      {
+        "Section": "[Outro]",
+        "Lines": [
+          [
+            "Da*G",
+            "da",
+            "da",
+            "dat",
+            "da*G/F",
+            "dat",
+            "da",
+            "da",
+            "da",
+            "da*C",
+            "ya",
+            "da"
+          ],
+          ["Da", "da", "dat*Cm", "dat", "da*D7", "ya", "da!*G"],
+          [
+            "Da",
+            "da",
+            "da",
+            "dat",
+            "da*G/F",
+            "dat",
+            "da",
+            "da",
+            "da",
+            "da*C",
+            "ya",
+            "da"
+          ],
+          ["Da", "da", "dat*Cm", "-", "Everybody!*D7"],
+          [
+            "Da*G",
+            "da",
+            "da",
+            "dat",
+            "da*G/F",
+            "dat",
+            "da",
+            "da",
+            "da",
+            "da*C",
+            "ya",
+            "da"
+          ],
+          ["Da", "da", "dat*Cm", "dat", "da", "ya", "da!*G"],
+          [
+            "Da",
+            "da",
+            "da",
+            "dat",
+            "da*G/F",
+            "dat",
+            "da",
+            "da",
+            "da",
+            "da*C",
+            "ya",
+            "da",
+            "da",
+            "da",
+            "da"
+          ],
+          ["Dat*Cm", "dat", "da*D7", "ya", "da!*G"]
+        ]
+      }
+    ]
+  }
+]
