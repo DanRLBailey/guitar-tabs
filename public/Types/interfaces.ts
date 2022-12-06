@@ -1,20 +1,31 @@
 export interface Song {
-  Link: string;
-  Chords: string[];
-  StrummingPattern: StrummingPattern;
-  Capo: number;
-  Parts: SongSection[];
+  Link: string
+  Chords: string[]
+  StrummingPattern: StrummingPattern
+  Capo: number
+  Parts: SongSection[]
+  Timings: number[]
+  Tabs: Tab
 }
 
 export interface StrummingPattern {
-  Bpm: number;
-  Beats: number;
-  Pattern: string;
+  Bpm: number
+  Beats: number
+  Pattern: string
 }
 
 export interface SongSection {
-  Section: string;
-  Lines: [];
+  Section: string
+  Lines: []
+}
+
+export interface Tab {
+  [key: string]: TabItem[]
+}
+
+export interface TabItem {
+  Beat: number
+  Notes: string[]
 }
 
 export interface Chords {
@@ -22,8 +33,8 @@ export interface Chords {
 }
 
 export interface Chord {
-  Key: string,
-  Suffix: string,
+  Key: string
+  Suffix: string
   Positions: Position[]
 }
 
@@ -32,4 +43,13 @@ export interface Position {
   Fingers: number[]
   BaseFret: number
   Barres: number[]
+}
+
+export interface SongMeta {
+  [key: string]: SongMetaDetails
+}
+
+export interface SongMetaDetails {
+  Name: string
+  Artist: string
 }

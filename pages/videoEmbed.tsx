@@ -2,11 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../styles/VideoEmbed.module.scss";
 import ReactPlayer from "react-player/youtube";
 import Chord from "./chord";
-import { Chords, Chord as ChordType } from "../public/Types/interfaces";
+import {
+  Chords,
+  Chord as ChordType,
+  Tab as TabType,
+  TabItem,
+} from "../public/Types/interfaces";
+import Tab from "./tab";
 
 interface VideoEmbedProps {
   embedId: string;
   chords: Chords;
+  tabs: TabType;
   timings: number[];
   currentChord: string;
   onHighlightChord: (index: number) => void;
@@ -27,6 +34,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   const [playing, setPlaying] = useState(false);
 
   const [currentChord, setCurrentChord] = useState<ChordType | null>(null);
+  const [currentTab, setCurrentTab] = useState<TabItem[] | null>(null);
   const [latest, setLatest] = useState(0);
   const [count, setCount] = useState(-1);
 
@@ -44,6 +52,17 @@ export default function VideoEmbed(props: VideoEmbedProps) {
 
   const seek = (time: number, type: string = "seconds") => {
     player.current.seekTo(time, type);
+  };
+
+  const seekBy = (time: number, type: string = "seconds") => {
+    let t = player.current.getCurrentTime();
+    const min = 0;
+    const max = player.current.getDuration();
+
+    t += time;
+    t = Math.min(Math.max(parseInt(t), min), max);
+
+    player.current.seekTo(t, type);
   };
 
   useEffect(() => {
@@ -78,6 +97,15 @@ export default function VideoEmbed(props: VideoEmbedProps) {
 
     if (c) {
       setCurrentChord(c);
+      setCurrentTab(null);
+      return;
+    }
+
+    const t = props.tabs[props.currentChord];
+
+    if (t) {
+      setCurrentTab(t);
+      setCurrentChord(null);
     }
   }, [props.currentChord]);
 
@@ -86,28 +114,45 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   }, [count]);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       {hasWindow && (
-        <div>
-          <ReactPlayer
-            ref={player}
-            url={url}
-            playing={playing}
-            onReady={setupPlayer}
-            onPlay={() => setCurrentTime(player.current.getCurrentTime())}
-          />
-
-          <div className={styles.playerController}>
-            <button onClick={togglePlay}>PLAY/PAUSE</button>
-            <button onClick={() => seek(10)}>seek (to 10s)</button>
-            <input type="range" min={0} max={maxTime} />
-          </div>
-
+        <div className={styles.playerContainer}>
           {currentChord && (
-            <div>
+            <div className={styles.chord}>
               <Chord chord={currentChord} />
             </div>
           )}
+          {currentTab && !currentChord && (
+            <div className={styles.chord}>
+              <Tab tab={currentTab} />
+            </div>
+          )}
+          <div className={styles.player}>
+            <ReactPlayer
+              ref={player}
+              url={url}
+              playing={playing}
+              onReady={setupPlayer}
+              onPlay={() => setCurrentTime(player.current.getCurrentTime())}
+              width="auto"
+              height="40vh"
+            />
+
+            <div className={styles.playerController}>
+              <button onClick={togglePlay}>PLAY/PAUSE</button>
+              <button onClick={() => seekBy(-10)}>back 10</button>
+              <input
+                type="range"
+                min={0}
+                max={maxTime}
+                value={currentTime}
+                onChange={(e) => {
+                  seek(parseInt(e.target.value));
+                }}
+              />
+              <button onClick={() => seekBy(10)}>forward 10</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

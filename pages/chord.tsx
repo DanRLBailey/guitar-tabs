@@ -42,7 +42,11 @@ export default function Chord(props: ChordProp) {
                 (fret: number, index: number) => {
                   return (
                     <td key={index}>
-                      {fret == -1 && <span className={styles.muted}></span>}
+                      {fret == -1 && (
+                        <span className={styles.muted}>
+                          <span className={styles.hidden}>.</span>
+                        </span>
+                      )}
                       {fret == 0 && <span className={styles.open}></span>}
                       {fret > 0 && (
                         <span className={styles.hidden}>{fret}</span>
@@ -113,8 +117,8 @@ export default function Chord(props: ChordProp) {
           })}
         </tbody>
       </table>
-      <button onClick={() => incrementIndex(-1)}>prev</button>
-      <button onClick={() => incrementIndex(1)}>next</button>
+      {/* <button onClick={() => incrementIndex(-1)}>prev</button>
+      <button onClick={() => incrementIndex(1)}>next</button> */}
     </div>
   );
 }

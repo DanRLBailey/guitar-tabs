@@ -1,14 +1,16 @@
 .container {
   $margin: 0.5rem;
+  $margin-mid: 2.5rem;
   $margin-large: 5rem;
 
   padding: 0 2rem;
   display: flex;
-  align-items: center;
   justify-content: center;
 
   .songContainer {
-    width: 50%;
+    flex: 0.7;
+    justify-content: center;
+    align-items: center;
 
     h1 {
       margin-bottom: 0;
@@ -27,12 +29,19 @@
       background: rgb(30, 30, 30);
       padding: 0 0.3rem;
       margin-right: $margin;
-      border-radius: 3px 3px 0 0;
+      border-radius: 8px 8px 0 0;
       cursor: default;
-    }
+      transition: 0.3s ease;
 
-    .highlight {
-      background: green;
+      &:hover {
+        background: #335e5d;
+      }
+
+      &.highlight {
+        background: #197a79;
+        padding-bottom: 0.4rem;
+        margin-top: -0.4rem;
+      }
     }
 
     .section {
@@ -69,21 +78,21 @@
     }
   }
 
-  .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
+  .sidebar {
+    display: flex;
 
-  .video {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
-  }
+    .video {
+      position: fixed;
+      right: $margin-mid;
+      bottom: $margin-mid;
+      width: 35%;
+      height: calc(100% - $margin-mid);
+    }
 
-  .playerController {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    .popup {
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
   }
 }

@@ -1,0 +1,41 @@
+.container {
+  padding: 3rem;
+
+  .tabContainer {
+    display: flex;
+    flex-direction: row;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+
+      &.strings {
+        border-right: 2px solid white;
+      }
+
+      .fret {
+        padding: 0 0.5rem;
+      }
+
+      .empty {
+        flex: 1 1;
+        color: transparent;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          border-top: 2px solid white;
+          z-index: -1;
+        }
+      }
+
+      &.end {
+        border-right: 2px solid white;
+      }
+    }
+  }
+}
