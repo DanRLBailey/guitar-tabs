@@ -1,27 +1,22 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 import Link from "next/link";
+import Songs from "../public/songs.json";
+import { SongMetaDetails } from "../public/Types/interfaces";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <ul>
-        <li>
-          <Link href="songs/hotel-california">Hotel California</Link>
-        </li>
-        <li>
-          <Link href="songs/have-you-ever-seen-the-rain">
-            Have You Ever Seen The Rain
-          </Link>
-        </li>
-        <li>
-          <Link href="songs/talking-to-the-moon">Talking To The Moon</Link>
-        </li>
-        <li>
-          <Link href="songs/dancing-in-the-moonlight">
-            Dancing In The Moonlight
-          </Link>
-        </li>
-      </ul>
+      <div className={styles.songList}>
+        {Object.keys(Songs).map((item: string, index: number) => {
+          const song: SongMetaDetails = Songs[item];
+          return (
+            <Link href={`songs/${item}`} className={styles.song}>
+              <span>{song.Name}</span>
+              <span>{song.Artist}</span>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

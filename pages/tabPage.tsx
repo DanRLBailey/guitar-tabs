@@ -25,7 +25,6 @@ export default function TabPage(props: TabPageProp) {
   const [showTabModal, setShowTabModal] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [highlightedChord, setHighlightedChord] = useState("");
-  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   let chordList: string[] = [];
   const song: Song = require(`../public/songs/${props.Key}`)[0];

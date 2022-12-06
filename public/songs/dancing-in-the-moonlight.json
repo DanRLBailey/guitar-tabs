@@ -1,13 +1,13 @@
 [
   {
     "Link": "0yBnIUX0QAE",
-    "Chords": ["Dm", "G", "C", "G/B", "Am"],
+    "Chords": ["G", "Em", "C", "D", "Am", "Bm"],
     "StrummingPattern": {
-      "Bpm": 119,
+      "Bpm": 190,
       "Beats": 8,
-      "Pattern": "d-du-udu"
+      "Pattern": "d-dudu"
     },
-    "Capo": 3,
+    "Capo": 1,
     "Parts": [
       {
         "Section": "[Intro]",
