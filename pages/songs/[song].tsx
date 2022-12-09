@@ -2,8 +2,8 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import TabPage from "../tabPage";
 import { useEffect, useState } from "react";
-import { SongMetaDetails } from "../../public/Types/interfaces";
-import songs from "../../public/songs.json";
+import { SongMeta, SongMetaDetails } from "../../public/Types/interfaces";
+import Songs from "../../public/songs.json";
 import chords from "../../public/chords/chords.json";
 
 const Song = () => {
@@ -11,11 +11,12 @@ const Song = () => {
   const { song } = router.query;
   const [currentSongMeta, setCurrentSongDetails] =
     useState<SongMetaDetails | null>(null);
+  const s: SongMeta = Songs;
 
   useEffect(() => {
     if (typeof song === "object" || !song) return;
 
-    const currentSongDetails = songs[song];
+    const currentSongDetails = s[song];
 
     if (currentSongDetails) setCurrentSongDetails(currentSongDetails);
   }, [song]);
