@@ -1,8 +1,8 @@
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
-import TabPage from "../tabPage";
+import SongPage from "../../components/song";
 import { useEffect, useState } from "react";
-import { SongMeta, SongMetaDetails } from "../../public/Types/interfaces";
+import { SongMeta, SongMetaDetails } from "../../types/interfaces";
 import Songs from "../../public/songs.json";
 import chords from "../../public/chords/chords.json";
 
@@ -22,7 +22,7 @@ const Song = () => {
   }, [song]);
 
   return currentSongMeta !== null ? (
-    <TabPage Key={song as string} SongMeta={currentSongMeta} Chords={chords} />
+    <SongPage Key={song as string} SongMeta={currentSongMeta} Chords={chords} />
   ) : (
     <p>No song found.</p>
   );

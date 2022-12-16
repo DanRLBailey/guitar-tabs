@@ -4,7 +4,7 @@ import {
   SongSection,
   Chords,
   Chord as ChordType,
-} from "../public/Types/interfaces";
+} from "../types/interfaces";
 import { useEffect, useState } from "react";
 
 interface ChordProp {

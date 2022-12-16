@@ -1,7 +1,7 @@
 import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 import Songs from "../public/songs.json";
-import { SongMeta, SongMetaDetails } from "../public/Types/interfaces";
+import { SongMeta, SongMetaDetails } from "../types/interfaces";
 
 export default function Home() {
   const s: SongMeta = Songs;

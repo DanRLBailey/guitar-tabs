@@ -6,7 +6,7 @@ import {
   Chord as ChordType,
   SongMetaDetails,
   TabItem,
-} from "../public/Types/interfaces";
+} from "../types/interfaces";
 import { useEffect, useState } from "react";
 import Chord from "./chord";
 import VideoEmbed from "./videoEmbed";
@@ -18,7 +18,7 @@ interface TabPageProp {
   Chords: Chords;
 }
 
-export default function TabPage(props: TabPageProp) {
+export default function SongPage(props: TabPageProp) {
   const [currentChord, setCurrentChord] = useState<ChordType | null>(null);
   const [currentTab, setCurrentTab] = useState<TabItem[] | null>(null);
   const [showChordModal, setShowChordModal] = useState(false);
@@ -27,7 +27,9 @@ export default function TabPage(props: TabPageProp) {
   const [highlightedChord, setHighlightedChord] = useState("");
 
   let chordList: string[] = [];
-  const song: Song = require(`../public/songs/${props.Key}`)[0];
+  const song: Song | null = props.Key
+    ? require(`../public/songs/${props.Key}`)[0]
+    : null;
 
   const getWord = (word: string) => {
     const words = word.split(/\*|\^/);
@@ -62,7 +64,7 @@ export default function TabPage(props: TabPageProp) {
       }
     }
 
-    const t = song.Tabs[chord];
+    const t = song?.Tabs[chord];
 
     if (t) {
       setShowTabModal(true);
@@ -88,12 +90,12 @@ export default function TabPage(props: TabPageProp) {
   return (
     <div className={styles.container}>
       <div className={styles.songContainer}>
-        <h1>{props.SongMeta.Name}</h1>
-        <h2>{props.SongMeta.Artist}</h2>
+        <h1>{props.SongMeta?.Name}</h1>
+        <h2>{props.SongMeta?.Artist}</h2>
         <div className={styles.songDetails}>
-          {song.Capo > 0 && <div>{`Capo: ${song.Capo}`}</div>}
+          {song?.Capo && song.Capo > 0 && <div>{`Capo: ${song?.Capo}`}</div>}
           <div>
-            {song.Chords.map((item: string, index: number) => {
+            {song?.Chords?.map((item: string, index: number) => {
               return (
                 <span
                   className={styles.chord}
@@ -110,7 +112,7 @@ export default function TabPage(props: TabPageProp) {
             })}
           </div>
         </div>
-        {song.Parts.map((item: SongSection, index: number) => {
+        {song?.Parts.map((item: SongSection, index: number) => {
           return (
             <div className={styles.section} key={index}>
               <h4>{item.Section}</h4>
@@ -177,16 +179,18 @@ export default function TabPage(props: TabPageProp) {
             <Chord chord={currentChord} />
           </div>
         )}
-        <div className={styles.video}>
-          <VideoEmbed
-            embedId={song.Link}
-            chords={props.Chords}
-            tabs={song.Tabs}
-            timings={song.Timings}
-            onHighlightChord={(index) => highlightChord(index)}
-            currentChord={highlightedChord}
-          />
-        </div>
+        {song && (
+          <div className={styles.video}>
+            <VideoEmbed
+              embedId={song.Link}
+              chords={props.Chords}
+              tabs={song.Tabs}
+              timings={song.Timings}
+              onHighlightChord={(index) => highlightChord(index)}
+              currentChord={highlightedChord}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

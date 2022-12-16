@@ -1,5 +1,5 @@
 import styles from "../styles/Tab.module.scss";
-import { TabItem } from "../public/Types/interfaces";
+import { TabItem } from "../types/interfaces";
 import { useEffect, useState } from "react";
 
 interface TabProp {

@@ -7,7 +7,7 @@ import {
   Chord as ChordType,
   Tab as TabType,
   TabItem,
-} from "../public/Types/interfaces";
+} from "../types/interfaces";
 import Tab from "./tab";
 
 interface VideoEmbedProps {
