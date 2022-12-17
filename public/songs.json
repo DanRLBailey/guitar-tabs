@@ -25,7 +25,14 @@
   },
   "remembering-sunday": {
     "Name": "Remembering Sunday",
-    "Artist": "All Time Low",
-    "NeedsTiming": true
+    "Artist": "All Time Low"
+  },
+  "fall-for-you": {
+    "Name": "Fall For You",
+    "Artist": "Secondhand Serenade"
+  },
+  "as-it-was": {
+    "Name": "As It Was",
+    "Artist": "Harry Styles"
   }
 }

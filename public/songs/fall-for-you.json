@@ -1,0 +1,246 @@
+[
+  {
+    "Link": "DEXDDyb6t2o",
+    "Chords": ["Am", "F", "C", "G"],
+    "StrummingPattern": {
+      "Bpm": 85,
+      "Beats": 8,
+      "Pattern": "dddddddd"
+    },
+    "Parts": [
+      {
+        "Section": "[Verse 1]",
+        "Lines": [
+          [
+            "The",
+            "best*Am",
+            "thing",
+            "about",
+            "tonights",
+            "that",
+            "were",
+            "not",
+            "fighting*F"
+          ],
+          [
+            "Could",
+            "it",
+            "be*C",
+            "that",
+            "we",
+            "have",
+            "been",
+            "this",
+            "way",
+            "before*G"
+          ],
+          [
+            "I",
+            "know*Am",
+            "you",
+            "dont",
+            "think",
+            "that",
+            "I",
+            "am",
+            "trying*F"
+          ],
+          [
+            "I",
+            "know*C",
+            "youre",
+            "wearing",
+            "thin",
+            "down",
+            "to",
+            "the",
+            "core*G"
+          ]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["But", "hold*F", "your", "breath*G"],
+          [
+            "Because",
+            "tonight*C",
+            "will",
+            "be",
+            "the",
+            "night",
+            "that",
+            "I",
+            "will",
+            "fall*Am",
+            "for",
+            "you"
+          ],
+          ["Over", "again*F"],
+          ["Dont", "make", "me", "change", "my", "*G", "mind"],
+          ["I", "wont", "live*C", "to", "see", "another", "day"],
+          ["I", "swear*Am", "its", "true"],
+          [
+            "Because",
+            "a",
+            "girl*F",
+            "like",
+            "you",
+            "is",
+            "impossible",
+            "to",
+            "find*G"
+          ],
+          ["Youre", "impossible", "to", "find*Am*F*C*G"]
+        ]
+      },
+      {
+        "Section": "[Verse 2]",
+        "Lines": [
+          ["*Am", "This", "is", "not", "what", "I", "intended*F"],
+          [
+            "I",
+            "always",
+            "swore*C",
+            "to",
+            "you",
+            "that",
+            "I",
+            "would",
+            "never",
+            "fall",
+            "apart*G"
+          ],
+          ["You*Am", "always", "thought", "that", "I", "was", "stronger*F"],
+          ["I", "may", "have", "failed*C"],
+          ["But", "I", "have", "loved", "you", "from", "the", "start*G"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["But", "hold*F", "your", "breath*G"],
+          [
+            "Because",
+            "tonight*C",
+            "will",
+            "be",
+            "the",
+            "night",
+            "that",
+            "I",
+            "will",
+            "fall*Am",
+            "for",
+            "you"
+          ],
+          ["Over", "again*F"],
+          ["Dont", "make", "me", "change", "my", "*G", "mind"],
+          ["I", "wont", "live*C", "to", "see", "another", "day"],
+          ["I", "swear*Am", "its", "true"],
+          [
+            "Because",
+            "a",
+            "girl*F",
+            "like",
+            "you",
+            "is",
+            "impossible",
+            "to",
+            "find*G"
+          ],
+          ["It's", "impossible"]
+        ]
+      },
+      {
+        "Section": "[Bridge]",
+        "Lines": [
+          ["So", "breathe*Am", "in*F", "so", "deep*C"],
+          ["Breathe*G", "me", "in*Am"],
+          ["Im", "yours*F", "to", "keep*C"],
+          ["And", "hold*G", "onto", "your", "words*Am"],
+          ["'Cause", "talk*F", "is", "cheap*C"],
+          ["And", "remember*G", "me", "tonight*F"],
+          ["When", "youre", "asleep"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          [
+            "Because",
+            "tonight*C",
+            "will",
+            "be",
+            "the",
+            "night",
+            "that",
+            "I",
+            "will",
+            "fall*Am",
+            "for",
+            "you"
+          ],
+          ["Over", "again*F"],
+          ["Dont", "make", "me", "change", "my", "*G", "mind"],
+          ["I", "wont", "live*C", "to", "see", "another", "day"],
+          ["I", "swear*Am", "its", "true"],
+          [
+            "Because",
+            "a",
+            "girl*F",
+            "like",
+            "you",
+            "is",
+            "impossible",
+            "to",
+            "find*G"
+          ],
+          [
+            "Tonight*C",
+            "will",
+            "be",
+            "the",
+            "night",
+            "that",
+            "I",
+            "will",
+            "fall*Am",
+            "for",
+            "you"
+          ],
+          ["Over", "again*F"],
+          ["Dont", "make", "me", "change", "my", "*G", "mind"],
+          ["I", "wont", "live*C", "to", "see", "another", "day"],
+          ["I", "swear*Am", "its", "true"],
+          [
+            "Because",
+            "a",
+            "girl*F",
+            "like",
+            "you",
+            "is",
+            "impossible",
+            "to",
+            "find*G"
+          ],
+          ["Youre", "impossible", "to", "find*C"]
+        ]
+      }
+    ],
+    "Timings": [
+      1.678005, 4.444444, 7.301587, 10.068027, 12.879819, 15.69161, 18.501454,
+      21.358597, 24.21574, 25.576284, 27.027531, 29.839323, 32.651114,
+      35.508257, 38.320048, 41.13184, 43.988983, 46.800774, 49.612565,
+      52.424357, 55.236148, 58.047939, 60.905082, 63.762225, 66.574017,
+      69.385808, 72.197599, 75.054742, 77.866534, 80.678325, 83.490116,
+      84.896012, 86.347259, 89.113699, 91.970842, 94.827985, 97.594425,
+      100.451568, 103.218007, 106.120502, 108.932293, 110.338189, 111.789436,
+      113.104629, 114.555876, 115.961772, 117.413019, 118.818915, 120.270162,
+      121.630706, 123.081953, 124.442497, 125.848393, 131.471976, 134.37447,
+      137.14091, 139.90735, 142.764493, 145.621636, 148.52413, 151.245218,
+      154.102361, 156.914153, 159.771295, 162.537735, 165.349527, 168.20667,
+      171.063812, 173.830252, 176.687395
+    ]
+  }
+]
