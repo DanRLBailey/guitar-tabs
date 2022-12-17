@@ -121,9 +121,8 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   }, [count]);
 
   useEffect(() => {
-    props.onToggleAutoscroll(autoscroll)
+    props.onToggleAutoscroll(autoscroll);
   }, [autoscroll]);
-
 
   return (
     <div className={styles.container}>
@@ -152,7 +151,12 @@ export default function VideoEmbed(props: VideoEmbedProps) {
 
             <div className={styles.playerController}>
               <div className={styles.playerControls}>
-                <button onClick={togglePlay} className={playing ? styles.playing : ""}>></button>
+                <button
+                  onClick={togglePlay}
+                  className={playing ? styles.playing : ""}
+                >
+                  &gt;
+                </button>
                 <button onClick={() => seekBy(-10)}>-10</button>
                 <input
                   type="range"
@@ -163,12 +167,14 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                     seek(parseInt(e.target.value));
                   }}
                 />
-                <input 
-                  type="checkbox" 
-                  id="autoscroll" 
-                  name="scroll" 
+                <input
+                  type="checkbox"
+                  id="autoscroll"
+                  name="scroll"
                   checked={autoscroll}
-                  onChange={() => {setAutoscroll(!autoscroll);}}
+                  onChange={() => {
+                    setAutoscroll(!autoscroll);
+                  }}
                 />
                 <button onClick={() => seekBy(10)}>+10</button>
               </div>

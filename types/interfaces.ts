@@ -53,5 +53,5 @@ export interface SongMeta {
 export interface SongMetaDetails {
   Name: string
   Artist: string,
-  NeedsTiming: boolean | null
+  NeedsTiming?: boolean
 }

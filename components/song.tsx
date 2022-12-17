@@ -81,7 +81,9 @@ export default function SongPage(props: TabPageProp) {
   };
 
   useEffect(() => {
-    if (highlightedIndex && autoscroll) {
+    if (!autoscroll) return;
+
+    if (highlightedIndex) {
       document
         .getElementById(`chord-${highlightedIndex}`)
         ?.scrollIntoView({ behavior: "smooth", block: "center" });
