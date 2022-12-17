@@ -1,0 +1,237 @@
+[
+  {
+    "Link": "ccKV1X9uyP4",
+    "Chords": ["Cmaj7", "Em", "Cadd9", "A7", "Dsus2", "G", "D"],
+    "StrummingPattern": {
+      "Bpm": 170,
+      "Beats": 8,
+      "Pattern": "d-dudu"
+    },
+    "Capo": 2,
+    "Parts": [
+      { "Section": "[Intro]", "Lines": [["*Cmaj7*Em*Cadd9*A7"]] },
+      {
+        "Section": "[Verse 1]",
+        "Lines": [
+          [
+            "*Cmaj7",
+            "He",
+            "woke",
+            "up",
+            "from",
+            "dreaming",
+            "and",
+            "put",
+            "on",
+            "his",
+            "shoes*Em"
+          ],
+          [
+            "Started",
+            "making",
+            "his",
+            "way",
+            "past",
+            "two*Cadd9",
+            "in",
+            "the",
+            "morning"
+          ],
+          ["He", "hasn't", "been", "sober", "for", "days*A7"],
+          ["*Cmaj7", "Leaning", "now", "into", "the", "breeze"],
+          ["Remembering*Dsus2", "Sunday", "he", "falls", "to", "his", "knees"],
+          ["They", "had", "breakfast*Em", "together"],
+          ["But", "two", "eggs", "don't", "last"],
+          ["Like", "the", "feeling*A7", "of", "what", "he", "needs"],
+          ["Now", "this", "place*Cmaj7", "seems", "familiar", "to", "him"],
+          [
+            "She",
+            "pulled*Dsus2",
+            "on",
+            "his",
+            "hand",
+            "with",
+            "a",
+            "devilish",
+            "grin"
+          ],
+          [
+            "She",
+            "led*Em",
+            "him",
+            "upstairs,",
+            "she",
+            "led",
+            "him",
+            "upstairs"
+          ],
+          ["Left", "him", "dying*A7", "to", "get", "in"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["*G", "Forgive", "me", "I'm", "trying", "to", "find*Cadd9"],
+          ["My", "calling,", "I'm", "calling", "at", "night*A7"],
+          ["I", "don't", "mean", "to", "be", "a", "bother"],
+          ["But", "have*Cadd9", "you", "seen", "this", "girl?"],
+          ["*G", "She's", "been", "running", "through", "my", "dreams*Cadd9"],
+          ["And", "it's", "driving", "me", "crazy", "it", "seems*A7"],
+          ["I'm", "gonna", "ask", "her", "to", "marry", "me*Cadd9"]
+        ]
+      },
+      {
+        "Section": "[Verse 2]",
+        "Lines": [
+          [
+            "*Cmaj7",
+            "Even",
+            "though",
+            "she",
+            "doesn't",
+            "believe",
+            "in",
+            "love*Dsus2"
+          ],
+          ["He's", "determined", "to", "call", "her", "bluff*Em"],
+          ["Who", "could", "deny,", "these", "butterflies?*A7"],
+          ["They're", "filling", "his", "gut"],
+          [
+            "*Cmaj7",
+            "Waking",
+            "the",
+            "neighbors,",
+            "*Dsus2",
+            "unfamiliar",
+            "faces"
+          ],
+          ["He", "pleads*Em", "though", "he", "tries"],
+          ["But", "he's", "only", "denied"],
+          ["Now", "he's", "dying*A7", "to", "get", "inside"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["*G", "Forgive", "me", "I'm", "trying", "to", "find*Cadd9"],
+          ["My", "calling,", "I'm", "calling", "at", "night*A7"],
+          ["I", "don't", "mean", "to", "be", "a", "bother"],
+          ["But", "have*Cadd9", "you", "seen", "this", "girl?"],
+          ["*G", "She's", "been", "running", "through", "my", "dreams*Cadd9"],
+          ["And", "it's", "driving", "me", "crazy", "it", "seems*A7"],
+          ["I'm", "gonna", "ask", "her", "to", "marry", "me*Cadd9"]
+        ]
+      },
+      {
+        "Section": "[Bridge]",
+        "Lines": [
+          ["*Em", "The", "neighbors", "said", "she", "moved", "away*Cadd9"],
+          ["Funny", "how", "it", "rained", "all", "day*G"],
+          ["I", "didn't", "think", "much", "of", "it", "then"],
+          ["But", "it's", "starting*D", "to", "all", "make", "sense"],
+          [
+            "Oh",
+            "I",
+            "can",
+            "see*Em",
+            "now",
+            "that",
+            "all",
+            "of",
+            "these*Cadd9",
+            "clouds"
+          ],
+          ["Are", "following*G", "me", "in", "my", "desperate", "endeavor"],
+          ["To", "find*D", "my", "whoever,", "whoever", "she", "may", "be*G"]
+        ]
+      },
+      {
+        "Section": "[Bridge 2]",
+        "Lines": [
+          [
+            "I'm",
+            "not",
+            "coming",
+            "back,",
+            "I've",
+            "done",
+            "something",
+            "so",
+            "terrible*Cadd9"
+          ],
+          [
+            "I'm",
+            "terrified",
+            "to",
+            "speak,",
+            "but",
+            "you'd",
+            "expect",
+            "that",
+            "from",
+            "me*A7"
+          ],
+          [
+            "I'm",
+            "mixed",
+            "up,",
+            "I'll",
+            "be",
+            "blunt,",
+            "now",
+            "the",
+            "rain",
+            "is",
+            "just"
+          ],
+          [
+            "Washing*Cadd9",
+            "you",
+            "out",
+            "of",
+            "my",
+            "hair",
+            "and",
+            "out",
+            "of",
+            "my",
+            "mind*G"
+          ],
+          ["Keeping", "an", "eye", "on", "the", "world"],
+          [
+            "So*Cadd9",
+            "many",
+            "thousands",
+            "of",
+            "feet",
+            "off",
+            "the",
+            "ground"
+          ],
+          [
+            "I'm",
+            "over*A7",
+            "you",
+            "now,",
+            "I'm",
+            "at",
+            "home",
+            "in",
+            "the",
+            "clouds"
+          ],
+          ["Towering*Cadd9", "over", "your", "head"]
+        ]
+      },
+      {
+        "Section": "[Outro]",
+        "Lines": [
+          ["I", "guess", "I'll", "go", "*Em", "home", "now"],
+          ["I", "guess", "I'll", "go", "*Dsus2", "home", "now"],
+          ["I", "guess", "I'll", "go", "*Em", "home", "now"],
+          ["I", "guess", "I'll", "go", "*A7", "home."]
+        ]
+      }
+    ]
+  }
+]

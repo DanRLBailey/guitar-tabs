@@ -22,5 +22,10 @@
   "youll-be-back": {
     "Name": "You'll Be Back",
     "Artist": "Hamilton"
+  },
+  "remembering-sunday": {
+    "Name": "Remembering Sunday",
+    "Artist": "All Time Low",
+    "NeedsTiming": true
   }
 }

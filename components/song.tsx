@@ -25,6 +25,7 @@ export default function SongPage(props: TabPageProp) {
   const [showTabModal, setShowTabModal] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [highlightedChord, setHighlightedChord] = useState("");
+  const [autoscroll, setAutoscroll] = useState(true);
 
   let chordList: string[] = [];
   const song: Song | null = props.Key
@@ -80,7 +81,7 @@ export default function SongPage(props: TabPageProp) {
   };
 
   useEffect(() => {
-    if (highlightedIndex) {
+    if (highlightedIndex && autoscroll) {
       document
         .getElementById(`chord-${highlightedIndex}`)
         ?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -188,6 +189,7 @@ export default function SongPage(props: TabPageProp) {
               timings={song.Timings}
               onHighlightChord={(index) => highlightChord(index)}
               currentChord={highlightedChord}
+              onToggleAutoscroll={(scroll) => setAutoscroll(scroll)}
             />
           </div>
         )}

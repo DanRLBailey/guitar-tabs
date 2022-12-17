@@ -13,5 +13,54 @@
     height: 100%;
     flex-direction: column;
     justify-content: flex-end;
+
+    .playerControls {
+      display: flex;
+
+      button {
+        height: 3rem;
+        width: 3rem;
+        margin: 0.5rem;
+        background-color: transparent;
+        border: 1px solid white;
+        border-radius: 1rem;
+        transition: 0.3s ease;
+
+        &.playing {
+          background: white;
+          color: black;
+        }
+      }
+
+      input[type="range"] {
+        flex: 1;
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        cursor: pointer;
+        overflow: hidden;
+        align-self: center;
+        height: 5px;
+        border-radius: 50px;
+        transition: 0.3s ease;
+
+        &:hover {
+          height: 15px;
+        }
+
+        &::-webkit-slider-runnable-track {
+          background: #fff;
+          height: 100%;
+        }
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          background: transparent;
+          height: 100%;
+          width: 1%;
+          box-shadow: -200px 0 0 200px #197a79;
+        }
+      }
+    }
   }
 }

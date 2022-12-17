@@ -17,6 +17,7 @@ interface VideoEmbedProps {
   timings: number[];
   currentChord: string;
   onHighlightChord: (index: number) => void;
+  onToggleAutoscroll: (autoscroll: boolean) => void;
 }
 
 export default function VideoEmbed(props: VideoEmbedProps) {
@@ -32,6 +33,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   const [maxTime, setMaxTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [autoscroll, setAutoscroll] = useState(true);
 
   const [currentChord, setCurrentChord] = useState<ChordType | null>(null);
   const [currentTab, setCurrentTab] = useState<TabItem[] | null>(null);
@@ -118,6 +120,11 @@ export default function VideoEmbed(props: VideoEmbedProps) {
     if (props.onHighlightChord) props.onHighlightChord(count);
   }, [count]);
 
+  useEffect(() => {
+    props.onToggleAutoscroll(autoscroll)
+  }, [autoscroll]);
+
+
   return (
     <div className={styles.container}>
       {hasWindow && (
@@ -144,18 +151,27 @@ export default function VideoEmbed(props: VideoEmbedProps) {
             />
 
             <div className={styles.playerController}>
-              <button onClick={togglePlay}>PLAY/PAUSE</button>
-              <button onClick={() => seekBy(-10)}>back 10</button>
-              <input
-                type="range"
-                min={0}
-                max={maxTime}
-                value={currentTime}
-                onChange={(e) => {
-                  seek(parseInt(e.target.value));
-                }}
-              />
-              <button onClick={() => seekBy(10)}>forward 10</button>
+              <div className={styles.playerControls}>
+                <button onClick={togglePlay} className={playing ? styles.playing : ""}>></button>
+                <button onClick={() => seekBy(-10)}>-10</button>
+                <input
+                  type="range"
+                  min={0}
+                  max={maxTime}
+                  value={currentTime}
+                  onChange={(e) => {
+                    seek(parseInt(e.target.value));
+                  }}
+                />
+                <input 
+                  type="checkbox" 
+                  id="autoscroll" 
+                  name="scroll" 
+                  checked={autoscroll}
+                  onChange={() => {setAutoscroll(!autoscroll);}}
+                />
+                <button onClick={() => seekBy(10)}>+10</button>
+              </div>
             </div>
           </div>
         </div>
