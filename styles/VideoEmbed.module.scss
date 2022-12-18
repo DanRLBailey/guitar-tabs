@@ -29,9 +29,9 @@
 
         button,
         .volumeWrapper {
-          height: 2rem;
-          width: 2rem;
-          margin: 0.5rem;
+          height: var(--padding-double);
+          width: var(--padding-double);
+          margin: var(--margin);
           background-color: transparent;
           border: none;
           transition: 0.3s ease;
@@ -67,7 +67,7 @@
           background: transparent;
           height: 100%;
           width: 1%;
-          box-shadow: -400px 0 0 400px #be4cb5;
+          box-shadow: -400px 0 0 400px var(--accent);
         }
 
         &:hover {

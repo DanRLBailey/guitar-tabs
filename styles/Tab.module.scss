@@ -1,7 +1,7 @@
 .container {
-  padding: 3rem;
+  padding: var(--padding-triple);
   background: #f5f5f5;
-  border-radius: 1rem;
+  border-radius: var(--border-radius);
   color: black;
   width: auto;
   font-weight: bold;
@@ -20,11 +20,10 @@
       }
 
       .fret {
-        padding: 0 0.5rem;
+        padding: 0 var(--padding-half);
       }
 
       .chordEmpty {
-        //padding: 0 0.5rem;
         color: transparent;
       }
 

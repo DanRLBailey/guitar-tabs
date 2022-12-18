@@ -93,6 +93,9 @@ export default function SongPage(props: TabPageProp) {
 
   return (
     <div className={styles.container}>
+      <title>
+        {props.SongMeta.Name} - {props.SongMeta.Artist}
+      </title>
       <div className={styles.songContainer}>
         <h1>{props.SongMeta?.Name}</h1>
         <h2>{props.SongMeta?.Artist}</h2>

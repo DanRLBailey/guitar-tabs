@@ -1,0 +1,46 @@
+:root {
+  --background: #f5f5f5;
+  --accent: #be4cb5;
+  --accent-dark: #782c72;
+
+  --padding: 1rem;
+  --padding-double: calc(var(--padding) * 2);
+  --padding-triple: calc(var(--padding) * 3);
+  --padding-half: calc(var(--padding) * 0.5);
+
+  --margin: 0.5rem;
+  --margin-mid: calc(var(--margin) * 5);
+  --margin-mid-negative: 20px;
+  --margin-large: calc(var(--margin) * 10);
+  --margin-half: calc(var(--margin) * 0.5);
+
+  --border-radius: 1rem;
+  --font-size-small: 0.75rem;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}

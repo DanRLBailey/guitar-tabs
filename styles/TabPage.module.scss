@@ -1,9 +1,5 @@
 .container {
-  $margin: 0.5rem;
-  $margin-mid: 2.5rem;
-  $margin-large: 5rem;
-
-  padding: 0 2rem;
+  padding: 0 var(--padding-double);
   display: flex;
   justify-content: center;
 
@@ -18,7 +14,7 @@
 
     h2 {
       margin-top: 0;
-      margin-bottom: $margin-large;
+      margin-bottom: var(--margin-large);
     }
 
     h4 {
@@ -28,36 +24,36 @@
     .chord {
       background: rgb(30, 30, 30);
       padding: 0 0.3rem;
-      margin-right: $margin;
+      margin-right: var(--margin);
       border-radius: 8px 8px 0 0;
       cursor: default;
       transition: 0.3s ease;
 
       &:hover {
-        background: darken($color: #be4cb5, $amount: 20%);
+        background: var(--accent-dark);
       }
 
       &.highlight {
-        background: #be4cb5;
+        background: var(--accent);
         padding-bottom: 0.4rem;
         margin-top: -0.4rem;
       }
     }
 
     .section {
-      margin-top: $margin-large;
+      margin-top: var(--margin-large);
 
       &:last-child {
-        margin-bottom: $margin-large;
+        margin-bottom: var(--margin-large);
       }
 
       .line {
         display: flex;
         align-items: flex-end;
-        margin-top: $margin;
+        margin-top: var(--margin);
 
         .word {
-          padding-right: $margin / 2;
+          padding-right: var(--margin-half);
           display: inline-flex;
           flex-direction: column;
 
@@ -83,10 +79,10 @@
 
     .video {
       position: fixed;
-      right: $margin-mid;
-      bottom: $margin-mid;
+      right: var(--margin-mid);
+      bottom: var(--margin-mid);
       width: 35%;
-      height: calc(100% - $margin-mid);
+      height: var(--margin-mid-negative);
     }
 
     .popup {

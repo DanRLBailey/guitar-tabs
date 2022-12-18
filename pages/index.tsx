@@ -15,6 +15,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <title>Guitar Tabs - Home</title>
       <div className={styles.filterContainer}>
         <input
           type="text"
