@@ -34,5 +34,13 @@
   "as-it-was": {
     "Name": "As It Was",
     "Artist": "Harry Styles"
+  },
+  "good-riddance": {
+    "Name": "Good Riddance",
+    "Artist": "Green Day"
+  },
+  "rule-the-world": {
+    "Name": "Rule The World",
+    "Artist": "Take That"
   }
 }

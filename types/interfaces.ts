@@ -1,11 +1,11 @@
 export interface Song {
   Link: string
   Chords: string[]
-  StrummingPattern: StrummingPattern
-  Capo: number
+  StrummingPattern?: StrummingPattern
+  Capo?: number
   Parts: SongSection[]
-  Timings: number[]
-  Tabs: Tab
+  Timings?: number[]
+  Tabs?: Tab
 }
 
 export interface StrummingPattern {
@@ -52,6 +52,5 @@ export interface SongMeta {
 
 export interface SongMetaDetails {
   Name: string
-  Artist: string,
-  NeedsTiming?: boolean
+  Artist: string
 }

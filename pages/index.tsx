@@ -1,7 +1,7 @@
 import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 import Songs from "../public/songs.json";
-import { SongMeta, SongMetaDetails } from "../types/interfaces";
+import { Song, SongMeta, SongMetaDetails } from "../types/interfaces";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -34,19 +34,22 @@ export default function Home() {
           )
           .map((item: string, index: number) => {
             const song: SongMetaDetails = songList[item];
+            const songDetails: Song = require(`../public/songs/${item}`)[0];
             return (
               <Link
                 href={`songs/${item}`}
                 className={`${styles.song} ${
-                  song.NeedsTiming ? styles.incomplete : ""
+                  songDetails.Timings == null ? styles.incomplete : ""
                 }`}
                 key={index}
               >
-                <span>{song.Name}</span>
-                <span>{song.Artist}</span>
-                {song.NeedsTiming && (
-                  <span className={styles.details}>Timings Missing</span>
-                )}
+                <div className={styles.details}>
+                  <span>{song.Name}</span>
+                  <span>{song.Artist}</span>
+                  {songDetails.Timings == null && (
+                    <span className={styles.details}>Timings Missing</span>
+                  )}
+                </div>
               </Link>
             );
           })}

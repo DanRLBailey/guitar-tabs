@@ -34,11 +34,11 @@
       transition: 0.3s ease;
 
       &:hover {
-        background: #335e5d;
+        background: darken($color: #be4cb5, $amount: 20%);
       }
 
       &.highlight {
-        background: #197a79;
+        background: #be4cb5;
         padding-bottom: 0.4rem;
         margin-top: -0.4rem;
       }

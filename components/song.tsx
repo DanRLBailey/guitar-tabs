@@ -6,6 +6,7 @@ import {
   Chord as ChordType,
   SongMetaDetails,
   TabItem,
+  Tab as TabType,
 } from "../types/interfaces";
 import { useEffect, useState } from "react";
 import Chord from "./chord";
@@ -65,7 +66,7 @@ export default function SongPage(props: TabPageProp) {
       }
     }
 
-    const t = song?.Tabs[chord];
+    const t = song?.Tabs ? song.Tabs[chord] : null;
 
     if (t) {
       setShowTabModal(true);
@@ -187,8 +188,8 @@ export default function SongPage(props: TabPageProp) {
             <VideoEmbed
               embedId={song.Link}
               chords={props.Chords}
-              tabs={song.Tabs}
-              timings={song.Timings}
+              tabs={song.Tabs as TabType}
+              timings={song.Timings as number[]}
               onHighlightChord={(index) => highlightChord(index)}
               currentChord={highlightedChord}
               onToggleAutoscroll={(scroll) => setAutoscroll(scroll)}

@@ -9,6 +9,13 @@ import {
   TabItem,
 } from "../types/interfaces";
 import Tab from "./tab";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import PauseCircleIcon from "@mui/icons-material/PauseCircle";
+import Replay10Icon from "@mui/icons-material/Replay10";
+import Forward10Icon from "@mui/icons-material/Forward10";
+import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 
 interface VideoEmbedProps {
   embedId: string;
@@ -32,6 +39,8 @@ export default function VideoEmbed(props: VideoEmbedProps) {
 
   const [maxTime, setMaxTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [currentVol, setCurrentVol] = useState(100);
+  const [vol, setVol] = useState(1);
   const [playing, setPlaying] = useState(false);
   const [autoscroll, setAutoscroll] = useState(true);
 
@@ -124,6 +133,10 @@ export default function VideoEmbed(props: VideoEmbedProps) {
     props.onToggleAutoscroll(autoscroll);
   }, [autoscroll]);
 
+  useEffect(() => {
+    setVol(currentVol / 100);
+  }, [currentVol]);
+
   return (
     <div className={styles.container}>
       {hasWindow && (
@@ -147,36 +160,50 @@ export default function VideoEmbed(props: VideoEmbedProps) {
               onPlay={() => setCurrentTime(player.current.getCurrentTime())}
               width="auto"
               height="40vh"
+              volume={vol}
             />
 
             <div className={styles.playerController}>
               <div className={styles.playerControls}>
-                <button
-                  onClick={togglePlay}
-                  className={playing ? styles.playing : ""}
-                >
-                  &gt;
-                </button>
-                <button onClick={() => seekBy(-10)}>-10</button>
-                <input
-                  type="range"
-                  min={0}
-                  max={maxTime}
-                  value={currentTime}
-                  onChange={(e) => {
-                    seek(parseInt(e.target.value));
-                  }}
-                />
-                <input
-                  type="checkbox"
-                  id="autoscroll"
-                  name="scroll"
-                  checked={autoscroll}
-                  onChange={() => {
-                    setAutoscroll(!autoscroll);
-                  }}
-                />
-                <button onClick={() => seekBy(10)}>+10</button>
+                <div className={styles.scrubberContainer}>
+                  <input
+                    type="range"
+                    min={0}
+                    max={maxTime}
+                    value={currentTime}
+                    onChange={(e) => {
+                      seek(parseInt(e.target.value));
+                    }}
+                  />
+                </div>
+                <div className={styles.controlContainer}>
+                  <button onClick={togglePlay}>
+                    {playing && <PauseCircleIcon />}
+                    {!playing && <PlayCircleOutlineIcon />}
+                  </button>
+                  <button onClick={() => seekBy(-10)}>
+                    <Replay10Icon />
+                  </button>
+                  <button onClick={() => seekBy(10)}>
+                    <Forward10Icon />
+                  </button>
+                  <button onClick={() => setAutoscroll(!autoscroll)}>
+                    {autoscroll && <ExpandCircleDownIcon />}
+                    {!autoscroll && <ExpandMoreIcon />}
+                  </button>
+                  <div className={styles.volumeWrapper}>
+                    <VolumeUpIcon />
+                    <input
+                      type="range"
+                      min={0}
+                      max={100}
+                      value={currentVol}
+                      onChange={(e) => {
+                        setCurrentVol(parseFloat(e.target.value));
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
