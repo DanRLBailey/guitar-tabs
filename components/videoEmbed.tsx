@@ -23,8 +23,11 @@ interface VideoEmbedProps {
   tabs: TabType;
   timings: number[];
   currentChord: string;
+  simpleChords: boolean;
+  hasSimpleChords: boolean;
   onHighlightChord: (index: number) => void;
   onToggleAutoscroll: (autoscroll: boolean) => void;
+  onSimplifyChords: () => void;
 }
 
 export default function VideoEmbed(props: VideoEmbedProps) {
@@ -39,7 +42,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
 
   const [maxTime, setMaxTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [currentVol, setCurrentVol] = useState(100);
+  const [currentVol, setCurrentVol] = useState(50);
   const [vol, setVol] = useState(1);
   const [playing, setPlaying] = useState(false);
   const [autoscroll, setAutoscroll] = useState(true);
@@ -203,6 +206,16 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                       }}
                     />
                   </div>
+                  {props.hasSimpleChords && (
+                    <button
+                      onClick={props.onSimplifyChords}
+                      className={`${styles.button} ${
+                        props.simpleChords && styles.active
+                      }`}
+                    >
+                      Simplify Chords
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,0 +1,287 @@
+[
+  {
+    "Link": "8rOxNlEcj8M",
+    "Chords": ["C", "F", "Am", "G", "D"],
+    "StrummingPattern": {
+      "Bpm": 0,
+      "Beats": 8,
+      "Pattern": ""
+    },
+    "Parts": [
+      {
+        "Section": "[Verse 1]",
+        "Lines": [
+          ["Another", "magical", "Friday*C", "night"],
+          ["I", "think", "Ill", "sit", "this", "one*F", "at", "home"],
+          [
+            "Unusual",
+            "for",
+            "me*Am",
+            "I",
+            "know,",
+            "but",
+            "please",
+            "go",
+            "ahead*F*G"
+          ],
+          [
+            "I",
+            "dont",
+            "want*C",
+            "to",
+            "be",
+            "the",
+            "blinking",
+            "rabbit",
+            "to",
+            "your*F",
+            "wildebeest,"
+          ],
+          [
+            "The",
+            "jaded",
+            "lover",
+            "to",
+            "a",
+            "sex*Am",
+            "machine,",
+            "you",
+            "should",
+            "go",
+            "ahead*D"
+          ],
+          [
+            "And",
+            "please*F",
+            "give",
+            "those",
+            "recycled",
+            "house",
+            "tracks",
+            "my",
+            "warmest*C",
+            "regards*G"
+          ],
+          [
+            "And*F",
+            "lock",
+            "the",
+            "door",
+            "if",
+            "youre",
+            "home",
+            "before",
+            "the",
+            "sun,*G",
+            "oh,"
+          ]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Pink,*F", "pink", "lemonade*C", "and"],
+          ["Does", "he", "kiss*G", "you", "till", "your", "lips", "explode?"],
+          ["Pink,*F", "pink", "lemonade*Am"],
+          [
+            "Does",
+            "he",
+            "take",
+            "you",
+            "places*D",
+            "I",
+            "cant",
+            "afford",
+            "to",
+            "go?*F"
+          ],
+          [
+            "Pink",
+            "lemonade",
+            "you",
+            "know",
+            "I,*Am",
+            "know",
+            "behind",
+            "that",
+            "sugar*G",
+            "theres",
+            "only",
+            "lies,*F",
+            "lies,",
+            "lies,",
+            "lies*G"
+          ]
+        ]
+      },
+      { "Section": "[Break]", "Lines": [["*C*F*G*Am*F*G"]] },
+      {
+        "Section": "[Verse 2]",
+        "Lines": [
+          ["Another", "magical", "Friday*C", "night"],
+          ["I", "wonder", "what", "state*F", "youre", "in?"],
+          [
+            "In",
+            "the",
+            "powder",
+            "or",
+            "in*Am",
+            "the",
+            "gin,",
+            "this",
+            "ones",
+            "ending",
+            "bad*D"
+          ],
+          [
+            "So",
+            "please",
+            "give*F",
+            "those",
+            "recycled",
+            "house",
+            "tracks",
+            "my",
+            "warmest*C",
+            "regards*G"
+          ],
+          [
+            "And",
+            "if",
+            "you",
+            "bring*F",
+            "him",
+            "home,",
+            "can",
+            "you",
+            "use",
+            "the",
+            "spare",
+            "bedroom?*G"
+          ]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Pink,*F", "pink", "lemonade*C", "and"],
+          ["Does", "he", "kiss*G", "you", "till", "your", "lips", "explode?*F"],
+          ["Pink,", "pink", "lemonade*Am"],
+          [
+            "Does",
+            "he",
+            "take",
+            "you",
+            "places*D",
+            "I",
+            "cant",
+            "afford",
+            "to",
+            "go?*F"
+          ],
+          [
+            "Pink",
+            "lemonade",
+            "you",
+            "know",
+            "I,*Am",
+            "know",
+            "behind",
+            "that",
+            "sugar*G",
+            "theres",
+            "only",
+            "lies,*F",
+            "lies,",
+            "lies,",
+            "lies*G"
+          ]
+        ]
+      },
+      {
+        "Section": "[Bridge]",
+        "Lines": [
+          ["And", "thats*F", "alright", "and*Am", "thats", "okay"],
+          [
+            "If",
+            "I",
+            "can",
+            "write*C",
+            "this",
+            "song,",
+            "I",
+            "can",
+            "play*D",
+            "that",
+            "game,"
+          ],
+          [
+            "And",
+            "its",
+            "all*F",
+            "good",
+            "with",
+            "me,",
+            "if",
+            "I*Am",
+            "know",
+            "its",
+            "all",
+            "good",
+            "with",
+            "you*C*G"
+          ],
+          [
+            "Cause",
+            "getting",
+            "lost*F",
+            "in",
+            "the",
+            "middle",
+            "of",
+            "the*Am",
+            "in-between,"
+          ],
+          [
+            "Is",
+            "only",
+            "half*C",
+            "as",
+            "frightening",
+            "as",
+            "it",
+            "first*D",
+            "may",
+            "seem,"
+          ],
+          [
+            "So",
+            "do",
+            "whatever*F",
+            "you",
+            "must,",
+            "love,*Am",
+            "do",
+            "whatever",
+            "it",
+            "must",
+            "take*C*D*F"
+          ],
+          ["Pink*G", "lemonade"]
+        ]
+      },
+      {
+        "Section": "[Outro]",
+        "Lines": [
+          ["*C*F", ""],
+          ["Pink", "lemonade*Am"],
+          ["*F", "Pink", "lemonade*C"],
+          ["*F", "Pink", "lemonade*Am*F"],
+          ["*C*F*Am*F"],
+          ["*C*F*Am*F"]
+        ]
+      },
+      { "Section": "[Ending]", "Lines": [["*C"]] }
+    ]
+  }
+]

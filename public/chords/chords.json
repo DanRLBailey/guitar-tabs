@@ -77,6 +77,18 @@
           "Barres": []
         }
       ]
+    },
+    {
+      "Key": "A",
+      "Suffix": "7/C#",
+      "Positions": [
+        {
+          "Frets": [-1, 3, 1, 1, 1, 2],
+          "Fingers": [0, 3, 1, 1, 1, 2],
+          "BaseFret": 2,
+          "Barres": [1]
+        }
+      ]
     }
   ],
   "A#": [
@@ -197,6 +209,18 @@
           "Barres": []
         }
       ]
+    },
+    {
+      "Key": "C",
+      "Suffix": "m7",
+      "Positions": [
+        {
+          "Frets": [-1, 1, 3, 1, 2, 1],
+          "Fingers": [0, 1, 3, 1, 2, 1],
+          "BaseFret": 3,
+          "Barres": [1]
+        }
+      ]
     }
   ],
   "C#": [
@@ -305,6 +329,54 @@
         {
           "Frets": [-1, -1, 0, 2, 3, 0],
           "Fingers": [0, 0, 0, 1, 3, 0],
+          "BaseFret": 1,
+          "Barres": []
+        }
+      ]
+    },
+    {
+      "Key": "D",
+      "Suffix": "/F#",
+      "Positions": [
+        {
+          "Frets": [1, 4, 3, 1, 2, 1],
+          "Fingers": [0, 4, 3, 0, 2, 0],
+          "BaseFret": 2,
+          "Barres": [1]
+        }
+      ]
+    },
+    {
+      "Key": "D",
+      "Suffix": "m7",
+      "Positions": [
+        {
+          "Frets": [-1, -1, 0, 2, 1, 1],
+          "Fingers": [0, 0, 0, 2, 0, 0],
+          "BaseFret": 1,
+          "Barres": []
+        }
+      ]
+    },
+    {
+      "Key": "D",
+      "Suffix": "sus4",
+      "Positions": [
+        {
+          "Frets": [-1, -1, 0, 2, 3, 3],
+          "Fingers": [0, 0, 0, 1, 0, 0],
+          "BaseFret": 1,
+          "Barres": []
+        }
+      ]
+    },
+    {
+      "Key": "D",
+      "Suffix": "7sus4",
+      "Positions": [
+        {
+          "Frets": [-1, -1, 0, 2, 1, 3],
+          "Fingers": [0, 0, 0, 2, 1, 3],
           "BaseFret": 1,
           "Barres": []
         }

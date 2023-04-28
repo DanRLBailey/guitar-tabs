@@ -21,8 +21,12 @@
       margin-bottom: 0;
     }
 
+    .songChordList {
+      display: flex;
+    }
+
     .chord {
-      background: rgb(30, 30, 30);
+      background: #1e1e1e;
       padding: 0 0.3rem;
       margin-right: var(--margin);
       border-radius: 8px 8px 0 0;

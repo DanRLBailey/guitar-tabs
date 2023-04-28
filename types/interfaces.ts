@@ -4,6 +4,7 @@ export interface Song {
   StrummingPattern?: StrummingPattern
   Capo?: number
   Parts: SongSection[]
+  SimpleParts: SongSection[]
   Timings?: number[]
   Tabs?: Tab
 }

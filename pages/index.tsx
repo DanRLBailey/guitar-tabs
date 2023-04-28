@@ -33,17 +33,12 @@ export default function Home() {
               songList[key].Name.toLowerCase().includes(filter.toLowerCase()) ||
               songList[key].Artist.toLowerCase().includes(filter.toLowerCase())
           )
+          .sort()
           .map((item: string, index: number) => {
             const song: SongMetaDetails = songList[item];
             const songDetails: Song = require(`../public/songs/${item}`)[0];
             return (
-              <Link
-                href={`songs/${item}`}
-                className={`${styles.song} ${
-                  songDetails.Timings == null ? styles.incomplete : ""
-                }`}
-                key={index}
-              >
+              <Link href={`songs/${item}`} className={styles.song} key={index}>
                 <div className={styles.details}>
                   <span>{song.Name}</span>
                   <span>{song.Artist}</span>

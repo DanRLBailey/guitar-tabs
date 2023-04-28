@@ -42,5 +42,13 @@
   "rule-the-world": {
     "Name": "Rule The World",
     "Artist": "Take That"
+  },
+  "pink-lemonade": {
+    "Name": "Pink Lemonade",
+    "Artist": "The Wombats"
+  },
+  "grace-kelly": {
+    "Name": "Grace Kelly",
+    "Artist": "Mika"
   }
 }

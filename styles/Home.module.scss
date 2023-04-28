@@ -32,10 +32,6 @@
       display: flex;
       flex-direction: row;
 
-      &.incomplete {
-        background: var(--accent);
-      }
-
       .details {
         display: flex;
         flex-direction: column;
@@ -47,7 +43,7 @@
 
         & > span.details {
           font-size: var(--font-size-small);
-          color: rgba(0, 0, 0, 0.5);
+          color: var(--accent);
         }
       }
     }
