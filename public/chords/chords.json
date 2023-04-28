@@ -89,12 +89,10 @@
           "Barres": [1]
         }
       ]
-    }
-  ],
-  "A#": [
+    },
     {
-      "Key": "A#",
-      "Suffix": "maj",
+      "Key": "A",
+      "Suffix": "#",
       "Positions": [
         {
           "Frets": [1, 3, 3, 2, 1, 1],
@@ -105,8 +103,8 @@
       ]
     },
     {
-      "Key": "A#",
-      "Suffix": "m",
+      "Key": "A",
+      "Suffix": "#m",
       "Positions": [
         {
           "Frets": [1, 3, 3, 1, 1, 1],
@@ -122,6 +120,12 @@
       "Key": "B",
       "Suffix": "maj",
       "Positions": [
+        {
+          "Frets": [-1, 1, 3, 3, 3, 1],
+          "Fingers": [0, 1, 2, 3, 4, 1],
+          "BaseFret": 2,
+          "Barres": [1]
+        },
         {
           "Frets": [1, 3, 3, 2, 1, 1],
           "Fingers": [1, 3, 4, 2, 1, 1],
@@ -221,30 +225,28 @@
           "Barres": [1]
         }
       ]
-    }
-  ],
-  "C#": [
+    },
     {
-      "Key": "C#",
-      "Suffix": "maj",
+      "Key": "C",
+      "Suffix": "#",
       "Positions": [
         {
           "Frets": [-1, 1, 3, 3, 3, 1],
-          "Fingers": [0, 1, 2, 3, 4, 1],
+          "Fingers": [0, 1, 3, 4, 2, 1],
           "BaseFret": 4,
           "Barres": [1]
         },
         {
           "Frets": [1, 3, 3, 2, 1, 1],
-          "Fingers": [1, 3, 4, 2, 1, 1],
+          "Fingers": [1, 3, 4, 1, 1, 1],
           "BaseFret": 9,
           "Barres": [1]
         }
       ]
     },
     {
-      "Key": "C#",
-      "Suffix": "m",
+      "Key": "C",
+      "Suffix": "#m",
       "Positions": [
         {
           "Frets": [-1, 1, 3, 3, 2, 1],
@@ -381,12 +383,10 @@
           "Barres": []
         }
       ]
-    }
-  ],
-  "D#": [
+    },
     {
-      "Key": "D#",
-      "Suffix": "maj",
+      "Key": "D",
+      "Suffix": "#",
       "Positions": [
         {
           "Frets": [-1, 1, 3, 3, 3, 1],
@@ -403,8 +403,8 @@
       ]
     },
     {
-      "Key": "D#",
-      "Suffix": "m",
+      "Key": "D",
+      "Suffix": "#m",
       "Positions": [
         {
           "Frets": [-1, 1, 3, 3, 2, 1],
@@ -483,12 +483,10 @@
           "Barres": [1]
         }
       ]
-    }
-  ],
-  "F#": [
+    },
     {
-      "Key": "F#",
-      "Suffix": "maj",
+      "Key": "F",
+      "Suffix": "#",
       "Positions": [
         {
           "Frets": [1, 3, 3, 2, 1, 1],
@@ -499,8 +497,8 @@
       ]
     },
     {
-      "Key": "F#",
-      "Suffix": "m",
+      "Key": "F",
+      "Suffix": "#m",
       "Positions": [
         {
           "Frets": [1, 3, 3, 1, 1, 1],
@@ -577,12 +575,10 @@
           "Barres": []
         }
       ]
-    }
-  ],
-  "G#": [
+    },
     {
-      "Key": "G#",
-      "Suffix": "maj",
+      "Key": "G",
+      "Suffix": "#",
       "Positions": [
         {
           "Frets": [1, 3, 3, 2, 1, 1],
@@ -593,8 +589,8 @@
       ]
     },
     {
-      "Key": "G#",
-      "Suffix": "m",
+      "Key": "G",
+      "Suffix": "#m",
       "Positions": [
         {
           "Frets": [1, 3, 3, 1, 1, 1],

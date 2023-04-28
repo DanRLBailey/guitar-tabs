@@ -42,8 +42,6 @@ export default function SongPage(props: TabPageProp) {
     song?.SimpleParts != null ?? null
   );
 
-  console.log("simpll,e", hasSimpleChords);
-
   const getWord = (word: string) => {
     const words = word.split(/\*|\^/);
 
