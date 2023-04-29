@@ -145,6 +145,18 @@
           "Barres": [1]
         }
       ]
+    },
+    {
+      "Key": "B",
+      "Suffix": "b",
+      "Positions": [
+        {
+          "Frets": [-1, 1, 3, 3, 3, 1],
+          "Fingers": [0, 1, 2, 3, 4, 1],
+          "BaseFret": 1,
+          "Barres": [1]
+        }
+      ]
     }
   ],
   "C": [

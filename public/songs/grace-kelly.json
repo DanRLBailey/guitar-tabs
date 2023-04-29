@@ -1,278 +1,8 @@
 [
   {
     "Link": "0CGVgAYJyjk",
-    "Chords": [
-      "G",
-      "D/F#",
-      "Dm7",
-      "Am7",
-      "Dsus4",
-      "D",
-      "G/B",
-      "C",
-      "D7sus4",
-      "D7",
-      "Cm7",
-      "F",
-      "Em",
-      "A7/C#"
-    ],
+    "Chords": ["G", "D", "Dm", "Am", "C", "Cm", "F", "Em", "A"],
     "Parts": [
-      {
-        "Section": "[Intro]",
-        "Lines": [
-          ["I", "wanna", "talk*G", "to", "you."],
-          [
-            "The",
-            "last",
-            "time",
-            "we",
-            "talked",
-            "Mr.*D/F#",
-            "Smith",
-            "you",
-            "reduced",
-            "me",
-            "to*G",
-            "tears.",
-            "I",
-            "promise",
-            "you",
-            "it",
-            "wont",
-            "happen",
-            "again.*D/F#"
-          ]
-        ]
-      },
-      {
-        "Section": "[Verse 1]",
-        "Lines": [
-          ["Do*G", "I", "attract", "you?"],
-          [
-            "Do",
-            "I",
-            "repulse",
-            "you",
-            "with",
-            "my",
-            "queasy*D/F#",
-            "smile?*G"
-          ],
-          ["Am", "I", "too", "dirty?", "Am", "I", "too", "flirty?"],
-          ["Do", "I", "like*D/F#", "what", "you", "like?*G"],
-          ["I", "could", "be", "wholesome", "I", "could", "be", "loathsome"],
-          ["I", "guess", "Im", "a", "little*D/F#", "bit", "shy*G"],
-          [
-            "Why",
-            "dont",
-            "you",
-            "like",
-            "me",
-            "why",
-            "dont",
-            "you",
-            "like",
-            "me"
-          ],
-          ["Without", "making", "me", "try?"]
-        ]
-      },
-      {
-        "Section": "[Pre-Chorus]",
-        "Lines": [
-          ["I*G", "tried", "to", "be", "like", "Grace", "Kelly*Dm7", "mm"],
-          [
-            "But*Am7",
-            "all",
-            "her",
-            "looks",
-            "were",
-            "too",
-            "sad*Dsus4",
-            "ah*D"
-          ],
-          ["So*G", "I", "tried", "a", "little", "Freddie*Dm7", "mm"],
-          ["Ive*Am7", "gone", "identity", "maaaaaaad!*Dsus4*D"]
-        ]
-      },
-      {
-        "Section": "[Chorus 1]",
-        "Lines": [
-          ["I*G", "could", "be", "brown", "I", "could", "be", "blue"],
-          ["I", "could", "be", "violet*G*Am7*G/B", "sky*C"],
-          ["I", "could", "be", "hurtful*C", "I", "could", "be", "purple*Dsus4"],
-          ["I", "could", "be", "anything*D", "you", "like"],
-          ["Gotta*G", "be", "green", "gotta", "be", "mean"],
-          ["Gotta", "be", "everything*G*Am7*G/B", "more*C"],
-          [
-            "Why",
-            "dont",
-            "you",
-            "like*C",
-            "me?",
-            "Why",
-            "dont",
-            "you",
-            "like",
-            "me?*D7sus4"
-          ],
-          ["Why", "dont", "you", "walk*D7", "out", "the", "door!*G"]
-        ]
-      },
-      {
-        "Section": "[Hook]",
-        "Lines": [["Getting", "angry", "doesnt", "solve", "anything."]]
-      },
-      {
-        "Section": "[Verse 2]",
-        "Lines": [
-          ["How*G", "can", "I", "help", "it", "how", "can", "I", "help", "it"],
-          ["How", "can", "I", "help*G", "what*Am7", "you*G/B", "think?*C"],
-          ["Hello", "my", "baby", "hello", "my", "baby*D7sus4"],
-          ["Putting", "my", "life*D7", "on", "the", "brink*G"],
-          [
-            "Why",
-            "dont",
-            "you",
-            "like",
-            "me",
-            "why",
-            "dont",
-            "you",
-            "like",
-            "me"
-          ],
-          ["Why", "dont", "you", "like*G*Am7", "yourself?*G/B*C"],
-          [
-            "Should",
-            "I",
-            "bend",
-            "over?",
-            "Should",
-            "I",
-            "look",
-            "older*D7sus4"
-          ],
-          ["Just", "to", "be", "put*D7", "on", "your", "shelf?*G"]
-        ]
-      },
-      {
-        "Section": "[Pre-Chorus]",
-        "Lines": [
-          ["I*G", "tried", "to", "be", "like", "Grace", "Kelly*Dm7", "mm"],
-          [
-            "But*Am7",
-            "all",
-            "her",
-            "looks",
-            "were",
-            "too",
-            "sad*Dsus4",
-            "ah*D"
-          ],
-          ["So*G", "I", "tried", "a", "little", "Freddie*Dm7", "mm"],
-          ["Ive*Am7", "gone", "identity", "maaaaaaad!*Dsus4*D"]
-        ]
-      },
-      {
-        "Section": "[Chorus 2]",
-        "Lines": [
-          ["I*G", "could", "be", "brown", "I", "could", "be", "blue"],
-          ["I", "could", "be", "violet*G*Am7*G/B", "sky*C"],
-          ["I", "could", "be", "hurtful*C", "I", "could", "be", "purple*Dsus4"],
-          ["I", "could", "be", "anything*D", "you", "like"],
-          ["Gotta*G", "be", "green", "gotta", "be", "mean"],
-          ["Gotta", "be", "everything*G*Am7*G/B", "more*C"],
-          [
-            "Why",
-            "dont",
-            "you",
-            "like*C",
-            "me?",
-            "Why",
-            "dont",
-            "you",
-            "like",
-            "me?*D7sus4"
-          ],
-          ["Walk*D7", "out", "the", "door!*C"]
-        ]
-      },
-      {
-        "Section": "[Bridge]",
-        "Lines": [
-          ["Say*Cm7", "what", "you", "want", "to", "satisfy*G", "yourself*C"],
-          [
-            "But",
-            "you*Cm7",
-            "only",
-            "want*F",
-            "what",
-            "everybody*G*D/F#",
-            "else",
-            "says*Em",
-            "you",
-            "should*D",
-            "want*A7/C#"
-          ],
-          ["You", "want*Dsus4*D"]
-        ]
-      },
-      {
-        "Section": "[Chorus 3]",
-        "Lines": [
-          ["I*G", "could", "be", "brown", "I", "could", "be", "blue"],
-          ["I", "could", "be", "violet*G*Am7*G/B", "sky*C"],
-          ["I", "could", "be", "hurtful*C", "I", "could", "be", "purple*Dsus4"],
-          ["I", "could", "be", "anything*D", "you", "like"],
-          ["Gotta*G", "be", "green", "gotta", "be", "mean"],
-          ["Gotta", "be", "everything*G*Am7*G/B", "more*C"],
-          [
-            "Why",
-            "dont",
-            "you",
-            "like*C",
-            "me?",
-            "Why",
-            "dont",
-            "you",
-            "like",
-            "me?*D7sus4"
-          ],
-          ["Walk*D7", "out", "the", "door!*G"]
-        ]
-      },
-      {
-        "Section": "[Chorus 4]",
-        "Lines": [
-          ["I*G", "could", "be", "brown", "I", "could", "be", "blue"],
-          ["I", "could", "be", "violet*G*Am7*G/B", "sky*C"],
-          ["I", "could", "be", "hurtful*C", "I", "could", "be", "purple*Dsus4"],
-          ["I", "could", "be", "anything*D", "you", "like"],
-          ["Gotta*G", "be", "green", "gotta", "be", "mean"],
-          ["Gotta", "be", "everything*G*Am7*G/B", "more*C"],
-          [
-            "Why",
-            "dont",
-            "you",
-            "like*C",
-            "me?",
-            "Why",
-            "dont",
-            "you",
-            "like",
-            "me?*D7sus4"
-          ],
-          ["Walk*D7", "out", "the", "door!*Em*G*C*G/B*Am7*G*F"]
-        ]
-      },
-      {
-        "Section": "[Outro]",
-        "Lines": [["Humphrey!*F", "Were", "leaving.", "Ka-ching!"]]
-      }
-    ],
-    "SimpleParts": [
       {
         "Section": "[Intro]",
         "Lines": [
@@ -346,7 +76,7 @@
             "Why",
             "dont",
             "you",
-            "like*C",
+            "like",
             "me?",
             "Why",
             "dont",
@@ -354,7 +84,7 @@
             "like",
             "me?*D"
           ],
-          ["Why", "dont", "you", "walk*D", "out", "the", "door!*G"]
+          ["Why", "dont", "you", "walk", "out", "the", "door!*G"]
         ]
       },
       {
@@ -382,7 +112,7 @@
           ],
           ["Why", "dont", "you", "like*G*Am", "yourself?*G*C"],
           ["Should", "I", "bend", "over?", "Should", "I", "look", "older*D"],
-          ["Just", "to", "be", "put", "on", "your", "shelf?*G"]
+          ["Just", "to", "be", "put", "on", "your", "shelf?"]
         ]
       },
       {
@@ -459,7 +189,7 @@
             "like",
             "me?*D"
           ],
-          ["Walk*D", "out", "the", "door!*G"]
+          ["Walk", "out", "the", "door!"]
         ]
       },
       {
@@ -483,13 +213,33 @@
             "like",
             "me?*D"
           ],
-          ["Walk*D", "out", "the", "door!*Em*G*C*G*Am*G*F"]
+          ["Walk", "out", "the", "door!*Em*G*C*G*Am*G*F"]
         ]
       },
       {
         "Section": "[Outro]",
-        "Lines": [["Humphrey!*F", "Were", "leaving.", "Ka-ching!"]]
+        "Lines": [["Humphrey!", "Were", "leaving.", "Ka-ching!"]]
       }
+    ],
+    "Timings": [
+      1.54195, 4.535147, 5.53288, 8.480726, 9.478458, 12.426304, 13.333333,
+      16.326531, 17.324263, 20.226757, 21.179138, 25.124717, 27.07483,
+      29.070295, 31.06576, 33.015873, 34.965986, 36.870748, 38.866213,
+      40.861678, 43.809524, 44.126984, 44.444444, 44.761905, 46.712018,
+      48.752834, 51.635161, 51.952621, 52.270082, 52.632893, 54.583007,
+      56.53312, 60.453515, 63.401361, 63.718821, 64.036281, 64.353741,
+      66.349206, 68.208617, 71.292517, 71.609977, 71.882086, 72.244898,
+      74.195011, 76.145125, 78.14059, 80.090703, 82.086168, 84.036281,
+      86.031746, 87.936508, 89.886621, 91.909708, 94.857554, 95.175014,
+      95.492475, 95.809935, 97.760049, 99.755513, 102.703359, 103.020819,
+      103.292928, 103.610389, 105.651205, 107.555967, 109.596783, 111.592248,
+      115.453467, 117.451459, 118.423552, 119.375933, 120.373665, 121.371398,
+      122.323779, 123.321511, 127.267089, 131.121965, 134.069811, 134.387271,
+      134.704731, 135.067543, 137.017656, 138.96777, 141.915616, 142.278427,
+      142.595888, 142.913348, 144.908813, 146.858926, 149.826762, 150.144223,
+      150.416332, 150.733792, 152.729257, 154.67937, 157.627216, 157.990028,
+      158.307488, 158.624948, 160.575062, 162.574204, 163.571936, 164.569668,
+      165.522049, 166.519782, 167.517514, 168.469895
     ]
   }
 ]
