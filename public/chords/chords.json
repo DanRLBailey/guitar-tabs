@@ -113,6 +113,24 @@
           "Barres": [1]
         }
       ]
+    },
+    {
+      "Key": "A",
+      "Suffix": "m/G",
+      "Positions": [
+        {
+          "Frets": [3, 0, 2, 2, 1, 0],
+          "Fingers": [4, 0, 2, 3, 1, 0],
+          "BaseFret": 1,
+          "Barres": []
+        },
+        {
+          "Frets": [1, 3, 3, 1, 1, 1],
+          "Fingers": [1, 3, 4, 1, 1, 1],
+          "BaseFret": 5,
+          "Barres": [1]
+        }
+      ]
     }
   ],
   "B": [
@@ -273,6 +291,18 @@
           "Barres": [1]
         }
       ]
+    },
+    {
+      "Key": "C",
+      "Suffix": "/G",
+      "Positions": [
+        {
+          "Frets": [3, 3, 2, 0, 1, 0],
+          "Fingers": [3, 4, 2, 0, 1, 0],
+          "BaseFret": 1,
+          "Barres": []
+        }
+      ]
     }
   ],
   "D": [
@@ -431,6 +461,18 @@
           "Barres": [1]
         }
       ]
+    },
+    {
+      "Key": "D",
+      "Suffix": "7/F#",
+      "Positions": [
+        {
+          "Frets": [2, 0, 0, 2, 1, 2],
+          "Fingers": [2, 0, 0, 3, 1, 4],
+          "BaseFret": 1,
+          "Barres": []
+        }
+      ]
     }
   ],
   "E": [
@@ -516,6 +558,18 @@
           "Frets": [1, 3, 3, 1, 1, 1],
           "Fingers": [1, 3, 4, 1, 1, 1],
           "BaseFret": 2,
+          "Barres": [1]
+        }
+      ]
+    },
+    {
+      "Key": "F",
+      "Suffix": "maj7",
+      "Positions": [
+        {
+          "Frets": [-1, -1, 3, 2, 1, 0],
+          "Fingers": [0, 0, 3, 2, 1, 0],
+          "BaseFret": 1,
           "Barres": [1]
         }
       ]

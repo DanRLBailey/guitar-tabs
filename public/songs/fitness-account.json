@@ -1,0 +1,274 @@
+[
+  {
+    "Link": "WD53-oXDqL4",
+    "Chords": ["D", "A", "Bm", "G", "F#"],
+    "Parts": [
+      { "Section": "[Intro]", "Lines": [["*D*A*Bm*A*G*A"]] },
+      {
+        "Section": "[Verse 1]",
+        "Lines": [
+          ["Grew*D", "up", "with", "my", "head", "in", "the", "clouds*Bm"],
+          [
+            "I",
+            "guess",
+            "I",
+            "never*A",
+            "quite",
+            "grew",
+            "out*G",
+            "of",
+            "feeling",
+            "like",
+            "I",
+            "could*A",
+            "be",
+            "relevant"
+          ],
+          [
+            "Cause",
+            "Im*D",
+            "out",
+            "here",
+            "trying*A",
+            "to",
+            "be",
+            "famous,*Bm",
+            "watching",
+            "my",
+            "friends*A",
+            "grow",
+            "their",
+            "savings*G"
+          ],
+          [
+            "Building",
+            "lives",
+            "and",
+            "credit,*A",
+            "oh",
+            "am",
+            "I",
+            "just",
+            "pathetic?*G"
+          ]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Maybe", "I", "should", "get", "a", "hobby*D*A"],
+          [
+            "Start*G",
+            "to",
+            "take",
+            "care",
+            "of",
+            "my",
+            "body*D*A",
+            "oh",
+            "no*G"
+          ],
+          [
+            "Get",
+            "obsessive*D",
+            "about",
+            "my",
+            "health,*F#",
+            "start",
+            "a",
+            "fitness*Bm*A",
+            "account*G"
+          ],
+          [
+            "Convince",
+            "the",
+            "internet*D",
+            "Im",
+            "doing*A",
+            "well*D*A*Bm*A*G*A"
+          ]
+        ]
+      },
+      {
+        "Section": "[Verse 2]",
+        "Lines": [
+          ["Ive*D", "spent", "whole", "summers*A", "in", "my", "room"],
+          [
+            "Writing*Bm",
+            "songs*A",
+            "and",
+            "singing",
+            "blues*G",
+            "about",
+            "some",
+            "girl",
+            "who",
+            "never",
+            "heard*A",
+            "em"
+          ],
+          [
+            "And*D",
+            "if",
+            "these",
+            "songs",
+            "dont*A",
+            "pay",
+            "the",
+            "rent,*Bm",
+            "what",
+            "the",
+            "hell*A",
+            "do",
+            "I",
+            "do",
+            "then?"
+          ],
+          ["I*G", "dont", "know", "how", "to", "be", "a", "person*A"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Why*G", "cant", "I", "just", "be", "realistic?*D*A"],
+          ["Start*G", "a", "job", "and", "mind", "my", "business*D*A"],
+          [
+            "And*G",
+            "I",
+            "cant",
+            "get*D",
+            "it",
+            "through",
+            "my",
+            "head,*F#",
+            "maybe",
+            "borings*Bm",
+            "for*A",
+            "the",
+            "best*G"
+          ],
+          [
+            "Cause",
+            "better",
+            "men*D",
+            "have",
+            "settled",
+            "down*A",
+            "for",
+            "less"
+          ]
+        ]
+      },
+      {
+        "Section": "[Solo/Instrumental]",
+        "Lines": [["*G*D*A"], ["*G*D*A"], ["*G*D*F#*Bm*A"], ["*G*D*A"]]
+      },
+      {
+        "Section": "[Bridge]",
+        "Lines": [
+          [
+            "I*D",
+            "hope",
+            "my",
+            "best*A",
+            "days",
+            "arent",
+            "behind",
+            "me,*Bm",
+            "the",
+            "word",
+            "normal*A",
+            "terrifies",
+            "me*G"
+          ],
+          ["I", "wanna", "be", "remembered*A"],
+          [
+            "I*D",
+            "think",
+            "thats",
+            "why*A",
+            "I",
+            "still",
+            "believe*Bm",
+            "Im",
+            "not",
+            "too",
+            "old*A",
+            "to",
+            "have",
+            "these",
+            "dreams*G"
+          ],
+          ["But", "dreams", "dont", "last", "forever*A"]
+        ]
+      },
+      {
+        "Section": "[Chrous]",
+        "Lines": [
+          ["Maybe*G", "I", "should", "get", "a", "hobby*D*A"],
+          [
+            "Start*G",
+            "to",
+            "take",
+            "care",
+            "of",
+            "my",
+            "body*D*A",
+            "oh",
+            "no*G"
+          ],
+          [
+            "Get",
+            "obsessive*D",
+            "about",
+            "my",
+            "health,*F#",
+            "start",
+            "a",
+            "fitness*Bm*A",
+            "account*G"
+          ],
+          ["Convince", "the", "internet*D", "Im", "doing*A", "well"],
+          ["Why*G", "cant", "I", "just", "be", "realistic?*D*A"],
+          ["Start*G", "a", "job", "and", "mind", "my", "business*D*A"],
+          [
+            "And*G",
+            "I",
+            "cant",
+            "get*D",
+            "it",
+            "through",
+            "my",
+            "head,*F#",
+            "maybe",
+            "borings*Bm",
+            "for*A",
+            "the",
+            "best*G"
+          ],
+          [
+            "Cause",
+            "better",
+            "men*D",
+            "have",
+            "settled",
+            "down*A",
+            "for",
+            "less"
+          ],
+          [
+            "Cause*G",
+            "better",
+            "men*D",
+            "have",
+            "settled",
+            "down*A",
+            "for",
+            "less",
+            "*G"
+          ]
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,211 @@
+[
+  {
+    "Link": "iYYRH4apXDo",
+    "Chords": [
+      "Fmaj7",
+      "Em",
+      "C",
+      "Am",
+      "Am/G",
+      "D7/F#",
+      "E7",
+      "F",
+      "Fm",
+      "Bb",
+      "G",
+      "A",
+      "D",
+      "E",
+      "C/G"
+    ],
+    "Parts": [
+      {
+        "Section": "[Intro]",
+        "Lines": [["*Fmaj7*Em*Fmaj7*Em"], ["*Fmaj7*Em*Fmaj7*Em"]]
+      },
+      {
+        "Section": "[Pre-Verse]",
+        "Lines": [
+          ["Ground*C", "control", "to", "Major", "Tom*Em"],
+          ["Ground*C", "control", "to", "Major", "Tom*Em"],
+          [
+            "Take*Am",
+            "your",
+            "protein*Am/G",
+            "pills",
+            "and",
+            "put*D7/F#",
+            "your",
+            "helmet",
+            "on"
+          ],
+          ["Ground*C", "control", "to", "Major", "Tom*Em"],
+          ["Commencing*C", "countdown", "engines", "on*Em"],
+          [
+            "Check*Am",
+            "ignition*Am/G",
+            "and",
+            "may",
+            "Gods*D7/F#",
+            "love",
+            "be",
+            "with",
+            "you"
+          ]
+        ]
+      },
+      {
+        "Section": "[Verse 1]",
+        "Lines": [
+          ["This*C", "is", "ground", "control", "to", "Major", "Tom*E7"],
+          ["Youve", "really", "made", "the", "grade*F"],
+          [
+            "And",
+            "the",
+            "papers*Fm",
+            "want",
+            "to",
+            "know*C",
+            "whose",
+            "shirt",
+            "you",
+            "wear*F"
+          ],
+          [
+            "Now",
+            "its",
+            "time*Fm",
+            "to",
+            "leave",
+            "the",
+            "capsule*C",
+            "if",
+            "you",
+            "dare*F"
+          ],
+          ["This*C", "is", "Major", "Tom", "to", "ground", "control*E7"],
+          ["Im", "stepping", "through", "the", "door*F"],
+          [
+            "And",
+            "Im",
+            "floating*Fm",
+            "in",
+            "a",
+            "most*C",
+            "peculiar",
+            "way*F"
+          ],
+          ["And", "the", "stars*Fm", "look", "very", "different*C", "today*F"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          [
+            "For",
+            "here*Fmaj7",
+            "am",
+            "I",
+            "sitting*Em",
+            "in",
+            "a",
+            "tin",
+            "can"
+          ],
+          ["Far*Fmaj7", "above", "the", "world*Em"],
+          [
+            "Planet*Bb",
+            "Earth",
+            "is",
+            "blue*Am",
+            "and",
+            "theres",
+            "nothing*G",
+            "I",
+            "can",
+            "do*F"
+          ]
+        ]
+      },
+      {
+        "Section": "[Instrumental]",
+        "Lines": [["*C*F*G*A*A"], ["*C*F*G*A*A"], ["*Fmaj7*Em*A"], ["*C*D*E"]]
+      },
+      {
+        "Section": "[Verse 2]",
+        "Lines": [
+          ["Though*C", "Im", "past", "one", "hundred", "thousand", "miles*E7"],
+          ["Im", "feeling", "very", "still*F"],
+          [
+            "And",
+            "I",
+            "think*Fm",
+            "my",
+            "spaceship",
+            "knows*C",
+            "which",
+            "way",
+            "to",
+            "go*F"
+          ],
+          [
+            "Tell",
+            "my",
+            "wife*Fm",
+            "I",
+            "love",
+            "her",
+            "very*C",
+            "much",
+            "she",
+            "knows*F"
+          ]
+        ]
+      },
+      {
+        "Section": "[Bridge]",
+        "Lines": [
+          [
+            "Ground*G",
+            "control",
+            "to",
+            "Major*E7",
+            "Tom,",
+            "your",
+            "circuits*Am",
+            "dead,",
+            "theres",
+            "something*C/G",
+            "wrong"
+          ],
+          ["Can", "you", "hear*D7/F#", "me", "Major", "Tom?"],
+          ["Can", "you", "hear*C", "me", "Major", "Tom?"],
+          ["Can", "you", "hear*G", "me", "Major", "Tom?", "Can", "you..."]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Here*Fmaj7", "am", "I", "floating*Em", "round", "my", "tin", "can"],
+          ["Far*Fmaj7", "above", "the", "Moon*Em"],
+          [
+            "Planet*Bb",
+            "Earth",
+            "is",
+            "blue*Am",
+            "and",
+            "theres",
+            "nothing*G",
+            "I",
+            "can",
+            "do*F"
+          ]
+        ]
+      },
+      {
+        "Section": "[Outro]",
+        "Lines": [["*C*F*G*A*A"], ["*C*F*G*A*A"], ["*Fmaj7*Em*A"], ["*C*D*E"]]
+      }
+    ]
+  }
+]

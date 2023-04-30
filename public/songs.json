@@ -58,5 +58,25 @@
   "night-eyes": {
     "Name": "Night Eyes",
     "Artist": "The Orion Experience"
+  },
+  "when-i-was-your-man": {
+    "Name": "When I Was Your Man",
+    "Artist": "Bruno Mars"
+  },
+  "fitness-account": {
+    "Name": "Fitness Account",
+    "Artist": "90s Kids"
+  },
+  "youll-be-in-my-heart": {
+    "Name": "You'll Be In My Heart",
+    "Artist": "Phil Collins"
+  },
+  "take-on-me": {
+    "Name": "Take On Me",
+    "Artist": "a-ha"
+  },
+  "space-oddity": {
+    "Name": "Space Oddity",
+    "Artist": "David Bowie"
   }
 }

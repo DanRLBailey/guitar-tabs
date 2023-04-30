@@ -1,0 +1,364 @@
+[
+  {
+    "Link": "hGPL5rzd3tQ",
+    "Chords": ["Bm", "E", "A", "D", "F#m", "C#m", "G"],
+    "Parts": [
+      {
+        "Section": "[Intro]",
+        "Lines": [["*Bm"], ["^Riff^Riff2"], ["^Riff^Riff2"], ["^Riff^Riff3"]]
+      },
+      {
+        "Section": "[Verse 1]",
+        "Lines": [
+          [
+            "Talking*Bm",
+            "away,*E",
+            "I*A",
+            "dont",
+            "know",
+            "what",
+            "Im*D",
+            "to",
+            "say*A"
+          ],
+          [
+            "Ill",
+            "say*Bm",
+            "it",
+            "anyway,*E",
+            "todays*A",
+            "another",
+            "day*D",
+            "to",
+            "find*A",
+            "you"
+          ],
+          [
+            "Shying*Bm",
+            "away,*E",
+            "Ill*F#m",
+            "be",
+            "coming",
+            "for",
+            "your",
+            "love,*D",
+            "OK?"
+          ]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Take*A", "on*E", "me*F#m", "(take*D", "on", "me)"],
+          ["Take*A", "me*E", "on*F#m", "(take*D", "on", "me)"],
+          ["Ill*A", "be*E", "gone*F#m*D"],
+          ["In", "a", "day", "or*A", "two*E*D*E"]
+        ]
+      },
+      {
+        "Section": "[Verse 2]",
+        "Lines": [
+          [
+            "So,",
+            "needless*Bm",
+            "to",
+            "say*E",
+            "Im",
+            "odds*A",
+            "and",
+            "ends,",
+            "but*D",
+            "Ill",
+            "be*A"
+          ],
+          [
+            "Stumbling*Bm",
+            "away*E",
+            "slowly*A",
+            "learning",
+            "that",
+            "life*D",
+            "is",
+            "OK*A"
+          ],
+          [
+            "Say*Bm",
+            "after",
+            "me,*E",
+            "its*F#m",
+            "no",
+            "better",
+            "to",
+            "be",
+            "safe*D",
+            "than",
+            "sorry"
+          ]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Take*A", "on*E", "me*F#m", "(take*D", "on", "me)"],
+          ["Take*A", "me*E", "on*F#m", "(take*D", "on", "me)"],
+          ["Ill*A", "be*E", "gone*F#m*D"],
+          ["In", "a", "day", "or*A", "two*E*D*E"]
+        ]
+      },
+      {
+        "Section": "[Instrumental]",
+        "Lines": [
+          ["*C#m*G"],
+          ["*C#m*G"],
+          ["*Bm*E"],
+          ["^Riff^Riff"],
+          ["^Riff^Riff2"],
+          ["^Riff^Riff2"],
+          ["^Riff^Riff3"]
+        ]
+      },
+      {
+        "Section": "[Verse 3]",
+        "Lines": [
+          [
+            "Oh,",
+            "the",
+            "things*Bm",
+            "that",
+            "you",
+            "say,*E",
+            "yeah,",
+            "is*A",
+            "it",
+            "life",
+            "or",
+            "just*D",
+            "to",
+            "play*A"
+          ],
+          [
+            "My",
+            "worries*Bm",
+            "away,*E",
+            "youre",
+            "all*A",
+            "the",
+            "things",
+            "Ive",
+            "got*D",
+            "to",
+            "remember*A"
+          ],
+          [
+            "Youre*Bm",
+            "shying",
+            "away,*E",
+            "Ill*F#m",
+            "be",
+            "coming",
+            "for",
+            "you*D",
+            "anyway"
+          ]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          ["Take*A", "on*E", "me*F#m", "(take*D", "on", "me)"],
+          ["Take*A", "me*E", "on*F#m", "(take*D", "on", "me)"],
+          ["Ill*A", "be*E", "gone*F#m*D"],
+          ["In", "a*A", "day*E*F#m*D"],
+          ["Take", "on", "me", "(take", "on", "me)"],
+          ["Take*A", "me*E", "on*F#m", "(take*D", "on", "me)"],
+          ["Ill*A", "be*E", "gone*F#m*D"],
+          ["In", "a*A", "day*E*F#m*D"],
+          ["Take", "me", "on"]
+        ]
+      }
+    ],
+    "Tabs": {
+      "Riff": [
+        {
+          "Beat": 1,
+          "Notes": ["e2"],
+          "Chord": "Bm"
+        },
+        {
+          "Beat": 2,
+          "Notes": ["e2"],
+          "Chord": ""
+        },
+        {
+          "Beat": 3,
+          "Notes": ["B3"],
+          "Chord": ""
+        },
+        {
+          "Beat": 4,
+          "Notes": ["B0"],
+          "Chord": ""
+        },
+        {
+          "Beat": 5,
+          "Notes": ["B0"],
+          "Chord": ""
+        },
+        {
+          "Beat": 6,
+          "Notes": ["e0"],
+          "Chord": "E"
+        },
+        {
+          "Beat": 7,
+          "Notes": ["e0"],
+          "Chord": ""
+        },
+        {
+          "Beat": 8,
+          "Notes": ["e0"],
+          "Chord": ""
+        },
+        {
+          "Beat": 9,
+          "Notes": ["e4"],
+          "Chord": ""
+        },
+        {
+          "Beat": 10,
+          "Notes": ["e4"],
+          "Chord": ""
+        },
+        {
+          "Beat": 11,
+          "Notes": ["e5"],
+          "Chord": ""
+        },
+        {
+          "Beat": 12,
+          "Notes": ["e7"],
+          "Chord": ""
+        }
+      ],
+      "Riff2": [
+        {
+          "Beat": 1,
+          "Notes": ["e5"],
+          "Chord": "A"
+        },
+        {
+          "Beat": 2,
+          "Notes": ["e5"],
+          "Chord": ""
+        },
+        {
+          "Beat": 3,
+          "Notes": ["e5"],
+          "Chord": ""
+        },
+        {
+          "Beat": 4,
+          "Notes": ["e0"],
+          "Chord": ""
+        },
+        {
+          "Beat": 5,
+          "Notes": ["B3"],
+          "Chord": ""
+        },
+        {
+          "Beat": 6,
+          "Notes": ["e2"],
+          "Chord": "D"
+        },
+        {
+          "Beat": 7,
+          "Notes": ["e2"],
+          "Chord": ""
+        },
+        {
+          "Beat": 8,
+          "Notes": ["e2"],
+          "Chord": ""
+        },
+        {
+          "Beat": 9,
+          "Notes": ["e0"],
+          "Chord": "A"
+        },
+        {
+          "Beat": 10,
+          "Notes": ["e0"],
+          "Chord": ""
+        },
+        {
+          "Beat": 11,
+          "Notes": ["e2"],
+          "Chord": ""
+        },
+        {
+          "Beat": 12,
+          "Notes": ["e0"],
+          "Chord": ""
+        }
+      ],
+      "Riff3": [
+        {
+          "Beat": 1,
+          "Notes": ["e5"],
+          "Chord": "A"
+        },
+        {
+          "Beat": 2,
+          "Notes": ["e5"],
+          "Chord": ""
+        },
+        {
+          "Beat": 3,
+          "Notes": ["e5"],
+          "Chord": ""
+        },
+        {
+          "Beat": 4,
+          "Notes": ["e0"],
+          "Chord": ""
+        },
+        {
+          "Beat": 5,
+          "Notes": ["B3"],
+          "Chord": ""
+        },
+        {
+          "Beat": 6,
+          "Notes": ["e2"],
+          "Chord": "D"
+        },
+        {
+          "Beat": 7,
+          "Notes": ["e2"],
+          "Chord": ""
+        },
+        {
+          "Beat": 8,
+          "Notes": ["e2"],
+          "Chord": ""
+        },
+        {
+          "Beat": 9,
+          "Notes": ["e0"],
+          "Chord": "A"
+        },
+        {
+          "Beat": 10,
+          "Notes": ["e0"],
+          "Chord": ""
+        },
+        {
+          "Beat": 11,
+          "Notes": ["e0"],
+          "Chord": ""
+        }
+      ]
+    }
+  }
+]

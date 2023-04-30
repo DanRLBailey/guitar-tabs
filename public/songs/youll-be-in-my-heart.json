@@ -1,0 +1,237 @@
+[
+  {
+    "Link": "MfrX4IOjCz0",
+    "Chords": [
+      "F",
+      "C",
+      "A#",
+      "Gm",
+      "A",
+      "D",
+      "G",
+      "F#m",
+      "Bm",
+      "Em",
+      "E",
+      "B",
+      "G#m",
+      "C#m"
+    ],
+    "Parts": [
+      { "Section": "[Intro]", "Lines": [["*F"]] },
+      {
+        "Section": "[Verse]",
+        "Lines": [
+          [
+            "Come*F",
+            "stop",
+            "your",
+            "cryin",
+            "it",
+            "will",
+            "be*C",
+            "alright*F"
+          ],
+          ["Just*F", "take", "my", "hand,", "hold*C", "it", "tight*F"],
+          ["I*A#", "will", "protect", "you", "from", "all", "around", "you"],
+          ["I*Gm", "will", "be", "here,", "dont", "you", "cry*C"],
+          ["For*F", "one", "so", "small,", "you", "seem*C", "so", "strong*F"],
+          [
+            "My*F",
+            "arms",
+            "will",
+            "hold",
+            "you",
+            "keep",
+            "you",
+            "safe*C",
+            "and",
+            "warm*F"
+          ],
+          ["This*A#", "bond", "between", "us,", "cant", "be", "broken"],
+          ["I*Gm", "will", "be", "here,", "dont", "you", "cry*C*A"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          [
+            "Cause",
+            "youll*D",
+            "be",
+            "in",
+            "my",
+            "heart,*G",
+            "Yes,",
+            "youll*A",
+            "be",
+            "in",
+            "my",
+            "heart*F#m"
+          ],
+          [
+            "From",
+            "this*Bm",
+            "day",
+            "on,",
+            "now*G",
+            "and",
+            "forever",
+            "more*C*A"
+          ],
+          [
+            "Youll*D",
+            "be",
+            "in",
+            "my",
+            "heart,*G",
+            "no",
+            "matter*A",
+            "what",
+            "they",
+            "say*F#m"
+          ],
+          ["Youll", "be*Bm", "here", "in", "my", "heart,*G", "always*C*A"]
+        ]
+      },
+      {
+        "Section": "[Verse]",
+        "Lines": [
+          [
+            "Why*F",
+            "cant",
+            "they",
+            "understand",
+            "the",
+            "way*C",
+            "we",
+            "feel?*F"
+          ],
+          [
+            "They*F",
+            "just",
+            "dont",
+            "trust",
+            "what",
+            "they",
+            "cant*C",
+            "explain*F"
+          ],
+          ["I*A#", "know", "were", "different", "but", "deep", "inside", "us"],
+          ["Were*Gm", "not", "that", "different", "at", "all*C*A"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          [
+            "Youll*D",
+            "be",
+            "in",
+            "my",
+            "heart,*G",
+            "yes",
+            "youll*A",
+            "be",
+            "in",
+            "my",
+            "heart*F#m"
+          ],
+          [
+            "From",
+            "this*Bm",
+            "day",
+            "on,",
+            "now*G",
+            "and",
+            "forever",
+            "more*C*A"
+          ]
+        ]
+      },
+      {
+        "Section": "[Bridge]",
+        "Lines": [
+          ["Dont", "listen*G", "to", "them,", "what", "do", "they", "know?"],
+          ["We", "need*C", "each", "other", "to", "have,*Em", "to", "hold"],
+          ["Theyll*Bm", "see", "in", "time.", "I", "know*C*A"],
+          ["When", "destiny*G", "calls", "you,", "you", "must", "be", "strong"],
+          [
+            "I",
+            "may*C",
+            "not",
+            "be",
+            "with",
+            "you,",
+            "but",
+            "you",
+            "got*Em",
+            "to",
+            "hold",
+            "on"
+          ],
+          ["Theyll*Bm", "see", "in", "time.", "I", "know*C"],
+          ["Well", "show*D", "them", "together*A*E"]
+        ]
+      },
+      {
+        "Section": "[Chorus]",
+        "Lines": [
+          [
+            "Cause",
+            "Youll*E",
+            "be",
+            "in",
+            "my",
+            "heart,*A",
+            "Believe",
+            "me,",
+            "youll*B",
+            "be",
+            "in",
+            "my",
+            "heart*G#m"
+          ],
+          [
+            "Ill",
+            "be",
+            "there",
+            "from",
+            "this*C#m",
+            "day",
+            "on,",
+            "now*A",
+            "and",
+            "forever",
+            "more*D*B"
+          ],
+          [
+            "Youll*E",
+            "be",
+            "in",
+            "my",
+            "heart,*A",
+            "no",
+            "matter*B",
+            "what",
+            "they",
+            "say*G#m"
+          ],
+          ["Youll", "be*C#m", "here", "in", "my", "heart,*A", "always*D*B"]
+        ]
+      },
+      {
+        "Section": "[Ending]",
+        "Lines": [
+          ["Always,*A", "Ill", "be", "with*E", "you"],
+          ["Ill", "be", "there*A", "for", "you", "always"],
+          ["Always", "and", "always*E"],
+          ["Just", "look", "over*A", "your", "shoulder"],
+          ["Just", "look", "over*E", "your", "shoulder"],
+          ["Just", "look", "over*A", "your", "shoulder"],
+          ["And", "Ill", "be", "there", "always*E"]
+        ]
+      }
+    ]
+  }
+]
