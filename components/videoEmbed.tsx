@@ -84,6 +84,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
       if (!playing) return;
 
       setCurrentTime(player.current.getCurrentTime());
+
       if (props.timings) {
         const l =
           props.timings.find((t) => t <= currentTime && t > latest) ?? latest;
@@ -98,6 +99,8 @@ export default function VideoEmbed(props: VideoEmbedProps) {
           setLatest(l);
         }
       }
+
+      if (!props.timings) console.log("scrollages");
     }, 10);
     return () => clearTimeout(timer);
   }, [playing, currentTime]);
@@ -155,17 +158,18 @@ export default function VideoEmbed(props: VideoEmbedProps) {
             </div>
           )}
           <div className={styles.player}>
-            <ReactPlayer
-              ref={player}
-              url={url}
-              playing={playing}
-              onReady={setupPlayer}
-              onPlay={() => setCurrentTime(player.current.getCurrentTime())}
-              width="auto"
-              height="40vh"
-              volume={vol}
-            />
-
+            <div className={styles.playerWrapper}>
+              <ReactPlayer
+                ref={player}
+                url={url}
+                playing={playing}
+                onReady={setupPlayer}
+                onPlay={() => setCurrentTime(player.current.getCurrentTime())}
+                width="auto"
+                height="40vh"
+                volume={vol}
+              />
+            </div>
             <div className={styles.playerController}>
               <div className={styles.playerControls}>
                 <div className={styles.scrubberContainer}>
