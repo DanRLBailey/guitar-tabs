@@ -28,6 +28,7 @@ export default function SongPage(props: TabPageProp) {
   const [highlightedChord, setHighlightedChord] = useState("");
   const [autoscroll, setAutoscroll] = useState(true);
   const [simpleChords, setSimpleChords] = useState(false);
+  const [allChords, setAllChords] = useState<string[]>([]);
 
   const simplifyChords = () => {
     setSimpleChords(!simpleChords);
@@ -124,7 +125,7 @@ export default function SongPage(props: TabPageProp) {
         <div className={styles.songDetails}>
           {song?.Capo && song.Capo > 0 && <div>{`Capo: ${song?.Capo}`}</div>}
           <div className={styles.songChordList}>
-            {song?.Chords?.map((item: string, index: number) => {
+            {allChords?.sort().map((item: string, index: number) => {
               return (
                 <div key={index}>
                   <span
@@ -192,6 +193,16 @@ export default function SongPage(props: TabPageProp) {
                   {lineItem.map((word: string, wordIndex) => {
                     const c = getChords(word);
                     const w = getWord(word);
+
+                    if (c.length > 0) {
+                      c.forEach((chord) => {
+                        if (
+                          !allChords.includes(chord) &&
+                          !chord.toLowerCase().includes("tab")
+                        )
+                          setAllChords([chord, ...allChords]);
+                      });
+                    }
 
                     return (
                       <div key={wordIndex} className={styles.word}>

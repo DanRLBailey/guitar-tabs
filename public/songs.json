@@ -78,5 +78,17 @@
   "space-oddity": {
     "Name": "Space Oddity",
     "Artist": "David Bowie"
+  },
+  "2-be-loved": {
+    "Name": "2 Be Loved (Am I Ready)",
+    "Artist": "Lizzo"
+  },
+  "your-song": {
+    "Name": "Your Song",
+    "Artist": "Elton John"
+  },
+  "can-you-feel-the-love-tonight": {
+    "Name": "Can You Feel The Love Tonight",
+    "Artist": "Elton John"
   }
 }
