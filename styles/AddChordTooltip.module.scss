@@ -1,0 +1,22 @@
+.container {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 0;
+  background-color: var(--background);
+  color: black;
+  width: 15rem;
+  padding: 0.5rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+
+  input {
+    flex: 1;
+    margin: 0 !important;
+  }
+
+  button {
+    flex: 0.2;
+  }
+}

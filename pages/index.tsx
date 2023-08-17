@@ -3,6 +3,7 @@ import Link from "next/link";
 import Songs from "../public/songs.json";
 import { Song, SongMeta, SongMetaDetails } from "../types/interfaces";
 import { useEffect, useState } from "react";
+import AddSong from "../components/addSong";
 
 export default function Home() {
   const [filter, setFilter] = useState("");
@@ -24,6 +25,8 @@ export default function Home() {
           }}
           placeholder="Filter"
         />
+        <button>Edit</button>
+        <AddSong />
       </div>
 
       <div className={styles.songList}>
