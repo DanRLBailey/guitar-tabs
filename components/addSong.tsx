@@ -113,7 +113,6 @@ export default function AddSong() {
 
     if (!word || chords.length == 0) return;
 
-    console.log("word", word, partIndex, lineIndex, wordIndex, chords);
     word = word.split("*")[0];
     chords.forEach((item) => {
       word += `*${item.replaceAll(" ", "")}`;
@@ -132,7 +131,6 @@ export default function AddSong() {
 
     if (!parts[partIndex].Lines[0]) {
       const chord = `*${chords.join("*").replaceAll(" ", "")}`;
-      console.log(chord);
       song[partIndex].Lines.push([chord]);
     } else if (!parts[partIndex].Lines[0][0].startsWith("*")) {
       song[partIndex].Lines.unshift([`*${chords.join("*").replaceAll(" ", "")}`]);
@@ -140,7 +138,6 @@ export default function AddSong() {
       song[partIndex].Lines[0] = [`*${chords.join("*").replaceAll(" ", "")}`];
     }
 
-    console.log(song);
     setParts(song);
   };
 
@@ -152,7 +149,7 @@ export default function AddSong() {
       Parts: parts,
     };
 
-    console.log(`[${JSON.stringify(song)}]`);
+    console.log(`[${JSON.stringify(song)}]`); //Don't remove until db connection complete
     setSong(song);
 
     //write to new JSON file => lower case & kebab case
