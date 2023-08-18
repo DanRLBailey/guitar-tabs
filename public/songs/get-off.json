@@ -165,9 +165,7 @@
       {
         "Section": "[Bridge]",
         "Lines": [
-          [
-            "*G#* G#* B* B* C#* G#* G#* B* B* F#*    F#* G* G#* G#* B* B* C#* E*    F#"
-          ],
+          ["*G#*G#*B*B*C#*G#*G#*B*B*F#*F#*G*G#*G#*B*B*C#*E*F#"],
           [
             "I*G#",
             "dont",
