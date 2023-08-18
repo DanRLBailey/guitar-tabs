@@ -23,11 +23,8 @@ interface VideoEmbedProps {
   tabs: TabType;
   timings: number[];
   currentChord: string;
-  simpleChords: boolean;
-  hasSimpleChords: boolean;
   onHighlightChord: (index: number) => void;
   onToggleAutoscroll: (autoscroll: boolean) => void;
-  onSimplifyChords: () => void;
 }
 
 export default function VideoEmbed(props: VideoEmbedProps) {
