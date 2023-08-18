@@ -4,19 +4,24 @@
   left: 0;
   background-color: var(--background);
   color: black;
-  width: 15rem;
+  //width: auto;
   padding: 0.5rem;
   z-index: 1;
+  border-radius: var(--border-radius);
   display: flex;
   align-items: center;
-  border-radius: 0.5rem;
-
-  input {
-    flex: 1;
-    margin: 0 !important;
-  }
+  gap: 0.25rem;
 
   button {
-    flex: 0.2;
+    max-width: 3rem;
+    border-radius: 0.3rem !important;
+
+    &:first-of-type {
+      border-radius: var(--border-radius) 0.3rem 0.3rem var(--border-radius) !important;
+    }
+
+    &:last-of-type {
+      border-radius: 0.3rem var(--border-radius) var(--border-radius) 0.3rem !important;
+    }
   }
 }

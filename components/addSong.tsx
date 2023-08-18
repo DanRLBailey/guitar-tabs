@@ -12,6 +12,8 @@ export default function AddSong() {
   const [songArtist, setSongArtist] = useState("");
   const [songLink, setSongLink] = useState("");
   const [songCapo, setSongCapo] = useState("");
+  const [songChords, setSongChords] = useState<string[]>([]);
+  const [chordList, setChordList] = useState<string[]>([]);
   const [parts, setParts] = useState<SongSection[]>([]);
   const [song, setSong] = useState<Song>();
 
@@ -44,6 +46,14 @@ export default function AddSong() {
     setSongCapo(val);
   };
 
+  const handleSongChordsChange = (e: any) => {
+    const val = e.target.value;
+    const arr = val.replaceAll(" ", "").split(",")
+
+    setSongChords(val)
+    setChordList(arr);
+  };
+
   const handleTextAreaChange = (e: any) => {
     const val = e.target.value;
     setTextAreaVal(val);
@@ -72,7 +82,7 @@ export default function AddSong() {
         const words = row.split(" ");
 
         words.forEach((word) => {
-          if (word) arr.push(word.trim().replace("'", ""));
+          if (word) arr.push(word.replaceAll(" ", "").replace("'", ""));
         });
 
         part.Lines.push([...arr]);
@@ -106,7 +116,7 @@ export default function AddSong() {
     console.log("word", word, partIndex, lineIndex, wordIndex, chords);
     word = word.split("*")[0];
     chords.forEach((item) => {
-      word += `*${item.trim()}`;
+      word += `*${item.replaceAll(" ", "")}`;
     });
 
     line[wordIndex] = word;
@@ -121,13 +131,13 @@ export default function AddSong() {
     let song = [...parts];
 
     if (!parts[partIndex].Lines[0]) {
-      const chord = chords.map((item) => `*${item.trim()}`);
+      const chord = `*${chords.join("*").replaceAll(" ", "")}`;
       console.log(chord);
-      song[partIndex].Lines.push(chord);
+      song[partIndex].Lines.push([chord]);
     } else if (!parts[partIndex].Lines[0][0].startsWith("*")) {
-      song[partIndex].Lines.unshift([`*${chords.join("*").trim()}`]);
+      song[partIndex].Lines.unshift([`*${chords.join("*").replaceAll(" ", "")}`]);
     } else {
-      song[partIndex].Lines[0] = [`*${chords.join("*").trim()}`];
+      song[partIndex].Lines[0] = [`*${chords.join("*").replaceAll(" ", "")}`];
     }
 
     console.log(song);
@@ -167,13 +177,13 @@ export default function AddSong() {
           body={
             <>
               {stage == 0 && (
-                <>
+                <div className={styles.addSongContainer}>
                   <div className={styles.songDetails}>
                     <div>
                       <h2>Name:</h2>
                       <input
                         type="text"
-                        placeholder="Name"
+                        placeholder="E.g: Pulp"
                         value={songName}
                         onChange={handleSongNameChange}
                       ></input>
@@ -182,7 +192,7 @@ export default function AddSong() {
                       <h2>Artist:</h2>
                       <input
                         type="text"
-                        placeholder="Artist"
+                        placeholder="E.g: Winnetka Bowling League"
                         value={songArtist}
                         onChange={handleSongArtistChange}
                       ></input>
@@ -191,7 +201,7 @@ export default function AddSong() {
                       <h2>Link:</h2>
                       <input
                         type="text"
-                        placeholder="Link"
+                        placeholder="E.g: g8BBtF5ctgg"
                         value={songLink}
                         onChange={handleSongLinkChange}
                       ></input>
@@ -200,9 +210,18 @@ export default function AddSong() {
                       <h2>Capo:</h2>
                       <input
                         type="text"
-                        placeholder="Capo"
+                        placeholder="E.g: 2"
                         value={songCapo}
                         onChange={handleSongCapoChange}
+                      ></input>
+                    </div>
+                    <div>
+                      <h2>Chords:</h2>
+                      <input
+                        type="text"
+                        placeholder="E.g: A, Bm, C#dim/G"
+                        value={songChords}
+                        onChange={handleSongChordsChange}
                       ></input>
                     </div>
                   </div>
@@ -210,52 +229,59 @@ export default function AddSong() {
                   <textarea
                     value={textAreaVal}
                     onChange={(e) => handleTextAreaChange(e)}
+                    placeholder={`[Intro]\n\n[Verse 1]\nBlame it on my ESP or my sensitive teeth\nTo put my yellow Jansport and puffer on her empty seat\n...`}
                   ></textarea>
-                </>
+                </div>
               )}
               {stage == 1 && (
-                <>
+                <div className={styles.addSongContainer}>
+                  <div>{songName && songArtist && `${songName} - ${songArtist}`}</div>
+                  <div>{chordList.length > 0 && `${chordList.join(", ")}`}</div>
                   <h2>Chords:</h2>
-                  {parts.map((part, partIndex) => {
-                    return (
-                      <div key={partIndex} className={styles.songPart}>
-                        <NewSongWord
-                          key={partIndex}
-                          word={part.Section}
-                          index={partIndex}
-                          onChordChange={(chords) =>
-                            handleSectionChordChange(partIndex, chords)
-                          }
-                          type="Section"
-                        />
-                        {part.Lines.map((line, lineIndex) => {
-                          return (
-                            <div key={lineIndex}>
-                              {line.map((word, wordIndex) => {
-                                return (
-                                  <NewSongWord
-                                    key={wordIndex}
-                                    word={word.split("*")[0]}
-                                    index={wordIndex}
-                                    onChordChange={(chords) =>
-                                      handleChordChange(
-                                        partIndex,
-                                        lineIndex,
-                                        wordIndex,
-                                        chords
-                                      )
-                                    }
-                                    type="Lyric"
-                                  />
-                                );
-                              })}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
-                  })}
-                </>
+                  <div className={styles.lyricsContainer}>
+                    {parts.map((part, partIndex) => {
+                      return (
+                        <div key={partIndex} className={styles.songPart}>
+                          <NewSongWord
+                            key={partIndex}
+                            word={part.Section}
+                            index={partIndex}
+                            onChordChange={(chords) =>
+                              handleSectionChordChange(partIndex, chords)
+                            }
+                            type="Section"
+                            songChords={chordList}
+                          />
+                          {part.Lines.map((line, lineIndex) => {
+                            return (
+                              <div key={lineIndex} className={styles.songPartLyrics}>
+                                {line.map((word, wordIndex) => {
+                                  return (
+                                    <NewSongWord
+                                      key={wordIndex}
+                                      word={word.split("*")[0]}
+                                      index={wordIndex}
+                                      onChordChange={(chords) =>
+                                        handleChordChange(
+                                          partIndex,
+                                          lineIndex,
+                                          wordIndex,
+                                          chords
+                                        )
+                                      }
+                                      type="Lyric"
+                                      songChords={chordList}
+                                    />
+                                  );
+                                })}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               )}
             </>
           }
