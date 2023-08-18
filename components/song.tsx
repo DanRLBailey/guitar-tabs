@@ -196,6 +196,7 @@ export default function SongPage(props: TabPageProp) {
 
                     if (c.length > 0) {
                       c.forEach((chord) => {
+                        chord = chord.trim();
                         if (
                           !allChords.includes(chord) &&
                           !chord.toLowerCase().includes("tab")

@@ -6,6 +6,7 @@ interface NewSongWordProp {
   word: string;
   index: number;
   onChordChange: (chords: string[]) => void;
+  type: "Section" | "Lyric";
 }
 
 export default function NewSongWord(props: NewSongWordProp) {
@@ -13,7 +14,9 @@ export default function NewSongWord(props: NewSongWordProp) {
   const [chords, setChords] = useState<string[]>([]);
 
   const handleChordAdded = (chord: string) => {
-    setChords([...chords, chord]);
+    const chordArr = chord.trim().split(",");
+
+    setChords([...chords, ...chordArr]);
   };
 
   const handleChordRemoved = (index: number) => {
@@ -29,7 +32,7 @@ export default function NewSongWord(props: NewSongWordProp) {
   return (
     <div className={styles.container}>
       {editing && <AddChordTooltip onChordAdded={(c) => handleChordAdded(c)} />}
-      {chords.length > 0 && (
+      {props.type == "Lyric" && chords.length > 0 && (
         <div>
           {" "}
           {chords.map((chord, index) => {
@@ -51,6 +54,24 @@ export default function NewSongWord(props: NewSongWordProp) {
       >
         {props.word}
       </button>
+      {props.type == "Section" && chords.length > 0 && (
+        <div>
+          {" "}
+          {chords.map((chord, index) => {
+            return (
+              <button
+                key={index}
+                className={`${styles.button} ${styles.chordButton} ${
+                  props.type == "Section" ? styles.sectionButton : ""
+                }`}
+                onClick={() => handleChordRemoved(index)}
+              >
+                {chord}
+              </button>
+            );
+          })}{" "}
+        </div>
+      )}
     </div>
   );
 }

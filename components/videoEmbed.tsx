@@ -100,7 +100,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
         }
       }
 
-      if (!props.timings) console.log("scrollages");
+      // if (!props.timings) console.log("scrollages");
     }, 10);
     return () => clearTimeout(timer);
   }, [playing, currentTime]);

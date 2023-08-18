@@ -101,11 +101,12 @@ export default function AddSong() {
     const line = part.Lines[lineIndex];
     let word = line[wordIndex];
 
-    if (!word) return;
+    if (!word || chords.length == 0) return;
 
+    console.log("word", word, partIndex, lineIndex, wordIndex, chords);
     word = word.split("*")[0];
     chords.forEach((item) => {
-      word += `*${item}`;
+      word += `*${item.trim()}`;
     });
 
     line[wordIndex] = word;
@@ -120,15 +121,13 @@ export default function AddSong() {
     let song = [...parts];
 
     if (!parts[partIndex].Lines[0]) {
-      const chord = chords.map(
-        (item) => `${item}!"£$%^&()_+-={}[]:@~;*'#<>?,./`
-      );
+      const chord = chords.map((item) => `*${item.trim()}`);
       console.log(chord);
       song[partIndex].Lines.push(chord);
     } else if (!parts[partIndex].Lines[0][0].startsWith("*")) {
-      song[partIndex].Lines.unshift([`*${chords.join("*")}`]);
+      song[partIndex].Lines.unshift([`*${chords.join("*").trim()}`]);
     } else {
-      song[partIndex].Lines[0] = [`*${chords.join("*")}`];
+      song[partIndex].Lines[0] = [`*${chords.join("*").trim()}`];
     }
 
     console.log(song);
@@ -227,6 +226,7 @@ export default function AddSong() {
                           onChordChange={(chords) =>
                             handleSectionChordChange(partIndex, chords)
                           }
+                          type="Section"
                         />
                         {part.Lines.map((line, lineIndex) => {
                           return (
@@ -245,6 +245,7 @@ export default function AddSong() {
                                         chords
                                       )
                                     }
+                                    type="Lyric"
                                   />
                                 );
                               })}
