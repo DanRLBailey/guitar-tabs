@@ -171,7 +171,7 @@ export default function SongPage(props: TabPageProp) {
         <div className={styles.section} key={index}>
           <h4>{item.Section}</h4>
           <div>
-            {item.Lines.map((lineItem: [], lineIndex) => {
+            {item.Lines.map((lineItem, lineIndex) => {
               return (
                 <div key={lineIndex} className={styles.line}>
                   {lineItem.map((word: string, wordIndex) => {

@@ -207,16 +207,6 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                       }}
                     />
                   </div>
-                  {props.hasSimpleChords && (
-                    <button
-                      onClick={props.onSimplifyChords}
-                      className={`${styles.button} ${
-                        props.simpleChords && styles.active
-                      }`}
-                    >
-                      Simplify Chords
-                    </button>
-                  )}
                 </div>
               </div>
             </div>
