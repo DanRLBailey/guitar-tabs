@@ -27,21 +27,12 @@ export default function SongPage(props: TabPageProp) {
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [highlightedChord, setHighlightedChord] = useState("");
   const [autoscroll, setAutoscroll] = useState(true);
-  const [simpleChords, setSimpleChords] = useState(false);
   const [allChords, setAllChords] = useState<string[]>([]);
-
-  const simplifyChords = () => {
-    setSimpleChords(!simpleChords);
-  };
 
   let chordList: string[] = [];
   const song: Song | null = props.Key
     ? require(`../public/songs/${props.Key}`)[0]
     : null;
-
-  const [hasSimpleChords, setHasSimpleChords] = useState(
-    song?.SimpleParts != null ?? null
-  );
 
   const getWord = (word: string) => {
     const words = word.split(/\*|\^/);
@@ -144,11 +135,7 @@ export default function SongPage(props: TabPageProp) {
             })}
           </div>
         </div>
-        {(!simpleChords || !hasSimpleChords) &&
-          getSong(song?.Parts as SongSection[])}
-        {hasSimpleChords &&
-          simpleChords &&
-          getSong(song?.SimpleParts as SongSection[])}
+        {getSong(song?.Parts as SongSection[])}
       </div>
       <div className={styles.sidebar}>
         {currentTab && showTabModal && (
@@ -168,12 +155,9 @@ export default function SongPage(props: TabPageProp) {
               chords={props.Chords}
               tabs={song.Tabs as TabType}
               timings={song.Timings as number[]}
-              hasSimpleChords={hasSimpleChords}
-              simpleChords={simpleChords}
               onHighlightChord={(index) => highlightChord(index)}
               currentChord={highlightedChord}
               onToggleAutoscroll={(scroll) => setAutoscroll(scroll)}
-              onSimplifyChords={simplifyChords}
             />
           </div>
         )}
@@ -187,7 +171,7 @@ export default function SongPage(props: TabPageProp) {
         <div className={styles.section} key={index}>
           <h4>{item.Section}</h4>
           <div>
-            {item.Lines.map((lineItem: [], lineIndex) => {
+            {item.Lines.map((lineItem, lineIndex) => {
               return (
                 <div key={lineIndex} className={styles.line}>
                   {lineItem.map((word: string, wordIndex) => {
@@ -196,6 +180,7 @@ export default function SongPage(props: TabPageProp) {
 
                     if (c.length > 0) {
                       c.forEach((chord) => {
+                        chord = chord.replaceAll(" ", "");
                         if (
                           !allChords.includes(chord) &&
                           !chord.toLowerCase().includes("tab")

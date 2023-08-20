@@ -2,8 +2,12 @@
   padding: 0 var(--padding-double);
 
   .filterContainer {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--padding);
+
     input[type="text"] {
-      width: 100%;
+      flex: 1;
       height: var(--padding-double);
       border-radius: var(--border-radius);
       border: none;
@@ -13,6 +17,14 @@
       &:focus {
         outline: none;
       }
+    }
+
+    button {
+      height: var(--padding-double);
+      border-radius: var(--border-radius);
+      border: none;
+      width: 5rem;
+      cursor: pointer;
     }
   }
 
