@@ -13,6 +13,7 @@ export default function AddSong() {
   const [songLink, setSongLink] = useState("");
   const [songCapo, setSongCapo] = useState("");
   const [songChords, setSongChords] = useState<string[]>([]);
+  const [songTimings, setSongTimings] = useState("");
   const [chordList, setChordList] = useState<string[]>([]);
   const [parts, setParts] = useState<SongSection[]>([]);
   const [song, setSong] = useState<Song>();
@@ -48,10 +49,15 @@ export default function AddSong() {
 
   const handleSongChordsChange = (e: any) => {
     const val = e.target.value;
-    const arr = val.replaceAll(" ", "").split(",")
+    const arr = val.replaceAll(" ", "").split(",");
 
-    setSongChords(val)
+    setSongChords(val);
     setChordList(arr);
+  };
+
+  const handleSongTimingsChange = (e: any) => {
+    const val = e.target.value;
+    setSongTimings(val);
   };
 
   const handleTextAreaChange = (e: any) => {
@@ -133,7 +139,9 @@ export default function AddSong() {
       const chord = `*${chords.join("*").replaceAll(" ", "")}`;
       song[partIndex].Lines.push([chord]);
     } else if (!parts[partIndex].Lines[0][0].startsWith("*")) {
-      song[partIndex].Lines.unshift([`*${chords.join("*").replaceAll(" ", "")}`]);
+      song[partIndex].Lines.unshift([
+        `*${chords.join("*").replaceAll(" ", "")}`,
+      ]);
     } else {
       song[partIndex].Lines[0] = [`*${chords.join("*").replaceAll(" ", "")}`];
     }
@@ -142,11 +150,18 @@ export default function AddSong() {
   };
 
   const handleSecondStage = () => {
+    setStage(stage + 1);
+  };
+
+  const handleThirdStage = () => {
+    const timings = songTimings.split(",").map((timing) => parseFloat(timing));
+
     const song: Song = {
       Link: songLink,
       Chords: [],
       Capo: songCapo ? parseInt(songCapo) : undefined,
       Parts: parts,
+      Timings: timings,
     };
 
     console.log(`[${JSON.stringify(song)}]`); //Don't remove until db connection complete
@@ -232,7 +247,9 @@ export default function AddSong() {
               )}
               {stage == 1 && (
                 <div className={styles.addSongContainer}>
-                  <div>{songName && songArtist && `${songName} - ${songArtist}`}</div>
+                  {songName && songArtist && (
+                    <div>{`${songName} - ${songArtist}`}</div>
+                  )}
                   <div>{chordList.length > 0 && `${chordList.join(", ")}`}</div>
                   <h2>Chords:</h2>
                   <div className={styles.lyricsContainer}>
@@ -251,7 +268,10 @@ export default function AddSong() {
                           />
                           {part.Lines.map((line, lineIndex) => {
                             return (
-                              <div key={lineIndex} className={styles.songPartLyrics}>
+                              <div
+                                key={lineIndex}
+                                className={styles.songPartLyrics}
+                              >
                                 {line.map((word, wordIndex) => {
                                   return (
                                     <NewSongWord
@@ -280,6 +300,15 @@ export default function AddSong() {
                   </div>
                 </div>
               )}
+              {stage == 2 && (
+                <div className={styles.addSongContainer}>
+                  <h2>Timings:</h2>
+                  <textarea
+                    value={songTimings}
+                    onChange={(e) => handleSongTimingsChange(e)}
+                  ></textarea>
+                </div>
+              )}
             </>
           }
           footer={
@@ -293,6 +322,9 @@ export default function AddSong() {
                       break;
                     case 1:
                       handleSecondStage();
+                      break;
+                    case 2:
+                      handleThirdStage();
                       break;
                   }
                 }}
