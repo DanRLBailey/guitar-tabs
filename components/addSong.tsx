@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Modal from "./modal";
 import NewSongWord from "./newSongWord";
 import { Song, SongSection } from "../types/interfaces";
-import { getSongs } from "../controllers/songController";
 
 export default function AddSong() {
   const [showModal, setShowModal] = useState(false);
