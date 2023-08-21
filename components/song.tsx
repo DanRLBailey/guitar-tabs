@@ -17,6 +17,7 @@ interface TabPageProp {
   Key: string;
   SongMeta: SongMetaDetails;
   Chords: Chords;
+  Song: Song;
 }
 
 export default function SongPage(props: TabPageProp) {
@@ -27,12 +28,11 @@ export default function SongPage(props: TabPageProp) {
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [highlightedChord, setHighlightedChord] = useState("");
   const [autoscroll, setAutoscroll] = useState(true);
+
   const [allChords, setAllChords] = useState<string[]>([]);
+  const [song, setSong] = useState<Song | null>(props.Song);
 
   let chordList: string[] = [];
-  const song: Song | null = props.Key
-    ? require(`../public/songs/${props.Key}`)[0]
-    : null;
 
   const getWord = (word: string) => {
     const words = word.split(/\*|\^/);
@@ -135,7 +135,7 @@ export default function SongPage(props: TabPageProp) {
             })}
           </div>
         </div>
-        {getSong(song?.Parts as SongSection[])}
+        {getSong(props.Song.Parts)}
       </div>
       <div className={styles.sidebar}>
         {currentTab && showTabModal && (
@@ -166,7 +166,7 @@ export default function SongPage(props: TabPageProp) {
   );
 
   function getSong(parts: SongSection[]) {
-    return parts.map((item: SongSection, index: number) => {
+    return parts?.map((item: SongSection, index: number) => {
       return (
         <div className={styles.section} key={index}>
           <h4>{item.Section}</h4>

@@ -1,6 +1,17 @@
+export interface SongDB {
+  user_id: number
+  song_name: string
+  song_artist: string
+  parts: string
+  timings: string
+  tabs: string
+  capo: number
+  link: string
+}
+
 export interface Song {
   Link: string
-  Chords: string[]
+  Chords?: string[]
   StrummingPattern?: StrummingPattern
   Capo?: number
   Parts: SongSection[]
