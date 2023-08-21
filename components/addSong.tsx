@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Modal from "./modal";
 import NewSongWord from "./newSongWord";
 import { Song, SongSection } from "../types/interfaces";
+import { getSongs } from "../controllers/songController";
 
 export default function AddSong() {
   const [showModal, setShowModal] = useState(false);
@@ -156,16 +157,35 @@ export default function AddSong() {
   const handleThirdStage = () => {
     const timings = songTimings.split(",").map((timing) => parseFloat(timing));
 
-    const song: Song = {
-      Link: songLink,
-      Chords: [],
-      Capo: songCapo ? parseInt(songCapo) : undefined,
-      Parts: parts,
-      Timings: timings,
-    };
+    // const song: Song = {
+    //   Link: songLink,
+    //   Chords: [],
+    //   Capo: songCapo ? parseInt(songCapo) : undefined,
+    //   Parts: parts,
+    //   Timings: timings,
+    // };
 
-    console.log(`[${JSON.stringify(song)}]`); //Don't remove until db connection complete
-    setSong(song);
+    fetch("/api/postSong", {
+      method: "POST",
+      body: JSON.stringify({
+        userId: 1,
+        songName: songName,
+        songArtist: songArtist,
+        parts: parts,
+        timings: timings,
+        tabs: null,
+        capo: songCapo,
+        link: songLink,
+        slug: songName.toLowerCase().replace(" ", "-"),
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+      });
+
+    // console.log(`[${JSON.stringify(song)}]`); //Don't remove until db connection complete
+    // setSong(song);
 
     //write to new JSON file => lower case & kebab case
     //add to songs.json => lower case & kebab case { name & artist }
