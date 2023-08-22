@@ -58,6 +58,7 @@ export default function Home() {
             )
             .sort((a, b) => a.song_name.localeCompare(b.song_name))
             .map((song, index) => {
+              console.log(song.song_name, song.timings);
               return (
                 <Link
                   href={`songs/${song.song_name
@@ -69,7 +70,7 @@ export default function Home() {
                   <div className={styles.details}>
                     <span>{song.song_name}</span>
                     <span>{song.song_artist}</span>
-                    {song.timings == "null" && (
+                    {(song.timings == "null" || song.timings == "[null]") && (
                       <span className={styles.details}>Timings Missing</span>
                     )}
                   </div>
