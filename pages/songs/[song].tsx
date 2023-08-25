@@ -20,7 +20,7 @@ const Song = () => {
   const [loading, setLoading] = useState(true);
   const [songList, setSongList] = useState<SongDB[]>([]);
 
-  const getSongs = () => {
+  const getSong = () => {
     fetch("/api/getSong", {
       method: "POST",
       body: JSON.stringify({ songName: song }),
@@ -42,8 +42,6 @@ const Song = () => {
         Artist: songList[0].song_artist,
       };
 
-      console.log(songList[0].parts);
-
       const s: SongType = {
         Link: songList[0].link,
         Capo: songList[0].capo,
@@ -57,7 +55,7 @@ const Song = () => {
       setLoading(false);
     }
 
-    getSongs();
+    getSong();
   }, [songList]);
 
   if (loading) return <p>Loading...</p>;

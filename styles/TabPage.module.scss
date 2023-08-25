@@ -14,7 +14,10 @@
 
     h2 {
       margin-top: 0;
-      margin-bottom: var(--margin-large);
+
+      & + button {
+        margin-bottom: var(--margin-large);
+      }
     }
 
     h4 {
@@ -61,6 +64,10 @@
           display: inline-flex;
           flex-direction: column;
 
+          button {
+            border: none;
+          }
+
           .chords {
             display: flex;
             flex-direction: row;
@@ -93,6 +100,40 @@
       position: fixed;
       left: 4vw;
       top: 40vh;
+    }
+  }
+
+  .timingContainer {
+    position: fixed;
+    bottom: 0;
+    left: 5%;
+    padding: 0.5rem;
+    background-color: var(--accent);
+    border-radius: 1rem 1rem 0 0;
+    overflow: hidden;
+
+    display: flex;
+    gap: 1rem;
+
+    &.isEditing {
+      width: 90%;
+    }
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      display: block;
+      flex: 1;
+    }
+
+    button {
+      padding: 0.25rem;
+      background-color: var(--background-button);
+      border: none;
+      box-shadow: 0 0 2px var(--background-dark);
+      border-radius: 1rem;
     }
   }
 }

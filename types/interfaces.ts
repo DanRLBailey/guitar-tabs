@@ -7,6 +7,7 @@ export interface SongDB {
   tabs: string
   capo: number
   link: string
+  slug: string
 }
 
 export interface Song {

@@ -16,12 +16,13 @@ export default async (req, res) => {
 
   try {
     const result = await excuteQuery({
-      query: `insert into songs VALUES (null, ${userId}, '${songName}', '${songArtist}', '${JSON.stringify(
+      query: `UPDATE songs SET song_name = '${songName}', song_artist = '${songArtist}', parts = '${JSON.stringify(
         parts
-      )}', '${JSON.stringify(timings)}', '${
+      )}', timings = '${JSON.stringify(timings)}', tabs = '${
         tabs ? JSON.stringify(tabs) : null
-      }', ${capo ? parseInt(capo) : null}, '${link}', '${slug}')`,
-      //values: [req.body.content],
+      }', capo = ${
+        capo ? parseInt(capo) : null
+      }, link = '${link}' WHERE slug = '${slug}'`,
     });
 
     res.send(result);

@@ -16,7 +16,6 @@ export default function AddSong() {
   const [songTimings, setSongTimings] = useState("");
   const [chordList, setChordList] = useState<string[]>([]);
   const [parts, setParts] = useState<SongSection[]>([]);
-  const [song, setSong] = useState<Song>();
 
   const toggleModal = (show?: boolean) => {
     setShowModal(show ?? !showModal);
@@ -156,14 +155,6 @@ export default function AddSong() {
   const handleThirdStage = () => {
     const timings = songTimings.split(",").map((timing) => parseFloat(timing));
 
-    // const song: Song = {
-    //   Link: songLink,
-    //   Chords: [],
-    //   Capo: songCapo ? parseInt(songCapo) : undefined,
-    //   Parts: parts,
-    //   Timings: timings,
-    // };
-
     fetch("/api/postSong", {
       method: "POST",
       body: JSON.stringify({
@@ -182,13 +173,6 @@ export default function AddSong() {
       .then((json) => {
         console.log(json);
       });
-
-    // console.log(`[${JSON.stringify(song)}]`); //Don't remove until db connection complete
-    // setSong(song);
-
-    //write to new JSON file => lower case & kebab case
-    //add to songs.json => lower case & kebab case { name & artist }
-    //alternatively do a whole db thing and send to that
   };
 
   useEffect(() => {
@@ -284,6 +268,7 @@ export default function AddSong() {
                             }
                             type="Section"
                             songChords={chordList}
+                            existingChords={[]}
                           />
                           {part.Lines.map((line, lineIndex) => {
                             return (
@@ -307,6 +292,7 @@ export default function AddSong() {
                                       }
                                       type="Lyric"
                                       songChords={chordList}
+                                      existingChords={[]}
                                     />
                                   );
                                 })}

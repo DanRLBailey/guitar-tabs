@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import Chord from "./chord";
 import VideoEmbed from "./videoEmbed";
 import Tab from "./tab";
+import NewSongWord from "./newSongWord";
+import PencilIcon from "@mui/icons-material/Create";
 
 interface TabPageProp {
   Key: string;
@@ -31,6 +33,9 @@ export default function SongPage(props: TabPageProp) {
 
   const [allChords, setAllChords] = useState<string[]>([]);
   const [song, setSong] = useState<Song | null>(props.Song);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [currentTime, setCurrentTime] = useState(0);
 
   let chordList: string[] = [];
 
@@ -95,6 +100,58 @@ export default function SongPage(props: TabPageProp) {
     setHighlightedChord(chordList[index]);
   };
 
+  const handleChordChange = (
+    partIndex: number,
+    lineIndex: number,
+    wordIndex: number,
+    chords: string[]
+  ) => {
+    if (!props.Song.Parts) return;
+
+    const parts = [...props.Song.Parts];
+    const part = parts[partIndex];
+    const line = part.Lines[lineIndex];
+    let word = line[wordIndex];
+
+    if (!word) return;
+
+    word = word.split("*")[0];
+    chords.forEach((item) => {
+      word += `*${item.replaceAll(" ", "")}`;
+    });
+
+    line[wordIndex] = word;
+    part.Lines[lineIndex] = line;
+    parts[partIndex] = part;
+    setSong({ ...(song as Song), Parts: parts });
+  };
+
+  const saveEditing = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleAddedTiming = () => {
+    let timings = song?.Timings ?? [];
+    timings?.push(currentTime);
+    timings?.sort((a, b) => a - b);
+
+    setSong({
+      ...song,
+      Timings: timings,
+    } as Song);
+  };
+
+  const handleRemovedTiming = () => {
+    let timings = song?.Timings;
+    timings?.sort((a, b) => a - b);
+    timings?.pop();
+
+    setSong({
+      ...song,
+      Timings: timings,
+    } as Song);
+  };
+
   useEffect(() => {
     if (!autoscroll) return;
 
@@ -104,6 +161,29 @@ export default function SongPage(props: TabPageProp) {
         ?.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [highlightedIndex]);
+
+  useEffect(() => {
+    if (isEditing) return;
+
+    fetch("/api/updateSong", {
+      method: "POST",
+      body: JSON.stringify({
+        userId: 1,
+        songName: props.SongMeta.Name,
+        songArtist: props.SongMeta.Artist,
+        parts: song?.Parts,
+        timings: song?.Timings,
+        tabs: song?.Tabs,
+        capo: song?.Capo,
+        link: song?.Link,
+        slug: props.SongMeta.Name.toLowerCase().replaceAll(" ", "-"),
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+      });
+  }, [isEditing]);
 
   return (
     <div className={styles.container}>
@@ -158,17 +238,35 @@ export default function SongPage(props: TabPageProp) {
               onHighlightChord={(index) => highlightChord(index)}
               currentChord={highlightedChord}
               onToggleAutoscroll={(scroll) => setAutoscroll(scroll)}
+              currentTime={currentTime}
+              onTimeChange={(t) => setCurrentTime(t)}
             />
           </div>
         )}
+      </div>
+      <div
+        className={`${styles.timingContainer} ${
+          isEditing ? styles.isEditing : ""
+        }`}
+      >
+        {isEditing && (
+          <>
+            {" "}
+            <span>{song?.Timings?.map((t) => t.toFixed(2)).join(", ")}</span>
+            <button onClick={handleRemovedTiming}>Delete</button>
+            <button onClick={handleAddedTiming}>Add</button>
+            <button onClick={saveEditing}>Save</button>
+          </>
+        )}
+        {!isEditing && <button onClick={saveEditing}>Edit Song</button>}
       </div>
     </div>
   );
 
   function getSong(parts: SongSection[]) {
-    return parts?.map((item: SongSection, index: number) => {
+    return parts?.map((item: SongSection, partIndex: number) => {
       return (
-        <div className={styles.section} key={index}>
+        <div className={styles.section} key={partIndex}>
           <h4>{item.Section}</h4>
           <div>
             {item.Lines.map((lineItem, lineIndex) => {
@@ -191,37 +289,59 @@ export default function SongPage(props: TabPageProp) {
 
                     return (
                       <div key={wordIndex} className={styles.word}>
-                        <div className={styles.chords}>
-                          {c.map((chord: string, chordIndex: number) => {
-                            const currentChordIndex =
-                              chordList.length - c.length + chordIndex;
-                            return (
-                              <span
-                                id={`chord-${currentChordIndex}`}
-                                className={`${styles.chord} ${
-                                  currentChordIndex == highlightedIndex
-                                    ? styles.highlight
-                                    : ""
-                                }`}
-                                key={chordIndex}
-                                onMouseEnter={() => showChord(chord)}
-                                onMouseLeave={() => {
-                                  setShowChordModal(false);
-                                  setShowTabModal(false);
-                                }}
-                              >
-                                {chord}
-                              </span>
-                            );
-                          })}
-                        </div>
-                        <span
-                          className={
-                            w.includes("_") ? styles.hidden : styles.word
-                          }
-                        >
-                          {w}
-                        </span>
+                        {!isEditing && (
+                          <>
+                            <div className={styles.chords}>
+                              {c.map((chord: string, chordIndex: number) => {
+                                const currentChordIndex =
+                                  chordList.length - c.length + chordIndex;
+                                return (
+                                  <span
+                                    id={`chord-${currentChordIndex}`}
+                                    className={`${styles.chord} ${
+                                      currentChordIndex == highlightedIndex
+                                        ? styles.highlight
+                                        : ""
+                                    }`}
+                                    key={chordIndex}
+                                    onMouseEnter={() => showChord(chord)}
+                                    onMouseLeave={() => {
+                                      setShowChordModal(false);
+                                      setShowTabModal(false);
+                                    }}
+                                  >
+                                    {chord}
+                                  </span>
+                                );
+                              })}
+                            </div>
+                            <span
+                              className={
+                                w.includes("_") ? styles.hidden : styles.word
+                              }
+                            >
+                              {w}
+                            </span>
+                          </>
+                        )}
+                        {isEditing && (
+                          <NewSongWord
+                            key={wordIndex}
+                            word={w}
+                            index={wordIndex}
+                            onChordChange={(chords) =>
+                              handleChordChange(
+                                partIndex,
+                                lineIndex,
+                                wordIndex,
+                                chords
+                              )
+                            }
+                            type="Lyric"
+                            songChords={allChords}
+                            existingChords={c}
+                          />
+                        )}
                       </div>
                     );
                   })}

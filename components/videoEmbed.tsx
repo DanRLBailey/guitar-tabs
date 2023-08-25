@@ -25,6 +25,8 @@ interface VideoEmbedProps {
   currentChord: string;
   onHighlightChord: (index: number) => void;
   onToggleAutoscroll: (autoscroll: boolean) => void;
+  currentTime: number;
+  onTimeChange: (time: number) => void;
 }
 
 export default function VideoEmbed(props: VideoEmbedProps) {
@@ -37,10 +39,12 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   }, []);
   //#endregion
 
+  const localVol = localStorage.getItem("volume");
+
   const [maxTime, setMaxTime] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [currentVol, setCurrentVol] = useState(50);
-  const [vol, setVol] = useState(1);
+  const [currentVol, setCurrentVol] = useState(
+    localVol ? parseInt(localVol) : 50
+  );
   const [playing, setPlaying] = useState(false);
   const [autoscroll, setAutoscroll] = useState(true);
 
@@ -58,7 +62,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
 
   const togglePlay = () => {
     setPlaying(!playing);
-    setCurrentTime(player.current.getCurrentTime());
+    props.onTimeChange(player.current.getCurrentTime());
   };
 
   const seek = (time: number, type: string = "seconds") => {
@@ -80,14 +84,15 @@ export default function VideoEmbed(props: VideoEmbedProps) {
     const timer = setTimeout(() => {
       if (!playing) return;
 
-      setCurrentTime(player.current.getCurrentTime());
+      props.onTimeChange(player.current.getCurrentTime());
 
       if (props.timings) {
         const l =
-          props.timings.find((t) => t <= currentTime && t > latest) ?? latest;
+          props.timings.find((t) => t <= props.currentTime && t > latest) ??
+          latest;
 
         const i = props.timings.filter((t) => {
-          return t <= currentTime;
+          return t <= props.currentTime;
         });
 
         if (i.length - 1 != count) setCount(i.length - 1);
@@ -96,11 +101,9 @@ export default function VideoEmbed(props: VideoEmbedProps) {
           setLatest(l);
         }
       }
-
-      // if (!props.timings) console.log("scrollages");
     }, 10);
     return () => clearTimeout(timer);
-  }, [playing, currentTime]);
+  }, [playing, props.currentTime]);
 
   useEffect(() => {
     if (!props.currentChord) return;
@@ -137,7 +140,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   }, [autoscroll]);
 
   useEffect(() => {
-    setVol(currentVol / 100);
+    localStorage.setItem("volume", currentVol.toString());
   }, [currentVol]);
 
   return (
@@ -161,10 +164,12 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                 url={url}
                 playing={playing}
                 onReady={setupPlayer}
-                onPlay={() => setCurrentTime(player.current.getCurrentTime())}
+                onPlay={() =>
+                  props.onTimeChange(player.current.getCurrentTime())
+                }
                 width="auto"
                 height="40vh"
-                volume={vol}
+                volume={currentVol / 100}
               />
             </div>
             <div className={styles.playerController}>
@@ -174,7 +179,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                     type="range"
                     min={0}
                     max={maxTime}
-                    value={currentTime}
+                    value={props.currentTime}
                     onChange={(e) => {
                       seek(parseInt(e.target.value));
                     }}

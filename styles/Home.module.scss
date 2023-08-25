@@ -40,6 +40,7 @@
       border-radius: var(--padding);
       background: var(--background);
       color: black;
+      cursor: pointer;
 
       display: flex;
       flex-direction: row;
@@ -48,15 +49,33 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        max-width: 100%;
+
+        &.editing {
+          width: 70%;
+        }
 
         & > :first-of-type {
           font-weight: bold;
+        }
+
+        & > span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         & > span.details {
           font-size: var(--font-size-small);
           color: var(--accent);
         }
+      }
+
+      .editContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        flex: 1;
       }
     }
   }

@@ -7,12 +7,14 @@ interface NewSongWordProp {
   index: number;
   onChordChange: (chords: string[]) => void;
   type: "Section" | "Lyric";
-  songChords: string[]
+  songChords: string[];
+  showChord?: boolean;
+  existingChords: string[];
 }
 
 export default function NewSongWord(props: NewSongWordProp) {
   const [editing, setEditing] = useState(false);
-  const [chords, setChords] = useState<string[]>([]);
+  const [chords, setChords] = useState<string[]>(props.existingChords);
 
   const handleChordAdded = (chord: string) => {
     const chordArr = chord.replaceAll(" ", "").split(",");
@@ -32,7 +34,12 @@ export default function NewSongWord(props: NewSongWordProp) {
 
   return (
     <div className={styles.container}>
-      {editing && <AddChordTooltip onChordAdded={(c) => handleChordAdded(c)} songChords={props.songChords}/>}
+      {editing && (
+        <AddChordTooltip
+          onChordAdded={(c) => handleChordAdded(c)}
+          songChords={props.songChords}
+        />
+      )}
       {props.type == "Lyric" && chords.length > 0 && (
         <div>
           {" "}

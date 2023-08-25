@@ -39,7 +39,6 @@ export default function Home() {
           }}
           placeholder="Filter"
         />
-        <button>Edit</button>
         <AddSong />
       </div>
 
@@ -58,7 +57,6 @@ export default function Home() {
             )
             .sort((a, b) => a.song_name.localeCompare(b.song_name))
             .map((song, index) => {
-              console.log(song.song_name, song.timings);
               return (
                 <Link
                   href={`songs/${song.song_name
