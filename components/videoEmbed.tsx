@@ -146,7 +146,8 @@ export default function VideoEmbed(props: VideoEmbedProps) {
 
   useEffect(() => {
     localStorage.setItem("volume", currentVol.toString());
-  }, [currentVol]);
+    localStorage.setItem("speed", speed.toString());
+  }, [currentVol, speed]);
 
   return (
     <div className={styles.container}>

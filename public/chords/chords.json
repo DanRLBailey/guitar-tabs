@@ -1620,8 +1620,8 @@
           "Midi": [49, 53, 56, 61, 65]
         },
         {
-          "Frets": [1, 1, 3, 3, 3, 1],
-          "Fingers": [1, 1, 2, 3, 4, 1],
+          "Frets": [-1, 1, 3, 3, 3, 1],
+          "Fingers": [0, 1, 2, 3, 4, 1],
           "Barres": [1],
           "Capo": true,
           "BaseFret": 4,
@@ -4620,7 +4620,7 @@
     },
     {
       "Key": "D",
-      "Suffix": "/Asharp",
+      "Suffix": "/A#",
       "Positions": [
         {
           "Frets": [-1, 1, 0, 2, 3, 2],
@@ -4714,7 +4714,7 @@
   ],
   "Dsharp": [
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "major",
       "Positions": [
         {
@@ -4750,7 +4750,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "minor",
       "Positions": [
         {
@@ -4786,7 +4786,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "dim",
       "Positions": [
         {
@@ -4820,7 +4820,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "dim7",
       "Positions": [
         {
@@ -4855,7 +4855,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "sus2",
       "Positions": [
         {
@@ -4893,7 +4893,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "sus4",
       "Positions": [
         {
@@ -4929,7 +4929,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "sus2sus4",
       "Positions": [
         {
@@ -4958,7 +4958,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "7sus4",
       "Positions": [
         {
@@ -4995,7 +4995,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "alt",
       "Positions": [
         {
@@ -5030,7 +5030,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "aug",
       "Positions": [
         {
@@ -5066,7 +5066,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "5",
       "Positions": [
         {
@@ -5093,7 +5093,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "6",
       "Positions": [
         {
@@ -5127,7 +5127,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "69",
       "Positions": [
         {
@@ -5164,7 +5164,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "7",
       "Positions": [
         {
@@ -5201,7 +5201,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "7b5",
       "Positions": [
         {
@@ -5236,7 +5236,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "aug7",
       "Positions": [
         {
@@ -5271,7 +5271,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "9",
       "Positions": [
         {
@@ -5306,7 +5306,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "9b5",
       "Positions": [
         {
@@ -5343,7 +5343,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "aug9",
       "Positions": [
         {
@@ -5378,7 +5378,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "7b9",
       "Positions": [
         {
@@ -5413,7 +5413,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "7#9",
       "Positions": [
         {
@@ -5448,7 +5448,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "11",
       "Positions": [
         {
@@ -5486,7 +5486,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "9#11",
       "Positions": [
         {
@@ -5523,7 +5523,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "13",
       "Positions": [
         {
@@ -5559,7 +5559,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "maj7",
       "Positions": [
         {
@@ -5595,7 +5595,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "maj7b5",
       "Positions": [
         {
@@ -5632,7 +5632,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "maj7#5",
       "Positions": [
         {
@@ -5667,7 +5667,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "maj9",
       "Positions": [
         {
@@ -5702,7 +5702,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "maj11",
       "Positions": [
         {
@@ -5739,7 +5739,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "maj13",
       "Positions": [
         {
@@ -5775,7 +5775,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "m6",
       "Positions": [
         {
@@ -5812,7 +5812,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "m7",
       "Positions": [
         {
@@ -5848,7 +5848,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "m7b5",
       "Positions": [
         {
@@ -5882,7 +5882,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "m9",
       "Positions": [
         {
@@ -5917,7 +5917,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "m69",
       "Positions": [
         {
@@ -5952,7 +5952,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "m11",
       "Positions": [
         {
@@ -5990,7 +5990,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "mmaj7",
       "Positions": [
         {
@@ -6026,7 +6026,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "mmaj7b5",
       "Positions": [
         {
@@ -6061,7 +6061,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "mmaj9",
       "Positions": [
         {
@@ -6097,7 +6097,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "mmaj11",
       "Positions": [
         {
@@ -6135,7 +6135,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "add9",
       "Positions": [
         {
@@ -6170,7 +6170,7 @@
       ]
     },
     {
-      "Key": "Dsharp",
+      "Key": "D#",
       "Suffix": "madd9",
       "Positions": [
         {
@@ -12970,7 +12970,7 @@
   ],
   "Gsharp": [
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "major",
       "Positions": [
         {
@@ -13008,7 +13008,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "minor",
       "Positions": [
         {
@@ -13044,7 +13044,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "dim",
       "Positions": [
         {
@@ -13078,7 +13078,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "dim7",
       "Positions": [
         {
@@ -13114,7 +13114,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "sus2",
       "Positions": [
         {
@@ -13151,7 +13151,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "sus4",
       "Positions": [
         {
@@ -13189,7 +13189,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "7sus4",
       "Positions": [
         {
@@ -13227,7 +13227,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "alt",
       "Positions": [
         {
@@ -13262,7 +13262,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "aug",
       "Positions": [
         {
@@ -13299,7 +13299,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "5",
       "Positions": [
         {
@@ -13326,7 +13326,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "6",
       "Positions": [
         {
@@ -13362,7 +13362,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "69",
       "Positions": [
         {
@@ -13399,7 +13399,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "7",
       "Positions": [
         {
@@ -13437,7 +13437,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "7b5",
       "Positions": [
         {
@@ -13473,7 +13473,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "aug7",
       "Positions": [
         {
@@ -13508,7 +13508,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "9",
       "Positions": [
         {
@@ -13544,7 +13544,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "9b5",
       "Positions": [
         {
@@ -13581,7 +13581,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "aug9",
       "Positions": [
         {
@@ -13616,7 +13616,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "7b9",
       "Positions": [
         {
@@ -13652,7 +13652,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "7#9",
       "Positions": [
         {
@@ -13687,7 +13687,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "11",
       "Positions": [
         {
@@ -13725,7 +13725,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "9#11",
       "Positions": [
         {
@@ -13761,7 +13761,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "13",
       "Positions": [
         {
@@ -13798,7 +13798,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "maj7",
       "Positions": [
         {
@@ -13835,7 +13835,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "maj7b5",
       "Positions": [
         {
@@ -13871,7 +13871,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "maj7#5",
       "Positions": [
         {
@@ -13906,7 +13906,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "maj9",
       "Positions": [
         {
@@ -13943,7 +13943,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "maj11",
       "Positions": [
         {
@@ -13980,7 +13980,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "maj13",
       "Positions": [
         {
@@ -14018,7 +14018,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "m6",
       "Positions": [
         {
@@ -14055,7 +14055,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "m7",
       "Positions": [
         {
@@ -14093,7 +14093,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "m7b5",
       "Positions": [
         {
@@ -14127,7 +14127,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "m9",
       "Positions": [
         {
@@ -14162,7 +14162,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "m69",
       "Positions": [
         {
@@ -14198,7 +14198,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "m11",
       "Positions": [
         {
@@ -14236,7 +14236,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "mmaj7",
       "Positions": [
         {
@@ -14274,7 +14274,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "mmaj7b5",
       "Positions": [
         {
@@ -14309,7 +14309,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "mmaj9",
       "Positions": [
         {
@@ -14345,7 +14345,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "mmaj11",
       "Positions": [
         {
@@ -14383,7 +14383,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "add9",
       "Positions": [
         {
@@ -14418,7 +14418,7 @@
       ]
     },
     {
-      "Key": "Gsharp",
+      "Key": "G#",
       "Suffix": "madd9",
       "Positions": [
         {
@@ -16250,7 +16250,7 @@
   ],
   "Asharp": [
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "major",
       "Positions": [
         {
@@ -16288,7 +16288,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "minor",
       "Positions": [
         {
@@ -16325,7 +16325,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "dim",
       "Positions": [
         {
@@ -16359,7 +16359,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "dim7",
       "Positions": [
         {
@@ -16394,7 +16394,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "sus2",
       "Positions": [
         {
@@ -16432,7 +16432,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "sus4",
       "Positions": [
         {
@@ -16470,7 +16470,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "sus2sus4",
       "Positions": [
         {
@@ -16499,7 +16499,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "7sus4",
       "Positions": [
         {
@@ -16536,7 +16536,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "alt",
       "Positions": [
         {
@@ -16570,7 +16570,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "aug",
       "Positions": [
         {
@@ -16606,7 +16606,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "5",
       "Positions": [
         {
@@ -16633,7 +16633,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "6",
       "Positions": [
         {
@@ -16668,7 +16668,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "69",
       "Positions": [
         {
@@ -16704,7 +16704,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "7",
       "Positions": [
         {
@@ -16741,7 +16741,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "7b5",
       "Positions": [
         {
@@ -16776,7 +16776,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "aug7",
       "Positions": [
         {
@@ -16811,7 +16811,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "9",
       "Positions": [
         {
@@ -16847,7 +16847,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "9b5",
       "Positions": [
         {
@@ -16882,7 +16882,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "aug9",
       "Positions": [
         {
@@ -16919,7 +16919,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "7b9",
       "Positions": [
         {
@@ -16955,7 +16955,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "7#9",
       "Positions": [
         {
@@ -16990,7 +16990,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "11",
       "Positions": [
         {
@@ -17028,7 +17028,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "9#11",
       "Positions": [
         {
@@ -17064,7 +17064,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "13",
       "Positions": [
         {
@@ -17099,7 +17099,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "maj7",
       "Positions": [
         {
@@ -17137,7 +17137,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "maj7b5",
       "Positions": [
         {
@@ -17172,7 +17172,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "maj7#5",
       "Positions": [
         {
@@ -17208,7 +17208,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "maj9",
       "Positions": [
         {
@@ -17245,7 +17245,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "maj11",
       "Positions": [
         {
@@ -17282,7 +17282,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "maj13",
       "Positions": [
         {
@@ -17320,7 +17320,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "m6",
       "Positions": [
         {
@@ -17355,7 +17355,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "m7",
       "Positions": [
         {
@@ -17392,7 +17392,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "m7b5",
       "Positions": [
         {
@@ -17427,7 +17427,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "m9",
       "Positions": [
         {
@@ -17463,7 +17463,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "m69",
       "Positions": [
         {
@@ -17499,7 +17499,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "m11",
       "Positions": [
         {
@@ -17537,7 +17537,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "mmaj7",
       "Positions": [
         {
@@ -17575,7 +17575,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "mmaj7b5",
       "Positions": [
         {
@@ -17611,7 +17611,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "mmaj9",
       "Positions": [
         {
@@ -17647,7 +17647,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "mmaj11",
       "Positions": [
         {
@@ -17685,7 +17685,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "add9",
       "Positions": [
         {
@@ -17720,7 +17720,7 @@
       ]
     },
     {
-      "Key": "Asharp",
+      "Key": "A#",
       "Suffix": "madd9",
       "Positions": [
         {

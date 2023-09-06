@@ -29,6 +29,7 @@ export default function SongPage(props: TabPageProp) {
   const [showTabModal, setShowTabModal] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [highlightedChord, setHighlightedChord] = useState("");
+  const [pinnedChord, setPinnedChord] = useState(false);
   const [autoscroll, setAutoscroll] = useState(true);
 
   const [allChords, setAllChords] = useState<string[]>([]);
@@ -70,15 +71,45 @@ export default function SongPage(props: TabPageProp) {
   };
 
   const getKeyFromChord = (chord: string) => {
-    return chord[1] == "#" ? `${chord[0].toUpperCase()}sharp` : chord[0];
+    if (chord[1] == "#") return `${chord[0].toUpperCase()}sharp`;
+    if (chord[1] == "b") return `${translateToSharp(chord[0])}sharp`;
+
+    return chord[0];
   };
 
   const getSuffixFromChord = (chord: string) => {
     if (chord.length == 1) return "major";
-    if (chord.length == 2 && chord.includes("#")) return "major";
-    if (chord.length == 2 && chord[1] == "m") return "minor";
+    if (chord.length == 2 && checkContents(chord, ["#", "b"])) return "major";
+    if (chord.length == 2 && checkContents(chord, ["m"])) return "minor";
+    if (chord.length == 3 && checkContents(chord, ["m"])) return "minor";
 
     return chord.slice(1);
+  };
+
+  const checkContents = (
+    chord: string,
+    arr: string[] = ["A", "B", "C", "D", "E", "F", "G"]
+  ) => {
+    return arr.some((i) => chord.includes(i));
+  };
+
+  const translateToSharp = (chord: string) => {
+    switch (chord) {
+      case "A":
+        return "G";
+      case "B":
+        return "A";
+      case "C":
+        return "B";
+      case "D":
+        return "C";
+      case "E":
+        return "D";
+      case "F":
+        return "E";
+      case "G":
+        return "F";
+    }
   };
 
   const showChord = (chord: string) => {
@@ -235,7 +266,7 @@ export default function SongPage(props: TabPageProp) {
             <Tab tab={currentTab} />
           </div>
         )}
-        {currentChord && showChordModal && (
+        {currentChord && (showChordModal || pinnedChord) && (
           <div className={styles.popup}>
             <Chord chord={currentChord} />
           </div>
@@ -323,6 +354,7 @@ export default function SongPage(props: TabPageProp) {
                                       setShowChordModal(false);
                                       setShowTabModal(false);
                                     }}
+                                    onClick={() => setPinnedChord(!pinnedChord)}
                                   >
                                     {chord}
                                   </span>

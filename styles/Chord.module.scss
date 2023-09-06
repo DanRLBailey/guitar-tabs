@@ -111,4 +111,17 @@
       }
     }
   }
+
+  .buttonContainer {
+    margin-top: var(--padding);
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: black;
+      font-weight: bold;
+    }
+  }
 }

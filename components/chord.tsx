@@ -12,19 +12,30 @@ interface ChordProp {
 }
 
 export default function Chord(props: ChordProp) {
+  const localIndex = localStorage.getItem(
+    `${props.chord.Key}${props.chord.Suffix}`
+  );
+
   const noOfFrets = [1, 2, 3, 4];
   const [maxIndex, setMaxIndex] = useState(props.chord.Positions.length);
-  const [chordIndex, setChordIndex] = useState(0);
+  const [chordIndex, setChordIndex] = useState(
+    localIndex ? parseInt(localIndex) : 0
+  );
 
   const incrementIndex = (increment: number) => {
     if (chordIndex + increment < 0 || chordIndex + increment >= maxIndex)
       return;
 
     setChordIndex(chordIndex + increment);
+
+    localStorage.setItem(
+      `${props.chord.Key}${props.chord.Suffix}`,
+      (chordIndex + increment).toString()
+    );
   };
 
   useEffect(() => {
-    setChordIndex(0);
+    setChordIndex(localIndex ? parseInt(localIndex) : 0);
     setMaxIndex(props.chord.Positions.length);
   }, [props.chord]);
 
@@ -34,7 +45,11 @@ export default function Chord(props: ChordProp) {
         <thead>
           <tr>
             {props.chord.Key}
-            {props.chord.Suffix}
+            {props.chord.Suffix == "major"
+              ? ""
+              : props.chord.Suffix == "minor"
+              ? "m"
+              : props.chord.Suffix}
           </tr>
           <tr>
             {props.chord.Positions[chordIndex] &&
@@ -117,8 +132,10 @@ export default function Chord(props: ChordProp) {
           })}
         </tbody>
       </table>
-      {/* <button onClick={() => incrementIndex(-1)}>prev</button>
-      <button onClick={() => incrementIndex(1)}>next</button> */}
+      <div className={styles.buttonContainer}>
+        <button onClick={() => incrementIndex(-1)}>&#60;</button>
+        <button onClick={() => incrementIndex(1)}>&#62;</button>
+      </div>
     </div>
   );
 }
