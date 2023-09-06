@@ -87,7 +87,10 @@ export default function AddSong() {
         const words = row.split(" ");
 
         words.forEach((word) => {
-          if (word) arr.push(word.replaceAll(" ", "").replace("'", ""));
+          if (word)
+            arr.push(
+              word.replaceAll(" ", "").replaceAll("'", "").replaceAll('"', "")
+            );
         });
 
         part.Lines.push([...arr]);
@@ -162,11 +165,11 @@ export default function AddSong() {
         songName: songName,
         songArtist: songArtist,
         parts: parts,
-        timings: timings,
+        timings: timings ?? [],
         tabs: null,
         capo: songCapo,
         link: songLink,
-        slug: songName.toLowerCase().replace(" ", "-"),
+        slug: songName.toLowerCase().replaceAll(" ", "-"),
       }),
     })
       .then((res) => res.json())

@@ -40,6 +40,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   //#endregion
 
   const localVol = localStorage.getItem("volume");
+  const localSpeed = localStorage.getItem("speed");
 
   const [maxTime, setMaxTime] = useState(0);
   const [currentVol, setCurrentVol] = useState(
@@ -47,6 +48,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   );
   const [playing, setPlaying] = useState(false);
   const [autoscroll, setAutoscroll] = useState(true);
+  const [speed, setSpeed] = useState(localSpeed ? parseFloat(localSpeed) : 1);
 
   const [currentChord, setCurrentChord] = useState<ChordType | null>(null);
   const [currentTab, setCurrentTab] = useState<TabItem[] | null>(null);
@@ -170,6 +172,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                 width="auto"
                 height="40vh"
                 volume={currentVol / 100}
+                playbackRate={speed}
               />
             </div>
             <div className={styles.playerController}>
@@ -211,6 +214,32 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                         setCurrentVol(parseFloat(e.target.value));
                       }}
                     />
+                  </div>
+                  <div className={styles.speedWrapper}>
+                    <button
+                      className={speed == 0.25 ? styles.selected : ""}
+                      onClick={() => setSpeed(0.25)}
+                    >
+                      ¼
+                    </button>
+                    <button
+                      className={speed == 0.5 ? styles.selected : ""}
+                      onClick={() => setSpeed(0.5)}
+                    >
+                      ½
+                    </button>
+                    <button
+                      className={speed == 0.75 ? styles.selected : ""}
+                      onClick={() => setSpeed(0.75)}
+                    >
+                      ¾
+                    </button>
+                    <button
+                      className={speed == 1.0 ? styles.selected : ""}
+                      onClick={() => setSpeed(1.0)}
+                    >
+                      1
+                    </button>
                   </div>
                 </div>
               </div>
