@@ -27,6 +27,8 @@ interface VideoEmbedProps {
   onToggleAutoscroll: (autoscroll: boolean) => void;
   currentTime: number;
   onTimeChange: (time: number) => void;
+  getKeyFromChord: (chord: string) => string;
+  getSuffixFromChord: (chord: string) => string;
 }
 
 export default function VideoEmbed(props: VideoEmbedProps) {
@@ -110,9 +112,8 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   useEffect(() => {
     if (!props.currentChord) return;
 
-    const key = props.currentChord[0];
-    const suffix =
-      props.currentChord.slice(1) != "" ? props.currentChord.slice(1) : "maj";
+    const key = props.getKeyFromChord(props.currentChord);
+    const suffix = props.getSuffixFromChord(props.currentChord);
 
     const temp = props.chords[key];
     if (temp) {
@@ -125,11 +126,13 @@ export default function VideoEmbed(props: VideoEmbedProps) {
       }
     }
 
-    const t = props.tabs[props.currentChord];
+    if (props.tabs) {
+      const t = props.tabs[props.currentChord];
 
-    if (t) {
-      setCurrentTab(t);
-      setCurrentChord(null);
+      if (t) {
+        setCurrentTab(t);
+        setCurrentChord(null);
+      }
     }
   }, [props.currentChord]);
 

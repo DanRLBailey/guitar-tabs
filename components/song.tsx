@@ -58,7 +58,7 @@ export default function SongPage(props: TabPageProp) {
 
   const getChord = (chord: string) => {
     const key = chord[0];
-    const suffix = chord.slice(1) != "" ? chord.slice(1) : "maj";
+    const suffix = chord.slice(1) != "" ? chord.slice(1) : "major";
 
     const temp = props.Chords[key];
     if (temp) {
@@ -69,9 +69,21 @@ export default function SongPage(props: TabPageProp) {
     return null;
   };
 
+  const getKeyFromChord = (chord: string) => {
+    return chord[1] == "#" ? `${chord[0].toUpperCase()}sharp` : chord[0];
+  };
+
+  const getSuffixFromChord = (chord: string) => {
+    if (chord.length == 1) return "major";
+    if (chord.length == 2 && chord.includes("#")) return "major";
+    if (chord.length == 2 && chord[1] == "m") return "minor";
+
+    return chord.slice(1);
+  };
+
   const showChord = (chord: string) => {
-    const key = chord[0];
-    const suffix = chord.slice(1) != "" ? chord.slice(1) : "maj";
+    const key = getKeyFromChord(chord);
+    const suffix = getSuffixFromChord(chord);
 
     const temp = props.Chords[key];
     if (temp) {
@@ -240,6 +252,8 @@ export default function SongPage(props: TabPageProp) {
               onToggleAutoscroll={(scroll) => setAutoscroll(scroll)}
               currentTime={currentTime}
               onTimeChange={(t) => setCurrentTime(t)}
+              getKeyFromChord={(c) => getKeyFromChord(c)}
+              getSuffixFromChord={(c) => getSuffixFromChord(c)}
             />
           </div>
         )}
