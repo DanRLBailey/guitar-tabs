@@ -2,7 +2,13 @@ import styles from "../styles/AddSong.module.scss";
 import { useEffect, useState } from "react";
 import Modal from "./modal";
 import NewSongWord from "./newSongWord";
-import { Song, SongSection } from "../types/interfaces";
+import {
+  Song,
+  SongSection,
+  TabItem,
+  Tab as TabType,
+} from "../types/interfaces";
+import Tab from "./tab";
 
 export default function AddSong() {
   const [showModal, setShowModal] = useState(false);
@@ -13,8 +19,9 @@ export default function AddSong() {
   const [songLink, setSongLink] = useState("");
   const [songCapo, setSongCapo] = useState("");
   const [songChords, setSongChords] = useState<string[]>([]);
-  const [songTimings, setSongTimings] = useState("");
+  const [songTabs, setSongTabs] = useState<TabType[]>([]);
   const [chordList, setChordList] = useState<string[]>([]);
+  const [tabList, setTabList] = useState<string[]>([]);
   const [parts, setParts] = useState<SongSection[]>([]);
 
   const toggleModal = (show?: boolean) => {
@@ -52,11 +59,6 @@ export default function AddSong() {
 
     setSongChords(val);
     setChordList(arr);
-  };
-
-  const handleSongTimingsChange = (e: any) => {
-    const val = e.target.value;
-    setSongTimings(val);
   };
 
   const handleTextAreaChange = (e: any) => {
@@ -151,31 +153,100 @@ export default function AddSong() {
     setParts(song);
   };
 
+  const handleTabChange = (
+    partIndex: number,
+    lineIndex: number,
+    wordIndex: number,
+    tabs: string[]
+  ) => {
+    if (!parts) return;
+
+    const song = [...parts];
+    const part = song[partIndex];
+    const line = part.Lines[lineIndex];
+    let word = line[wordIndex];
+
+    if (!word || tabs.length == 0) return;
+
+    word = word.split("^")[0];
+    tabs.forEach((item) => {
+      word += `^${item.replaceAll(" ", "")}`;
+    });
+
+    line[wordIndex] = word;
+    part.Lines[lineIndex] = line;
+    song[partIndex] = part;
+    setParts(song);
+  };
+
+  const handleSectionTabChange = (partIndex: number, tabs: string[]) => {
+    if (tabs.length == 0) return;
+
+    let song = [...parts];
+
+    if (!parts[partIndex].Lines[0]) {
+      const tab = `^${tabs.join("^").replaceAll(" ", "")}`;
+      song[partIndex].Lines.push([tab]);
+    } else if (!parts[partIndex].Lines[0][0].startsWith("^")) {
+      song[partIndex].Lines.unshift([`^${tabs.join("^").replaceAll(" ", "")}`]);
+    } else {
+      song[partIndex].Lines[0] = [`^${tabs.join("^").replaceAll(" ", "")}`];
+    }
+
+    setParts(song);
+  };
+
   const handleSecondStage = () => {
+    let keys: string[] = [];
+
+    songTabs.forEach((tab) =>
+      Object.keys(tab).forEach((key) => keys.push(key))
+    );
+
+    setTabList(keys);
     setStage(stage + 1);
   };
 
   const handleThirdStage = () => {
-    const timings = songTimings.split(",").map((timing) => parseFloat(timing));
+    const body = {
+      userId: 1,
+      songName: songName,
+      songArtist: songArtist,
+      parts: parts,
+      timings: [],
+      tabs: songTabs ?? null,
+      capo: songCapo,
+      link: songLink,
+      slug: songName.toLowerCase().replaceAll(" ", "-"),
+    };
 
-    fetch("/api/postSong", {
-      method: "POST",
-      body: JSON.stringify({
-        userId: 1,
-        songName: songName,
-        songArtist: songArtist,
-        parts: parts,
-        timings: timings ?? [],
-        tabs: null,
-        capo: songCapo,
-        link: songLink,
-        slug: songName.toLowerCase().replaceAll(" ", "-"),
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-      });
+    console.log(body);
+    console.log(JSON.stringify(body));
+
+    // fetch("/api/postSong", {
+    //   method: "POST",
+    //   body: JSON.stringify(body),
+    // })
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     console.log(json);
+    //   });
+  };
+
+  const onTabChange = (tabItem: TabType, index: number) => {
+    if (tabItem == undefined || tabItem == null) return;
+
+    if (songTabs[index]) {
+      let tabs = [...songTabs];
+      let tab = tabs[index];
+      tab = tabItem;
+      tabs[index] = tab;
+      setSongTabs(tabs);
+    } else {
+      let tabs = [...songTabs];
+      tabs.push(tabItem);
+      setSongTabs(tabs);
+    }
   };
 
   useEffect(() => {
@@ -184,6 +255,14 @@ export default function AddSong() {
       toggleModal(false);
     }
   }, [stage]);
+
+  useEffect(() => {
+    console.log("songTabs", songTabs);
+  }, [songTabs]);
+
+  useEffect(() => {
+    console.log("song", parts);
+  }, [parts]);
 
   return (
     <>
@@ -251,6 +330,33 @@ export default function AddSong() {
                   ></textarea>
                 </div>
               )}
+              {stage == 10 && (
+                <div className={styles.addSongContainer}>
+                  <h2>Tabs:</h2>
+                  {songTabs.map((item, index) => {
+                    const key = Object.keys(item)[0];
+
+                    return (
+                      <Tab
+                        key={index}
+                        tab={key ? item[key] : undefined}
+                        title={key ?? undefined}
+                        editing={true}
+                        onTabEdited={(tabs) => onTabChange(tabs, index)}
+                        onTabDeleted={() => {
+                          songTabs?.pop();
+                          setSongTabs([...songTabs]);
+                        }}
+                      />
+                    );
+                  })}
+                  <button
+                    onClick={() => setSongTabs([...songTabs, {} as TabType])}
+                  >
+                    Add Tab
+                  </button>
+                </div>
+              )}
               {stage == 1 && (
                 <div className={styles.addSongContainer}>
                   {songName && songArtist && (
@@ -269,8 +375,12 @@ export default function AddSong() {
                             onChordChange={(chords) =>
                               handleSectionChordChange(partIndex, chords)
                             }
+                            onTabChange={(tabs) =>
+                              handleSectionTabChange(partIndex, tabs)
+                            }
                             type="Section"
                             songChords={chordList}
+                            songTabs={tabList}
                             existingChords={[]}
                           />
                           {part.Lines.map((line, lineIndex) => {
@@ -283,7 +393,7 @@ export default function AddSong() {
                                   return (
                                     <NewSongWord
                                       key={wordIndex}
-                                      word={word.split("*")[0]}
+                                      word={word.split(/[\*^]/)[0]}
                                       index={wordIndex}
                                       onChordChange={(chords) =>
                                         handleChordChange(
@@ -293,8 +403,17 @@ export default function AddSong() {
                                           chords
                                         )
                                       }
+                                      onTabChange={(tabs) =>
+                                        handleTabChange(
+                                          partIndex,
+                                          lineIndex,
+                                          wordIndex,
+                                          tabs
+                                        )
+                                      }
                                       type="Lyric"
                                       songChords={chordList}
+                                      songTabs={tabList}
                                       existingChords={[]}
                                     />
                                   );
@@ -308,15 +427,6 @@ export default function AddSong() {
                   </div>
                 </div>
               )}
-              {stage == 2 && (
-                <div className={styles.addSongContainer}>
-                  <h2>Timings:</h2>
-                  <textarea
-                    value={songTimings}
-                    onChange={(e) => handleSongTimingsChange(e)}
-                  ></textarea>
-                </div>
-              )}
             </>
           }
           footer={
@@ -328,10 +438,10 @@ export default function AddSong() {
                     case 0:
                       handleFirstStage();
                       break;
-                    case 1:
+                    case 10:
                       handleSecondStage();
                       break;
-                    case 2:
+                    case 1:
                       handleThirdStage();
                       break;
                   }
