@@ -1,0 +1,81 @@
+.chordDiagramContainer {
+  h4 {
+    margin: 0;
+    display: inline-block;
+  }
+
+  .chordContainer {
+    display: flex;
+    flex-direction: column;
+
+    .chordRow {
+      display: flex;
+      flex-direction: row;
+
+      .chordCell {
+        border: 1px solid black;
+        width: 1rem;
+        height: 1.5rem;
+        color: transparent;
+
+        &.withFinger {
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 0.8rem;
+            height: 0.8rem;
+            left: 0.5rem;
+            top: 0.25rem;
+            background-color: black;
+            border-radius: var(--padding);
+            z-index: 1;
+          }
+        }
+
+        &.withBarre {
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 0.8rem;
+            height: 0.8rem;
+            left: 0.5rem;
+            top: 0.25rem;
+            background-color: black;
+            border-radius: var(--padding);
+            z-index: 1;
+          }
+        }
+
+        &.fretIndicator {
+          > span {
+            margin-left: -0.35rem;
+            font-weight: bold;
+          }
+        }
+
+        &:first-of-type {
+          border: none;
+          border-right: 1px solid black;
+        }
+      }
+
+      .baseFret {
+        margin-left: 1rem;
+      }
+
+      &:first-of-type,
+      &:last-of-type {
+        margin-left: 1rem;
+
+        .chordCell {
+          color: black;
+          border: none;
+        }
+      }
+    }
+  }
+}

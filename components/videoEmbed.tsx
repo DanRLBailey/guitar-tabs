@@ -1,256 +1,195 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../styles/VideoEmbed.module.scss";
 import ReactPlayer from "react-player/youtube";
-import Chord from "./chord";
-import {
-  Chords,
-  Chord as ChordType,
-  Tab as TabType,
-  TabItem,
-} from "../types/interfaces";
-import Tab from "./tab";
+import Slider from "./slider";
+
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 import Replay10Icon from "@mui/icons-material/Replay10";
 import Forward10Icon from "@mui/icons-material/Forward10";
-import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CheckBox from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlank from "@mui/icons-material/CheckBoxOutlineBlank";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import SettingsIcon from "@mui/icons-material/Settings";
+import Popup from "./popup";
 
 interface VideoEmbedProps {
   embedId: string;
-  chords: Chords;
-  tabs: TabType;
-  timings: number[];
-  currentChord: string;
-  onHighlightChord: (index: number) => void;
-  onToggleAutoscroll: (autoscroll: boolean) => void;
-  currentTime: number;
+  onChordsHidden: (hidden: boolean) => void;
   onTimeChange: (time: number) => void;
-  getKeyFromChord: (chord: string) => string;
-  getSuffixFromChord: (chord: string) => string;
+}
+
+interface Setting {
+  [key: string]: number | boolean | string;
 }
 
 export default function VideoEmbed(props: VideoEmbedProps) {
-  //#region hydration error hack
-  const [hasWindow, setHasWindow] = useState(false);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasWindow(true);
-    }
-  }, []);
-  //#endregion
-
-  const localVol = localStorage.getItem("volume");
-  const localSpeed = localStorage.getItem("speed");
-
-  const [maxTime, setMaxTime] = useState(0);
-  const [currentVol, setCurrentVol] = useState(
-    localVol ? parseInt(localVol) : 50
-  );
   const [playing, setPlaying] = useState(false);
-  const [autoscroll, setAutoscroll] = useState(true);
-  const [speed, setSpeed] = useState(localSpeed ? parseFloat(localSpeed) : 1);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [maxTime, setMaxTime] = useState(0);
+  const [settings, setSettings] = useState<Setting>({
+    url: `https://www.youtube.com/watch?v=${props.embedId}`,
+    settingsOpen: false,
+    volume: getSettingsFromStore("volume", 50),
+    speed: getSettingsFromStore("speed", 100),
+    autoscroll: true,
+    showChords: getSettingsFromStore("showChords", true),
+  });
 
-  const [currentChord, setCurrentChord] = useState<ChordType | null>(null);
-  const [currentTab, setCurrentTab] = useState<TabItem[] | null>(null);
-  const [latest, setLatest] = useState(0);
-  const [count, setCount] = useState(-1);
-
-  const url = `https://www.youtube.com/watch?v=${props.embedId}`;
   const player = useRef<any>();
 
-  const setupPlayer = () => {
-    setMaxTime(player.current.getDuration());
-  };
-
-  const togglePlay = () => {
-    setPlaying(!playing);
-    props.onTimeChange(player.current.getCurrentTime());
-  };
-
-  const seek = (time: number, type: string = "seconds") => {
-    player.current.seekTo(time, type);
-  };
-
-  const seekBy = (time: number, type: string = "seconds") => {
-    let t = player.current.getCurrentTime();
+  const seekBy = (amount: number) => {
+    let current = player.current.getCurrentTime();
     const min = 0;
-    const max = player.current.getDuration();
 
-    t += time;
-    t = Math.min(Math.max(parseInt(t), min), max);
+    current += amount;
+    current = Math.min(Math.max(parseInt(current), min), maxTime);
 
-    player.current.seekTo(t, type);
+    seekTo(current);
+  };
+
+  const seekTo = (amount: number) => {
+    player.current.seekTo(amount, "seconds");
+  };
+
+  const onSettingChange = (setting: Setting, store: boolean = true) => {
+    setSettings({ ...settings, ...setting });
+
+    const key = Object.keys(setting)[0];
+    if (store) localStorage.setItem(key, setting[key].toString());
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!playing) return;
-
-      props.onTimeChange(player.current.getCurrentTime());
-
-      if (props.timings) {
-        const l =
-          props.timings.find((t) => t <= props.currentTime && t > latest) ??
-          latest;
-
-        const i = props.timings.filter((t) => {
-          return t <= props.currentTime;
-        });
-
-        if (i.length - 1 != count) setCount(i.length - 1);
-
-        if (l) {
-          setLatest(l);
-        }
-      }
-    }, 10);
-    return () => clearTimeout(timer);
-  }, [playing, props.currentTime]);
-
-  useEffect(() => {
-    if (!props.currentChord) return;
-
-    const key = props.getKeyFromChord(props.currentChord);
-    const suffix = props.getSuffixFromChord(props.currentChord);
-
-    const temp = props.chords[key];
-    if (temp) {
-      const c = temp.find((x) => x.Suffix == suffix);
-
-      if (c) {
-        setCurrentChord(c);
-        setCurrentTab(null);
-        return;
-      }
-    }
-
-    if (props.tabs) {
-      const t = props.tabs[props.currentChord];
-
-      if (t) {
-        setCurrentTab(t);
-        setCurrentChord(null);
-      }
-    }
-  }, [props.currentChord]);
-
-  useEffect(() => {
-    if (props.onHighlightChord) props.onHighlightChord(count);
-  }, [count]);
-
-  useEffect(() => {
-    props.onToggleAutoscroll(autoscroll);
-  }, [autoscroll]);
-
-  useEffect(() => {
-    localStorage.setItem("volume", currentVol.toString());
-    localStorage.setItem("speed", speed.toString());
-  }, [currentVol, speed]);
+    props.onTimeChange(currentTime);
+  }, [currentTime]);
 
   return (
-    <div className={styles.container}>
-      {hasWindow && (
-        <div className={styles.playerContainer}>
-          {currentChord && (
-            <div className={styles.chord}>
-              <Chord chord={currentChord} />
-            </div>
-          )}
-          {currentTab && !currentChord && (
-            <div className={styles.chord}>
-              <Tab tab={currentTab} />
-            </div>
-          )}
-          <div className={styles.player}>
-            <div className={styles.playerWrapper}>
-              <ReactPlayer
-                ref={player}
-                url={url}
-                playing={playing}
-                onReady={setupPlayer}
-                onPlay={() =>
-                  props.onTimeChange(player.current.getCurrentTime())
-                }
-                width="auto"
-                height="40vh"
-                volume={currentVol / 100}
-                playbackRate={speed}
-              />
-            </div>
-            <div className={styles.playerController}>
-              <div className={styles.playerControls}>
-                <div className={styles.scrubberContainer}>
-                  <input
-                    type="range"
-                    min={0}
-                    max={maxTime}
-                    value={props.currentTime}
-                    onChange={(e) => {
-                      seek(parseInt(e.target.value));
+    <div className={styles.videoEmbedContainer}>
+      <div className={styles.player}>
+        <ReactPlayer
+          ref={player}
+          url={settings.url as string}
+          playing={playing}
+          onReady={() => setMaxTime(player.current.getDuration())}
+          progressInterval={10}
+          onProgress={() => setCurrentTime(player.current.getCurrentTime())}
+          width="auto"
+          height="30vh"
+          volume={(settings.volume as number) / 100}
+          playbackRate={(settings.speed as number) / 100}
+        />
+      </div>
+      <div className={styles.scrubberContainer}>
+        <Slider
+          currentValue={currentTime}
+          maxValue={maxTime}
+          onSliderChange={(val) => seekTo(val)}
+        />
+      </div>
+      <div className={styles.controlsContainer}>
+        <button onClick={() => setPlaying(!playing)}>
+          {playing && <PauseCircleIcon />}
+          {!playing && <PlayCircleOutlineIcon />}
+        </button>
+        <button onClick={() => seekBy(-10)}>
+          <Replay10Icon />
+        </button>
+        <button onClick={() => seekBy(10)}>
+          <Forward10Icon />
+        </button>
+        <Slider
+          currentValue={settings.volume as number}
+          maxValue={100}
+          onSliderChange={(val) => onSettingChange({ volume: val })}
+          icon={
+            <button
+              onClick={() =>
+                onSettingChange(
+                  (settings.volume as number) > 0
+                    ? { volume: 0 }
+                    : { volume: getSettingsFromStore("volume") },
+                  false
+                )
+              }
+            >
+              <VolumeUpIcon />
+            </button>
+          }
+        />
+        <div className={styles.settingsContainer}>
+          <button
+            onClick={() =>
+              onSettingChange({ settingsOpen: !settings.settingsOpen })
+            }
+          >
+            <SettingsIcon />
+          </button>
+          {settings.settingsOpen && (
+            <Popup className={styles.settings}>
+              <>
+                <div>
+                  Autoscroll:
+                  <button
+                    onClick={() =>
+                      onSettingChange({ autoscroll: !settings.autoscroll })
+                    }
+                  >
+                    {settings.autoscroll && <CheckBox color="action" />}
+                    {!settings.autoscroll && (
+                      <CheckBoxOutlineBlank color="action" />
+                    )}
+                  </button>
+                </div>
+                <div>
+                  Speed:
+                  <button onClick={() => onSettingChange({ speed: 50 })}>
+                    0.5x
+                  </button>
+                  <button onClick={() => onSettingChange({ speed: 75 })}>
+                    0.75x
+                  </button>
+                  <button onClick={() => onSettingChange({ speed: 100 })}>
+                    1x
+                  </button>
+                </div>
+                <div>
+                  Hard Mode:
+                  <button
+                    onClick={() => {
+                      props.onChordsHidden(!settings.showChords);
+                      onSettingChange({ showChords: !settings.showChords });
                     }}
-                  />
+                  >
+                    {settings.showChords && (
+                      <CheckBoxOutlineBlank color="action" />
+                    )}
+                    {!settings.showChords && <CheckBox color="action" />}
+                  </button>
                 </div>
-                <div className={styles.controlContainer}>
-                  <button onClick={togglePlay}>
-                    {playing && <PauseCircleIcon />}
-                    {!playing && <PlayCircleOutlineIcon />}
-                  </button>
-                  <button onClick={() => seekBy(-10)}>
-                    <Replay10Icon />
-                  </button>
-                  <button onClick={() => seekBy(10)}>
-                    <Forward10Icon />
-                  </button>
-                  <button onClick={() => setAutoscroll(!autoscroll)}>
-                    {autoscroll && <ExpandCircleDownIcon />}
-                    {!autoscroll && <ExpandMoreIcon />}
-                  </button>
-                  <div className={styles.volumeWrapper}>
-                    <VolumeUpIcon />
-                    <input
-                      type="range"
-                      min={0}
-                      max={100}
-                      value={currentVol}
-                      onChange={(e) => {
-                        setCurrentVol(parseFloat(e.target.value));
-                      }}
-                    />
-                  </div>
-                  <div className={styles.speedWrapper}>
-                    <button
-                      className={speed == 0.25 ? styles.selected : ""}
-                      onClick={() => setSpeed(0.25)}
-                    >
-                      ¼
-                    </button>
-                    <button
-                      className={speed == 0.5 ? styles.selected : ""}
-                      onClick={() => setSpeed(0.5)}
-                    >
-                      ½
-                    </button>
-                    <button
-                      className={speed == 0.75 ? styles.selected : ""}
-                      onClick={() => setSpeed(0.75)}
-                    >
-                      ¾
-                    </button>
-                    <button
-                      className={speed == 1.0 ? styles.selected : ""}
-                      onClick={() => setSpeed(1.0)}
-                    >
-                      1
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              </>
+            </Popup>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
+
+  function getSettingsFromStore(setting: string, fallback?: number | boolean) {
+    const local = localStorage.getItem(setting);
+    // if (local) return parseInt(local);
+    if (local) {
+      switch (typeof fallback) {
+        case "number":
+          return parseInt(local);
+        case "boolean":
+          props.onChordsHidden(local == "true");
+          return local == "true";
+      }
+    }
+
+    if (!fallback) return 0;
+
+    localStorage.setItem(setting, fallback.toString());
+    return fallback;
+  }
 }

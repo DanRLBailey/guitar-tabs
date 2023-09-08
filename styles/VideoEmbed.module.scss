@@ -1,120 +1,54 @@
-.container {
-  width: 100%;
-  height: 100%;
-  flex: 1;
+.videoEmbedContainer {
+  display: flex;
+  flex-direction: column;
 
-  .chord {
-    flex: 1;
-    margin-bottom: 15vh;
+  .player {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+    }
   }
 
-  .playerContainer {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: flex-end;
+  .scrubberContainer {
+    width: 100%;
+  }
 
-    .player {
-      .playerWrapper {
-        position: relative;
+  .controlsContainer {
+    .settingsContainer {
+      position: relative;
 
-        &:after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+      .settings {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+
+        > div {
+          display: flex;
         }
       }
     }
+  }
 
-    .playerControls {
+  > div:not(:first-of-type) {
+    display: flex;
+    margin-bottom: var(--padding);
+
+    button {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-      .scrubberContainer {
-        input[type="range"] {
-          width: 100%;
-        }
-      }
+      padding: none;
+      background-color: transparent;
+      border: none;
 
-      .controlContainer {
-        display: flex;
-
-        button,
-        .volumeWrapper {
-          height: var(--padding-double);
-          width: var(--padding-double);
-          margin: var(--margin);
-          background-color: transparent;
-          border: none;
-          transition: 0.3s ease;
-        }
-
-        .button {
-          background: rgb(30, 30, 30);
-          padding: 0 0.3rem;
-          margin-right: var(--margin);
-          border-radius: 8px;
-          cursor: pointer;
-          transition: 0.3s ease;
-          width: 5rem;
-        }
-        .active {
-          background-color: var(--accent);
-        }
-
-        .volumeWrapper {
-          display: flex;
-          flex: 0.4;
-          align-items: center;
-        }
-
-        .speedWrapper {
-          display: flex;
-
-          button {
-            width: 100%;
-            border-radius: var(--border-radius);
-
-            &.selected {
-              background-color: var(--accent);
-            }
-          }
-        }
-      }
-
-      input[type="range"] {
-        flex: 1;
-        -webkit-appearance: none;
-        appearance: none;
-        background: transparent;
-        cursor: pointer;
-        overflow: hidden;
-        align-self: center;
-        height: 5px;
-        border-radius: 50px;
-        transition: 0.3s ease;
-        width: 5rem;
-
-        &::-webkit-slider-runnable-track {
-          background: #fff;
-          height: 100%;
-        }
-
-        &::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          background: transparent;
-          height: 100%;
-          width: 1%;
-          box-shadow: -400px 0 0 400px var(--accent);
-        }
-
-        &:hover {
-          height: 10px;
-        }
-      }
+      cursor: pointer;
     }
   }
 }

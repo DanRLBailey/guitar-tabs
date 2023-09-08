@@ -1,0 +1,25 @@
+.slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  align-self: center;
+  height: 5px;
+  border-radius: 50px;
+  transition: 0.3s ease;
+
+  &::-webkit-slider-runnable-track {
+    background: #fff;
+    height: 100%;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: transparent;
+    height: 100%;
+    width: 1%;
+    box-shadow: -400px 0 0 400px var(--accent);
+  }
+}

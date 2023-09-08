@@ -1,8 +1,7 @@
 import styles from "../styles/Home.module.scss";
 import Link from "next/link";
-import { Song, SongDB, SongMeta, SongMetaDetails } from "../types/interfaces";
+import { SongDB } from "../types/interfaces";
 import { useEffect, useState } from "react";
-import AddSong from "../components/addSong";
 
 export default function Home() {
   const [filter, setFilter] = useState("");
@@ -15,13 +14,22 @@ export default function Home() {
       .then((json) => {
         setSongList(json);
         setLoading(false);
+        localStorage.setItem("songs", JSON.stringify(json));
       });
   };
 
   useEffect(() => {
     if (songList.length != 0) return;
 
-    getSongs();
+    const localSongs = localStorage.getItem("songs");
+    const songs = localSongs ? JSON.parse(localSongs) : null;
+    console.log(songs);
+
+    if (!songs || songs.length == 0) getSongs();
+    else {
+      setSongList(songs);
+      setLoading(false);
+    }
   }, [songList]);
 
   useEffect(() => {
@@ -39,12 +47,20 @@ export default function Home() {
           }}
           placeholder="Filter"
         />
-        <AddSong />
+        <button
+          onClick={() => {
+            getSongs();
+            setLoading(true);
+          }}
+        >
+          Refresh
+        </button>
       </div>
 
       <div className={styles.songList}>
         {loading && <span>Loading...</span>}
-        {songList.length != 0 &&
+        {!loading &&
+          songList.length != 0 &&
           songList
             .filter(
               (key, index) =>
