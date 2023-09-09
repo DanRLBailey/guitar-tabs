@@ -66,3 +66,17 @@ export interface SongMetaDetails {
   Name: string
   Artist: string
 }
+
+export interface ChordObj {
+  chord: string
+  id: number
+  isRendered: boolean
+}
+
+export interface PartObj {
+  text: string
+  id: number | null
+  sectionId: number
+  lineId: number | null
+  type: "section" | "line" | "word" | "chord"
+}

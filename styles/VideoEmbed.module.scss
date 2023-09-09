@@ -30,6 +30,15 @@
 
         > div {
           display: flex;
+
+          button {
+            border-radius: var(--padding);
+
+            &.active {
+              background-color: var(--accent);
+              color: white;
+            }
+          }
         }
       }
     }

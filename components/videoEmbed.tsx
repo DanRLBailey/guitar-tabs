@@ -103,14 +103,15 @@ export default function VideoEmbed(props: VideoEmbedProps) {
           onSliderChange={(val) => onSettingChange({ volume: val })}
           icon={
             <button
-              onClick={() =>
+              onClick={() => {
+                console.log(getSettingsFromStore("volume"));
                 onSettingChange(
                   (settings.volume as number) > 0
                     ? { volume: 0 }
                     : { volume: getSettingsFromStore("volume") },
                   false
-                )
-              }
+                );
+              }}
             >
               <VolumeUpIcon />
             </button>
@@ -142,14 +143,23 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                 </div>
                 <div>
                   Speed:
-                  <button onClick={() => onSettingChange({ speed: 50 })}>
-                    0.5x
-                  </button>
-                  <button onClick={() => onSettingChange({ speed: 75 })}>
+                  <button
+                    onClick={() => onSettingChange({ speed: 75 })}
+                    className={settings.speed == 75 ? styles.active : ""}
+                  >
                     0.75x
                   </button>
-                  <button onClick={() => onSettingChange({ speed: 100 })}>
+                  <button
+                    onClick={() => onSettingChange({ speed: 100 })}
+                    className={settings.speed == 100 ? styles.active : ""}
+                  >
                     1x
+                  </button>
+                  <button
+                    onClick={() => onSettingChange({ speed: 150 })}
+                    className={settings.speed == 150 ? styles.active : ""}
+                  >
+                    1.5x
                   </button>
                 </div>
                 <div>
@@ -177,13 +187,15 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   function getSettingsFromStore(setting: string, fallback?: number | boolean) {
     const local = localStorage.getItem(setting);
     // if (local) return parseInt(local);
+
     if (local) {
       switch (typeof fallback) {
-        case "number":
-          return parseInt(local);
         case "boolean":
           props.onChordsHidden(local == "true");
           return local == "true";
+        case "number":
+        default:
+          return parseInt(local);
       }
     }
 

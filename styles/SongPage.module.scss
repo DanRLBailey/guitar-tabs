@@ -34,22 +34,10 @@
         & > div {
           display: inline-block;
           transition: var(--transition);
-          //position: relative;
+          position: relative;
 
-          & > span {
-            background-color: var(--background-dark);
-            padding: 0 var(--padding-quarter);
-            border-radius: var(--padding-half) var(--padding-half) 0 0;
-            transition: var(--transition);
-            cursor: default; //Change to pointer when pinning is available
-
-            &:not(:first-of-type) {
-              margin-left: var(--padding-half);
-            }
-
-            &:hover {
-              background-color: var(--accent);
-            }
+          &:not(:first-child) {
+            margin-left: var(--padding-half);
           }
 
           .chordTooltip {
