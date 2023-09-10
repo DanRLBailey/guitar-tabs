@@ -75,8 +75,9 @@ export interface ChordObj {
 
 export interface PartObj {
   text: string
-  id: number | null
   sectionId: number
   lineId: number | null
-  type: "section" | "line" | "word" | "chord"
+  chordId: number | null
+  wordId: number | null
+  type: "section" | "line" | "word" | "chord" | "tab"
 }

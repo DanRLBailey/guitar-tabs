@@ -25,6 +25,10 @@
 
       .settings {
         position: absolute;
+        bottom: 125%;
+        left: -10rem;
+        height: fit-content;
+        width: fit-content;
         display: flex;
         flex-direction: column;
 

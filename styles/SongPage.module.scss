@@ -7,46 +7,45 @@
     padding-left: 25%;
 
     .songDetails {
+      .header {
+        display: flex;
+        gap: var(--padding-half);
+      }
+
       .songSection {
         margin-top: 5%;
 
-        .songLine {
+        .songLines {
           display: flex;
           gap: var(--padding-half);
           margin-bottom: var(--padding);
 
-          .songWord {
+          .songLine {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            position: relative;
 
-            .songLyric {
-              margin-top: auto;
+            .wordGroup {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-end;
+              padding-left: var(--padding-quarter);
 
-              .hidden {
-                opacity: 0;
+              .chordGroup {
+                display: flex;
+                gap: var(--padding-quarter);
+              }
+
+              .songWord {
+                &:not(:first-of-type) {
+                  padding-left: var(--padding-quarter);
+                }
+
+                &.hidden {
+                  display: none;
+                }
               }
             }
-          }
-        }
-      }
-
-      .songChords {
-        & > div {
-          display: inline-block;
-          transition: var(--transition);
-          position: relative;
-
-          &:not(:first-child) {
-            margin-left: var(--padding-half);
-          }
-
-          .chordTooltip {
-            position: absolute;
-            bottom: 2rem;
-            left: -3.75rem;
-            height: fit-content;
-            width: fit-content;
-            z-index: 1;
           }
         }
       }

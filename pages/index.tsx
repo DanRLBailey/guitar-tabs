@@ -23,7 +23,6 @@ export default function Home() {
 
     const localSongs = localStorage.getItem("songs");
     const songs = localSongs ? JSON.parse(localSongs) : null;
-    console.log(songs);
 
     if (!songs || songs.length == 0) getSongs();
     else {

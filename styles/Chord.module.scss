@@ -1,19 +1,32 @@
-.chord {
-  background-color: var(--background-dark);
-  padding: 0 var(--padding-quarter);
-  border-radius: var(--padding-half) var(--padding-half) 0 0;
-  transition: var(--transition);
-  cursor: default; //Change to pointer when pinning is available
-  min-width: 30px;
+.chordContainer {
+  position: relative;
   display: inline-block;
-  text-align: center;
 
-  &:not(:first-child) {
-    margin-left: var(--padding-half);
+  .chord {
+    background-color: var(--background-dark);
+    padding: 0 var(--padding-quarter);
+    border-radius: var(--padding-half) var(--padding-half) 0 0;
+    transition: var(--transition);
+    cursor: default; //Change to pointer when pinning is available
+    min-width: 30px;
+    display: inline-block;
+    text-align: center;
+
+    &:not(:first-child) {
+      margin-left: var(--padding-half);
+    }
+
+    &:hover,
+    &.active {
+      background-color: var(--accent);
+    }
   }
 
-  &:hover,
-  &.active {
-    background-color: var(--accent);
+  .chordTooltip {
+    position: fixed;
+    bottom: 50vh;
+    left: 1rem;
+    width: fit-content;
+    height: fit-content;
   }
 }

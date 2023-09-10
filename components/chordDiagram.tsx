@@ -11,7 +11,12 @@ interface ChordDiagramProps {
 
 export default function ChordDiagram(props: ChordDiagramProps) {
   if (props.chord) {
-    const chord = getChordFromParts(separateChordParts(props.chord));
+    const chordParts = separateChordParts(props.chord);
+    if (chordParts.length == 0) return <></>;
+
+    const chord = getChordFromParts(chordParts);
+    if (!chord) return <></>;
+
     const maxFret = 3;
 
     let frets: number[] = [];
@@ -48,6 +53,9 @@ export default function ChordDiagram(props: ChordDiagramProps) {
   function separateChordParts(chord: string) {
     const keys = Object.keys(chords);
     const matching = keys.filter((key) => chord.startsWith(key));
+
+    if (!matching || matching.length == 0) return [];
+
     const prefix = matching[matching.length - 1];
     const suffix = chord.slice(prefix.length);
 

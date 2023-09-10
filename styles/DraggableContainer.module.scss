@@ -1,0 +1,27 @@
+.draggableContainer {
+  position: absolute;
+  user-select: none;
+
+  .header,
+  .footer {
+    width: 100%;
+    background-color: red;
+    height: 1rem;
+    display: flex;
+
+    & > .resize {
+      cursor: nw-resize;
+      width: 10%;
+      background-color: blue;
+    }
+  }
+
+  .header {
+    cursor: move;
+    justify-content: center;
+  }
+
+  .footer {
+    justify-content: flex-end;
+  }
+}
