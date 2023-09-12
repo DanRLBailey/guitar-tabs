@@ -1,13 +1,10 @@
 .popupContainer {
   padding: var(--padding);
-  left: var(--padding-triple);
-  bottom: 0;
-  background-color: var(--background);
+  background-color: var(--background-darkest);
   border-radius: var(--padding);
-  color: black;
-  width: fit-content;
+  color: white;
 
   button {
-    color: black;
+    color: white;
   }
 }

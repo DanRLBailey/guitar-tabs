@@ -1,8 +1,6 @@
 import styles from "../styles/ChordDiagram.module.scss";
 import chords from "../public/chords/chords.json";
-import Popup from "./popup";
 import { Chords, Position } from "../types/interfaces";
-import { useEffect } from "react";
 
 interface ChordDiagramProps {
   chord: string | null;
@@ -27,24 +25,18 @@ export default function ChordDiagram(props: ChordDiagramProps) {
     const positions = chord.Positions[0]; //position 0 until you can loop through them
 
     return (
-      <Popup
-        className={`${styles.chordDiagramContainer} ${
-          props.className && props.className
-        }`}
-      >
-        <>
-          <h4>{props.chord}</h4>
-          <div className={styles.chordContainer}>
-            <div className={styles.chordRow}>
-              {writeFretIndicators(positions.Frets)}
-            </div>
-            {writeStringIndicators(frets, positions.Frets, positions)}
-            <div className={styles.chordRow}>
-              {writeFingerIndicators(positions.Fingers)}
-            </div>
+      <div className={styles.chordDiagramContainer}>
+        <h3>{props.chord}</h3>
+        <div className={styles.chordContainer}>
+          <div className={styles.chordRow}>
+            {writeFretIndicators(positions.Frets)}
           </div>
-        </>
-      </Popup>
+          {writeStringIndicators(frets, positions.Frets, positions)}
+          <div className={styles.chordRow}>
+            {writeFingerIndicators(positions.Fingers)}
+          </div>
+        </div>
+      </div>
     );
   }
 

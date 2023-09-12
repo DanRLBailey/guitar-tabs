@@ -1,27 +1,45 @@
 .draggableContainer {
-  position: absolute;
+  position: fixed;
   user-select: none;
+  display: flex;
+  flex-direction: column;
 
   .header,
   .footer {
     width: 100%;
-    background-color: red;
-    height: 1rem;
     display: flex;
-
-    & > .resize {
-      cursor: nw-resize;
-      width: 10%;
-      background-color: blue;
-    }
   }
 
   .header {
-    cursor: move;
     justify-content: center;
+
+    .drag {
+      cursor: move;
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+
+      h4 {
+        margin: 0;
+        height: 100%;
+      }
+    }
+  }
+
+  .body {
+    flex: 1;
+    margin: var(--padding) 0;
   }
 
   .footer {
     justify-content: flex-end;
+
+    & > .resize {
+      cursor: nw-resize;
+
+      & > svg {
+        transform: scaleX(-1);
+      }
+    }
   }
 }

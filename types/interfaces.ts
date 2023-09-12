@@ -67,12 +67,6 @@ export interface SongMetaDetails {
   Artist: string
 }
 
-export interface ChordObj {
-  chord: string
-  id: number
-  isRendered: boolean
-}
-
 export interface PartObj {
   text: string
   sectionId: number
@@ -80,4 +74,12 @@ export interface PartObj {
   chordId: number | null
   wordId: number | null
   type: "section" | "line" | "word" | "chord" | "tab"
+}
+
+export interface Setting {
+  [key: string]: number | boolean | string;
+}
+
+export interface Dimension {
+  [key: string]: number;
 }

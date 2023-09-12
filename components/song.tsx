@@ -1,18 +1,19 @@
 import styles from "../styles/SongPage.module.scss";
 import {
-  ChordObj,
   Song,
   SongMetaDetails,
   SongSection,
   PartObj,
+  Setting,
 } from "../types/interfaces";
 import { useEffect, useState } from "react";
-import Overlay from "./overlay";
 import ChordDiagram from "./chordDiagram";
 import Chord from "./chord";
 import React from "react";
 import VideoEmbed from "./videoEmbed";
 import DraggableContainer from "./draggableContainer";
+import { getSettingsFromStore } from "../lib/localStore";
+import SettingToggle from "./settingToggle";
 
 interface TabPageProp {
   Key: string;
@@ -21,14 +22,19 @@ interface TabPageProp {
 }
 
 export default function SongPage(props: TabPageProp) {
-  const [uniqueSongChords, setUniqueSongChords] = useState<PartObj[]>(
-    getAllParts(true, ["chord"])
-  );
-  const [partList, setPartList] = useState<PartObj[]>(getAllParts());
+  const uniqueSongChords = getAllParts(true, ["chord"]);
+  const partList = getAllParts();
 
-  const [easyMode, setEasyMode] = useState<boolean>(true);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
+  const [activeChord, setActiveChord] = useState<string>("");
+  const [hoveredChord, setHoveredChord] = useState<string>("");
+  const [settings, setSettings] = useState<Setting>({
+    "hidden-mode": getSettingsFromStore("hidden-mode", false),
+    "show-chord-popup": getSettingsFromStore("show-chord-popup", true),
+    autoscroll: getSettingsFromStore("autoscroll", true),
+    editing: false,
+  });
 
   useEffect(() => {
     if (currentTime == 0) return;
@@ -41,12 +47,20 @@ export default function SongPage(props: TabPageProp) {
   }, [currentTime, props.Song.Timings]);
 
   useEffect(() => {
-    console.log(highlightedIndex);
     const chordEl = document.getElementById(`chord-${highlightedIndex}`);
 
-    if (chordEl)
+    if (chordEl && settings.autoscroll)
       chordEl.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [highlightedIndex]);
+
+  const onSettingChange = (setting: Setting, saveToStorage: boolean = true) => {
+    setSettings({ ...settings, ...setting });
+
+    if (!saveToStorage) return;
+
+    const key = Object.keys(setting)[0];
+    localStorage.setItem(key, setting[key].toString());
+  };
 
   return (
     <div className={styles.container}>
@@ -56,6 +70,7 @@ export default function SongPage(props: TabPageProp) {
       <div className={styles.songContainer}>
         <h1>{props.SongMeta?.Name}</h1>
         <h2>{props.SongMeta?.Artist}</h2>
+        {props.Song.Capo && <h3>Capo: {props.Song.Capo}</h3>}
         <div className={styles.songDetails}>
           {listChords()}
           {partList &&
@@ -71,15 +86,80 @@ export default function SongPage(props: TabPageProp) {
               })}
         </div>
       </div>
-      <Overlay>
-        <DraggableContainer containerName="test">
+      <>
+        <DraggableContainer
+          containerId="video-player"
+          width={15}
+          minWidth={200}
+        >
           <VideoEmbed
             embedId={props.Song.Link}
-            onChordsHidden={(hidden) => setEasyMode(hidden)}
             onTimeChange={(val) => setCurrentTime(val)}
           />
         </DraggableContainer>
-      </Overlay>
+        {settings["show-chord-popup"] && activeChord && (
+          <DraggableContainer
+            containerId="chord-diagram-active"
+            width={10}
+            minWidth={130}
+          >
+            <ChordDiagram chord={activeChord} />
+          </DraggableContainer>
+        )}
+        {hoveredChord && (
+          <DraggableContainer
+            containerId="chord-diagram-hover"
+            width={10}
+            minWidth={130}
+          >
+            <ChordDiagram chord={hoveredChord} />
+          </DraggableContainer>
+        )}
+        <DraggableContainer
+          containerId="settings"
+          title="Settings"
+          width={10}
+          minWidth={150}
+          collapsable
+        >
+          <div>
+            <SettingToggle
+              initialValue={{ "hidden-mode": settings["hidden-mode"] }}
+              onSettingChange={(setting) => onSettingChange(setting)}
+              settingText="Hidden Mode"
+              type="checkbox"
+            />
+            <SettingToggle
+              initialValue={{
+                ["show-chord-popup"]: settings["show-chord-popup"],
+              }}
+              onSettingChange={(setting) => onSettingChange(setting)}
+              settingText="Show Chords"
+              type="checkbox"
+            />
+            <SettingToggle
+              initialValue={{ ["autoscroll"]: settings["autoscroll"] }}
+              onSettingChange={(setting) => onSettingChange(setting)}
+              settingText="Autoscroll"
+              type="checkbox"
+            />
+            <SettingToggle
+              initialValue={{ ["editing"]: settings["editing"] }}
+              onSettingChange={(setting) => onSettingChange(setting)}
+              settingText="Edit Mode"
+              type="checkbox"
+            />
+            {settings.editing && (
+              <>
+                <button>Save</button>
+                <button onClick={() => onSettingChange({ ["editing"]: false })}>
+                  Cancel
+                </button>
+              </>
+            )}
+          </div>
+        </DraggableContainer>
+      </>
     </div>
   );
 
@@ -141,13 +221,20 @@ export default function SongPage(props: TabPageProp) {
                             key={chordIndex}
                             chordName={chord.text}
                             isChordNameVisible={
-                              easyMode || chord.chordId == highlightedIndex
+                              !settings["hidden-mode"] ||
+                              chord.chordId == highlightedIndex
                             }
                             currentActiveChord={
                               chord.chordId == highlightedIndex
                             }
                             className={styles.songChord}
                             chordId={chord.chordId ?? undefined}
+                            onChordActive={(chord: string) =>
+                              setActiveChord(chord)
+                            }
+                            onChordHighlight={(chord: string) =>
+                              setHoveredChord(chord)
+                            }
                           />
                         );
                       })}
@@ -269,6 +356,7 @@ export default function SongPage(props: TabPageProp) {
               chordName={item.text}
               isChordNameVisible={true}
               currentActiveChord={false}
+              onChordHighlight={(chord: string) => setHoveredChord(chord)}
             />
           );
         })}

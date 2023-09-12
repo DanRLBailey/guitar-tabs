@@ -7,7 +7,7 @@
     padding: 0 var(--padding-quarter);
     border-radius: var(--padding-half) var(--padding-half) 0 0;
     transition: var(--transition);
-    cursor: default; //Change to pointer when pinning is available
+    cursor: pointer;
     min-width: 30px;
     display: inline-block;
     text-align: center;

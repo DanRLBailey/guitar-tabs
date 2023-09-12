@@ -4,6 +4,11 @@
 
   .player {
     position: relative;
+    border-radius: var(--padding);
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+
     &::after {
       position: absolute;
       content: "";
@@ -16,50 +21,53 @@
   }
 
   .scrubberContainer {
+    margin: var(--padding) 0;
     width: 100%;
   }
 
   .controlsContainer {
-    .settingsContainer {
+    .volumeContainer {
+      position: relative;
+
+      .volumeSliderContainer {
+        padding: var(--padding-half);
+        background-color: var(--background-dark);
+        border-radius: var(--padding);
+        position: absolute;
+        top: -60px;
+        left: -30px;
+        width: 100px;
+        transform: rotate(270deg);
+        display: flex;
+      }
+    }
+
+    .settingContainer {
+      display: flex;
       position: relative;
 
       .settings {
+        padding: var(--padding-half);
+        background-color: var(--background-dark);
+        border-radius: var(--padding);
         position: absolute;
-        bottom: 125%;
-        left: -10rem;
-        height: fit-content;
-        width: fit-content;
-        display: flex;
-        flex-direction: column;
-
-        > div {
-          display: flex;
-
-          button {
-            border-radius: var(--padding);
-
-            &.active {
-              background-color: var(--accent);
-              color: white;
-            }
-          }
-        }
+        bottom: 0;
+        left: 2.25rem;
+        width: 200px;
       }
     }
   }
 
   > div:not(:first-of-type) {
     display: flex;
-    margin-bottom: var(--padding);
 
     button {
       display: flex;
       justify-content: center;
       align-items: center;
-
-      padding: none;
       background-color: transparent;
       border: none;
+      margin: 0;
 
       cursor: pointer;
     }

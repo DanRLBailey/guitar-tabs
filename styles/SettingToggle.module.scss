@@ -1,0 +1,28 @@
+.settingToggle {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between !important;
+  align-items: center;
+  width: 100%;
+  padding: var(--padding-half) var(--padding-quarter);
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
+  }
+
+  & > span:not(.radioItem) {
+    flex: 1;
+    text-align: left;
+  }
+
+  .radioItem {
+    border-radius: var(--padding-quarter);
+    padding: var(--padding-quarter);
+
+    &.active {
+      background-color: var(--accent);
+    }
+  }
+}
