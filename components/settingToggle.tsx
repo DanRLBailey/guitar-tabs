@@ -1,11 +1,11 @@
 import styles from "../styles/SettingToggle.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Setting } from "../types/interfaces";
 import CheckBox from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlank from "@mui/icons-material/CheckBoxOutlineBlank";
 
 interface SettingToggleProp {
-  initialValue: Setting;
+  value: Setting;
   onSettingChange: (setting: Setting) => void;
   settingText: string;
   optionsValues?: string[] | number[];
@@ -13,8 +13,8 @@ interface SettingToggleProp {
 }
 
 export default function SettingToggle(props: SettingToggleProp) {
-  const key = Object.keys(props.initialValue)[0];
-  const [setting, setSetting] = useState<Setting>(props.initialValue);
+  const key = Object.keys(props.value)[0];
+  const [setting, setSetting] = useState<Setting>(props.value);
 
   const handleSettingChange = (value?: string | number) => {
     const newValue = { ...setting };
@@ -23,6 +23,10 @@ export default function SettingToggle(props: SettingToggleProp) {
     setSetting(newValue);
     props.onSettingChange(newValue);
   };
+
+  useEffect(() => {
+    setSetting(props.value);
+  }, [props.value]);
 
   return (
     <>

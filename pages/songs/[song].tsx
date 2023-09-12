@@ -49,7 +49,6 @@ const Song = () => {
   }, [song]);
 
   const getSong = () => {
-    console.log("getting");
     fetch("/api/getSong", {
       method: "POST",
       body: JSON.stringify({ songName: song }),
@@ -69,6 +68,7 @@ const Song = () => {
         Key={song as string}
         SongMeta={currentSongMeta}
         Song={currentSong}
+        onSongRefresh={getSong}
       />
     );
 

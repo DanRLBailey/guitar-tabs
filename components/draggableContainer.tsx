@@ -149,7 +149,10 @@ export default function DraggableContainer(props: DraggableContainerProps) {
             {props.title && <h4>{props.title}</h4>}
           </div>
           {props.collapsable && (
-            <div onClick={() => setExpanded(!expanded)}>
+            <div
+              className={styles.expand}
+              onClick={() => setExpanded(!expanded)}
+            >
               {expanded && <ExpandLessIcon />}
               {!expanded && <ExpandMoreIcon />}
             </div>

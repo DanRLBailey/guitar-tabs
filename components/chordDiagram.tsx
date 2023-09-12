@@ -9,38 +9,52 @@ interface ChordDiagramProps {
 
 export default function ChordDiagram(props: ChordDiagramProps) {
   if (props.chord) {
-    const chordParts = separateChordParts(props.chord);
-    if (chordParts.length == 0) return <></>;
+    const type = determineType(props.chord);
 
-    const chord = getChordFromParts(chordParts);
-    if (!chord) return <></>;
+    if (type == "chord") {
+      const chordParts = separateChordParts(props.chord);
+      if (chordParts.length == 0) return <></>;
 
-    const maxFret = 3;
+      const chord = getChordFromParts(chordParts);
+      if (!chord) return <></>;
 
-    let frets: number[] = [];
-    for (let i = 0; i <= maxFret; i++) {
-      frets.push(i);
-    }
+      const maxFret = 3;
 
-    const positions = chord.Positions[0]; //position 0 until you can loop through them
+      let frets: number[] = [];
+      for (let i = 0; i <= maxFret; i++) {
+        frets.push(i);
+      }
 
-    return (
-      <div className={styles.chordDiagramContainer}>
-        <h3>{props.chord}</h3>
-        <div className={styles.chordContainer}>
-          <div className={styles.chordRow}>
-            {writeFretIndicators(positions.Frets)}
-          </div>
-          {writeStringIndicators(frets, positions.Frets, positions)}
-          <div className={styles.chordRow}>
-            {writeFingerIndicators(positions.Fingers)}
+      const positions = chord.Positions[0]; //position 0 until you can loop through them
+
+      return (
+        <div className={styles.chordDiagramContainer}>
+          <h3>{props.chord}</h3>
+          <div className={styles.chordContainer}>
+            <div className={styles.chordRow}>
+              {writeFretIndicators(positions.Frets)}
+            </div>
+            {writeStringIndicators(frets, positions.Frets, positions)}
+            <div className={styles.chordRow}>
+              {writeFingerIndicators(positions.Fingers)}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else if (type == "tab") {
+      return <>tab</>;
+    }
   }
 
   return <></>;
+
+  function determineType(chord: string) {
+    const keys = Object.keys(chords);
+    const matching = keys.filter((key) => chord.startsWith(key));
+
+    if (!matching || matching.length == 0) return "tab";
+    return "chord";
+  }
 
   function separateChordParts(chord: string) {
     const keys = Object.keys(chords);

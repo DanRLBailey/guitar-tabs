@@ -141,13 +141,13 @@ export default function VideoEmbed(props: VideoEmbedProps) {
           {playerSettings["settings-open"] && (
             <div className={styles.settings}>
               <SettingToggle
-                initialValue={{ "show-video": playerSettings["show-video"] }}
+                value={{ "show-video": playerSettings["show-video"] }}
                 onSettingChange={(setting) => onSettingChange(setting)}
                 settingText="Show Video"
                 type="checkbox"
               />
               <SettingToggle
-                initialValue={{ speed: playerSettings["speed"] }}
+                value={{ speed: playerSettings["speed"] }}
                 onSettingChange={(setting) => onSettingChange(setting)}
                 settingText="Speed"
                 optionsValues={[0.75, 1, 1.5]}

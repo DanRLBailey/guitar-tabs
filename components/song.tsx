@@ -19,6 +19,7 @@ interface TabPageProp {
   Key: string;
   SongMeta: SongMetaDetails;
   Song: Song;
+  onSongRefresh: () => void;
 }
 
 export default function SongPage(props: TabPageProp) {
@@ -34,6 +35,8 @@ export default function SongPage(props: TabPageProp) {
     "show-chord-popup": getSettingsFromStore("show-chord-popup", true),
     autoscroll: getSettingsFromStore("autoscroll", true),
     editing: false,
+    recording: false,
+    countdown: getSettingsFromStore("countdown", true),
   });
 
   useEffect(() => {
@@ -70,7 +73,9 @@ export default function SongPage(props: TabPageProp) {
       <div className={styles.songContainer}>
         <h1>{props.SongMeta?.Name}</h1>
         <h2>{props.SongMeta?.Artist}</h2>
-        {props.Song.Capo && <h3>Capo: {props.Song.Capo}</h3>}
+        {props.Song.Capo && props.Song.Capo > 0 && (
+          <h3>Capo: {props.Song.Capo}</h3>
+        )}
         <div className={styles.songDetails}>
           {listChords()}
           {partList &&
@@ -91,6 +96,7 @@ export default function SongPage(props: TabPageProp) {
           containerId="video-player"
           width={15}
           minWidth={200}
+          title={`${props.SongMeta?.Name} - ${props.SongMeta?.Artist}`}
         >
           <VideoEmbed
             embedId={props.Song.Link}
@@ -118,47 +124,85 @@ export default function SongPage(props: TabPageProp) {
         <DraggableContainer
           containerId="settings"
           title="Settings"
-          width={10}
-          minWidth={150}
+          width={11}
+          minWidth={200}
           collapsable
         >
           <div>
             <SettingToggle
-              initialValue={{ "hidden-mode": settings["hidden-mode"] }}
+              value={{ "hidden-mode": settings["hidden-mode"] }}
               onSettingChange={(setting) => onSettingChange(setting)}
               settingText="Hidden Mode"
               type="checkbox"
             />
             <SettingToggle
-              initialValue={{
+              value={{
                 ["show-chord-popup"]: settings["show-chord-popup"],
               }}
               onSettingChange={(setting) => onSettingChange(setting)}
-              settingText="Show Chords"
+              settingText="Show Chord Popup"
               type="checkbox"
             />
             <SettingToggle
-              initialValue={{ ["autoscroll"]: settings["autoscroll"] }}
+              value={{ ["autoscroll"]: settings["autoscroll"] }}
               onSettingChange={(setting) => onSettingChange(setting)}
               settingText="Autoscroll"
               type="checkbox"
             />
             <SettingToggle
-              initialValue={{ ["editing"]: settings["editing"] }}
-              onSettingChange={(setting) => onSettingChange(setting)}
-              settingText="Edit Mode"
+              value={{ ["editing"]: settings["editing"] }}
+              onSettingChange={(setting) => onSettingChange(setting, false)}
+              settingText="TODO: Edit Mode"
               type="checkbox"
             />
-            {settings.editing && (
-              <>
-                <button>Save</button>
-                <button onClick={() => onSettingChange({ ["editing"]: false })}>
-                  Cancel
-                </button>
-              </>
-            )}
+            <SettingToggle
+              value={{ ["recording"]: settings["recording"] }}
+              onSettingChange={(setting) => onSettingChange(setting, false)}
+              settingText="TODO: Recording Mode"
+              type="checkbox"
+            />
+            <SettingToggle
+              value={{ ["countdown"]: settings["countdown"] }}
+              onSettingChange={(setting) => onSettingChange(setting)}
+              settingText="Show Countdown"
+              type="checkbox"
+            />
+            <button onClick={props.onSongRefresh}>Refresh</button>
+            <button>TODO: Transpose</button>
           </div>
         </DraggableContainer>
+        {settings.editing && (
+          <DraggableContainer
+            containerId="edit"
+            title="Editing"
+            width={10}
+            minWidth={150}
+            collapsable
+          >
+            <>
+              <button>Save</button>
+              <button onClick={() => onSettingChange({ ["editing"]: false })}>
+                Cancel
+              </button>
+            </>
+          </DraggableContainer>
+        )}
+        {settings.recording && (
+          <DraggableContainer
+            containerId="recording"
+            title="Record"
+            width={10}
+            minWidth={150}
+            collapsable
+          >
+            <>
+              <button>Start</button>
+              <button>Pause</button>
+              <button>Stop</button>
+            </>
+          </DraggableContainer>
+        )}
+        {settings.countdown && showCountdown()}
       </>
     </div>
   );
@@ -240,18 +284,23 @@ export default function SongPage(props: TabPageProp) {
                       })}
                   </div>
 
-                  {word.text != "" && (
+                  {!settings["editing"] && word.text != "" && (
                     <span key={wordIndex} className={styles.songWord}>
                       {word.text}
                     </span>
                   )}
-                  {word.text == "" && (
+                  {!settings["editing"] && word.text == "" && (
                     <span
                       key={wordIndex}
                       className={`${styles.songWord} ${styles.hidden}`}
                     >
                       -
                     </span>
+                  )}
+                  {settings["editing"] && (
+                    <button key={wordIndex} className={styles.songWord}>
+                      {word.text}
+                    </button>
                   )}
                 </div>
               );
@@ -365,10 +414,25 @@ export default function SongPage(props: TabPageProp) {
   }
 
   function showCountdown() {
-    if (!props.Song.Timings || currentTime > props.Song.Timings[0]) return;
+    if (!props.Song.Timings || currentTime > props.Song.Timings[0])
+      return <></>;
 
-    const timeTillFirstChord = currentTime - props.Song.Timings[0];
-    // return <h4>First Chord: {Math.abs(timeTillFirstChord).toFixed(1)}s</h4>;
-    return Math.abs(timeTillFirstChord).toFixed(1) + "s";
+    let timeTillFirstChord = currentTime - props.Song.Timings[0];
+    timeTillFirstChord = Math.abs(timeTillFirstChord);
+
+    if (timeTillFirstChord > 5) return <></>;
+
+    return (
+      <DraggableContainer
+        containerId="countdown"
+        title="Countdown"
+        width={1}
+        minWidth={150}
+      >
+        <h1 style={{ textAlign: "center" }}>
+          {timeTillFirstChord.toFixed(1)}s
+        </h1>
+      </DraggableContainer>
+    );
   }
 }

@@ -18,11 +18,19 @@
       flex: 1;
       display: flex;
       justify-content: flex-start;
+      width: 100%;
 
       h4 {
         margin: 0;
         height: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
+    }
+
+    .expand {
+      cursor: pointer;
     }
   }
 
