@@ -1,19 +1,22 @@
 :root {
   --background: #f5f5f5;
+  --background-grey: #c5c5c5;
   --background-dark: #333333;
   --background-darker: #2b2b2b;
   --background-darkest: #242424;
   --background-input: #3b3b3b;
-  --accent: #be4cb5;
-  --accent-dark: #782c72;
+  --accent: #2accc9;
+  --accent-dark: #22aaa8;
   --background-button: #6b6b6b;
 
   --padding: 1rem;
   --padding-double: calc(var(--padding) * 2);
   --padding-triple: calc(var(--padding) * 3);
   --padding-half: calc(var(--padding) * 0.5);
+  --padding-quarter: calc(var(--padding) * 0.25);
 
   --margin: 0.5rem;
+  --margin-negative: calc(var(--margin) * -1);
   --margin-mid: calc(var(--margin) * 5);
   --margin-mid-negative: 20px;
   --margin-large: calc(var(--margin) * 10);
@@ -21,6 +24,9 @@
 
   --border-radius: 1rem;
   --font-size-small: 0.75rem;
+
+  --transition: 0.3s ease;
+  --shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
 }
 
 html,

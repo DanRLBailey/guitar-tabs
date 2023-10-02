@@ -1,0 +1,64 @@
+.draggableContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+
+  .header,
+  .footer {
+    width: 100%;
+    display: flex;
+  }
+
+  .header {
+    justify-content: center;
+
+    .drag {
+      cursor: move;
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+
+      h4 {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .minimise {
+      cursor: pointer;
+    }
+  }
+
+  .body {
+    flex: 1;
+    margin: var(--padding) 0;
+
+    &.edit {
+      overflow-y: scroll;
+    }
+  }
+
+  .footer {
+    justify-content: flex-end;
+
+    & > .resize {
+      cursor: nw-resize;
+
+      & > svg {
+        transform: scaleX(-1);
+      }
+    }
+  }
+}
+
+.taskbarIcon {
+  &.maximised {
+    background-color: var(--background);
+    color: var(--background-darkest);
+  }
+}

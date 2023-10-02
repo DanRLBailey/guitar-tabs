@@ -1,120 +1,84 @@
-.container {
-  width: 100%;
-  height: 100%;
-  flex: 1;
+.videoEmbedContainer {
+  display: flex;
+  flex-direction: column;
 
-  .chord {
+  .player {
+    position: relative;
+    border-radius: var(--padding);
+    overflow: hidden;
     flex: 1;
-    margin-bottom: 15vh;
+    display: flex;
+
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+    }
   }
 
-  .playerContainer {
+  .scrubberContainer {
+    margin: var(--padding) 0;
+    width: 100%;
     display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: flex-end;
+    gap: var(--padding-quarter);
+    justify-content: center;
 
-    .player {
-      .playerWrapper {
-        position: relative;
+    .scrubberTime {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
 
-        &:after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
+  .controlsContainer {
+    .volumeContainer {
+      position: relative;
+
+      .volumeSliderContainer {
+        padding: var(--padding-half);
+        background-color: var(--background-dark);
+        border-radius: var(--padding);
+        position: absolute;
+        top: -60px;
+        left: -30px;
+        width: 100px;
+        transform: rotate(270deg);
+        display: flex;
       }
     }
 
-    .playerControls {
+    .settingContainer {
       display: flex;
-      flex-direction: column;
+      position: relative;
 
-      .scrubberContainer {
-        input[type="range"] {
-          width: 100%;
-        }
+      .settings {
+        box-shadow: var(--shadow);
+        padding: var(--padding-half);
+        background-color: var(--background-dark);
+        border-radius: var(--padding);
+        position: absolute;
+        bottom: 2rem;
+        left: -5rem;
+        width: 200px;
       }
+    }
+  }
 
-      .controlContainer {
-        display: flex;
+  > div:not(:first-of-type) {
+    display: flex;
 
-        button,
-        .volumeWrapper {
-          height: var(--padding-double);
-          width: var(--padding-double);
-          margin: var(--margin);
-          background-color: transparent;
-          border: none;
-          transition: 0.3s ease;
-        }
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      margin: 0;
 
-        .button {
-          background: rgb(30, 30, 30);
-          padding: 0 0.3rem;
-          margin-right: var(--margin);
-          border-radius: 8px;
-          cursor: pointer;
-          transition: 0.3s ease;
-          width: 5rem;
-        }
-        .active {
-          background-color: var(--accent);
-        }
-
-        .volumeWrapper {
-          display: flex;
-          flex: 0.4;
-          align-items: center;
-        }
-
-        .speedWrapper {
-          display: flex;
-
-          button {
-            width: 100%;
-            border-radius: var(--border-radius);
-
-            &.selected {
-              background-color: var(--accent);
-            }
-          }
-        }
-      }
-
-      input[type="range"] {
-        flex: 1;
-        -webkit-appearance: none;
-        appearance: none;
-        background: transparent;
-        cursor: pointer;
-        overflow: hidden;
-        align-self: center;
-        height: 5px;
-        border-radius: 50px;
-        transition: 0.3s ease;
-        width: 5rem;
-
-        &::-webkit-slider-runnable-track {
-          background: #fff;
-          height: 100%;
-        }
-
-        &::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          background: transparent;
-          height: 100%;
-          width: 1%;
-          box-shadow: -400px 0 0 400px var(--accent);
-        }
-
-        &:hover {
-          height: 10px;
-        }
-      }
+      cursor: pointer;
     }
   }
 }

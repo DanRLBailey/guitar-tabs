@@ -1,127 +1,32 @@
-.container {
-  width: 150px;
-  padding: var(--padding);
-  background: #f5f5f5;
-  border-radius: var(--border-radius);
-  color: black;
+.chordContainer {
+  position: relative;
+  display: inline-block;
 
-  .chordContainer {
-    table-layout: fixed;
-    width: 100%;
+  .chord {
+    background-color: var(--background-dark);
+    padding: 0 var(--padding-quarter);
+    border-radius: var(--padding-half) var(--padding-half) 0 0;
+    transition: var(--transition);
+    cursor: pointer;
+    min-width: 30px;
+    display: inline-block;
+    text-align: center;
 
-    &,
-    td,
-    th {
-      border-collapse: separate;
-      border-spacing: 0;
-      margin: 0;
-      padding: 0;
+    &:not(:first-child) {
+      margin-left: var(--padding-half);
     }
 
-    .hidden {
-      opacity: 0;
-    }
-
-    thead {
-      font-weight: bold;
-      & > tr td {
-        span {
-          &.muted {
-            position: relative;
-            &::after {
-              content: "\03a7";
-              position: absolute;
-              left: -0.4rem;
-              width: 10px;
-              height: 10px;
-            }
-          }
-
-          &.open {
-            position: relative;
-            &::after {
-              content: "\039f";
-              position: absolute;
-              top: -0.75rem;
-              left: -0.4rem;
-              width: 10px;
-              height: 10px;
-            }
-          }
-        }
-      }
-    }
-
-    tbody > tr {
-      height: 25px;
-
-      &:first-of-type > td {
-        border-top: 5px solid black;
-      }
-
-      td {
-        width: 10px;
-        border: 1px solid black;
-        position: relative;
-
-        &:nth-child(n + 6) {
-          border: none;
-        }
-
-        span {
-          &.dot {
-            position: relative;
-            &::after {
-              content: "";
-              position: absolute;
-              top: -0.3rem;
-              left: -0.4rem;
-              width: 10px;
-              height: 10px;
-              border-radius: 50%;
-              background: black;
-            }
-          }
-
-          &.barre {
-            position: relative;
-
-            &::after {
-              content: "";
-              position: absolute;
-              top: -0.3rem;
-              left: -0.4rem;
-              width: 30px;
-              height: 10px;
-              border-radius: 10px;
-              background: black;
-            }
-          }
-        }
-
-        &:nth-of-type(6) {
-          span {
-            &.barre {
-              &::after {
-                width: 0;
-              }
-            }
-          }
-        }
-      }
+    &:hover,
+    &.active {
+      background-color: var(--accent);
     }
   }
 
-  .buttonContainer {
-    margin-top: var(--padding);
-    display: flex;
-    justify-content: space-between;
-
-    button {
-      background-color: transparent;
-      border: none;
-      color: black;
-      font-weight: bold;
-    }
+  .chordTooltip {
+    position: fixed;
+    bottom: 50vh;
+    left: 1rem;
+    width: fit-content;
+    height: fit-content;
   }
 }

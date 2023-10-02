@@ -1,232 +1,88 @@
-import styles from "../styles/TabPage.module.scss";
+import styles from "../styles/SongPage.module.scss";
+import draggableStyles from "../styles/DraggableContainer.module.scss";
 import {
   Song,
-  SongSection,
-  Chords,
-  Chord as ChordType,
   SongMetaDetails,
-  TabItem,
-  Tab as TabType,
+  SongSection,
+  PartObj,
+  Setting,
 } from "../types/interfaces";
 import { useEffect, useState } from "react";
+import ChordDiagram from "./chordDiagram";
 import Chord from "./chord";
+import React from "react";
 import VideoEmbed from "./videoEmbed";
-import Tab from "./tab";
-import NewSongWord from "./newSongWord";
-import PencilIcon from "@mui/icons-material/Create";
+import DraggableContainer from "./draggableContainer";
+import { getSettingsFromStore } from "../lib/localStore";
+import SettingToggle from "./settingToggle";
+
+import SettingsIcon from "@mui/icons-material/Settings";
+import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
+import AlarmIcon from "@mui/icons-material/Alarm";
 
 interface TabPageProp {
   Key: string;
   SongMeta: SongMetaDetails;
-  Chords: Chords;
   Song: Song;
+  onSongRefresh: () => void;
 }
 
 export default function SongPage(props: TabPageProp) {
-  const [currentChord, setCurrentChord] = useState<ChordType | null>(null);
-  const [currentTab, setCurrentTab] = useState<TabItem[] | null>(null);
-  const [showChordModal, setShowChordModal] = useState(false);
-  const [showTabModal, setShowTabModal] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
-  const [highlightedChord, setHighlightedChord] = useState("");
-  const [pinnedChord, setPinnedChord] = useState(false);
-  const [autoscroll, setAutoscroll] = useState(true);
+  const uniqueSongChords = getAllParts(true, ["chord"]);
+  const partList = getAllParts();
 
-  const [allChords, setAllChords] = useState<string[]>([]);
-  const [song, setSong] = useState<Song | null>(props.Song);
-  const [isEditing, setIsEditing] = useState(false);
-
-  const [currentTime, setCurrentTime] = useState(0);
-
-  let chordList: string[] = [];
-
-  const getWord = (word: string) => {
-    const words = word.split(/\*|\^/);
-
-    return words[0].length == 0 ? "_" : words[0];
-  };
-
-  const getChords = (word: string) => {
-    const chords = word.split(/\*|\^/);
-    chords.shift();
-
-    if (chords.length > 0) {
-      chordList.push(...chords);
-    }
-
-    return chords;
-  };
-
-  const getChord = (chord: string) => {
-    const key = chord[0];
-    const suffix = chord.slice(1) != "" ? chord.slice(1) : "major";
-
-    const temp = props.Chords[key];
-    if (temp) {
-      const c = temp.find((x) => x.Suffix == suffix);
-      return c;
-    }
-
-    return null;
-  };
-
-  const getKeyFromChord = (chord: string) => {
-    if (chord[1] == "#") return `${chord[0].toUpperCase()}sharp`;
-    if (chord[1] == "b") return `${translateToSharp(chord[0])}sharp`;
-
-    return chord[0];
-  };
-
-  const getSuffixFromChord = (chord: string) => {
-    if (chord.length == 1) return "major";
-    if (chord.length == 2 && checkContents(chord, ["#", "b"])) return "major";
-    if (chord.length == 2 && checkContents(chord, ["m"])) return "minor";
-    if (chord.length == 3 && checkContents(chord, ["m"])) return "minor";
-
-    return chord.slice(1);
-  };
-
-  const checkContents = (
-    chord: string,
-    arr: string[] = ["A", "B", "C", "D", "E", "F", "G"]
-  ) => {
-    return arr.some((i) => chord.includes(i));
-  };
-
-  const translateToSharp = (chord: string) => {
-    switch (chord) {
-      case "A":
-        return "G";
-      case "B":
-        return "A";
-      case "C":
-        return "B";
-      case "D":
-        return "C";
-      case "E":
-        return "D";
-      case "F":
-        return "E";
-      case "G":
-        return "F";
-    }
-  };
-
-  const showChord = (chord: string) => {
-    const key = getKeyFromChord(chord);
-    const suffix = getSuffixFromChord(chord);
-
-    const temp = props.Chords[key];
-    if (temp) {
-      const c = temp.find((x) => x.Suffix == suffix);
-
-      if (c) {
-        setShowChordModal(true);
-        setCurrentChord(c);
-        setCurrentTab(null);
-        return;
-      }
-    }
-
-    const t = song?.Tabs ? song.Tabs[chord] : null;
-
-    if (t) {
-      setShowTabModal(true);
-      setCurrentTab(t);
-      setCurrentChord(null);
-    }
-  };
-
-  const highlightChord = (index: number) => {
-    if (index < 0) return;
-    setHighlightedIndex(index);
-    setHighlightedChord(chordList[index]);
-  };
-
-  const handleChordChange = (
-    partIndex: number,
-    lineIndex: number,
-    wordIndex: number,
-    chords: string[]
-  ) => {
-    if (!props.Song.Parts) return;
-
-    const parts = [...props.Song.Parts];
-    const part = parts[partIndex];
-    const line = part.Lines[lineIndex];
-    let word = line[wordIndex];
-
-    if (!word) return;
-
-    word = word.split("*")[0];
-    chords.forEach((item) => {
-      word += `*${item.replaceAll(" ", "")}`;
-    });
-
-    line[wordIndex] = word;
-    part.Lines[lineIndex] = line;
-    parts[partIndex] = part;
-    setSong({ ...(song as Song), Parts: parts });
-  };
-
-  const saveEditing = () => {
-    setIsEditing(!isEditing);
-  };
-
-  const handleAddedTiming = () => {
-    let timings = song?.Timings ?? [];
-    timings?.push(currentTime);
-    timings?.sort((a, b) => a - b);
-
-    setSong({
-      ...song,
-      Timings: timings,
-    } as Song);
-  };
-
-  const handleRemovedTiming = () => {
-    let timings = song?.Timings;
-    timings?.sort((a, b) => a - b);
-    timings?.pop();
-
-    setSong({
-      ...song,
-      Timings: timings,
-    } as Song);
-  };
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
+  const [activeChord, setActiveChord] = useState<string>("");
+  const [hoveredChord, setHoveredChord] = useState<string>("");
+  const [settings, setSettings] = useState<Setting>({
+    "hidden-mode": getSettingsFromStore("hidden-mode", false),
+    autoscroll: getSettingsFromStore("autoscroll", true),
+    editing: false,
+    recording: false,
+    countdown: getSettingsFromStore("countdown", true),
+    transpose: 0,
+  });
+  const [capo, setCapo] = useState(props.Song.Capo ?? 0);
 
   useEffect(() => {
-    if (!autoscroll) return;
+    if (currentTime == 0) return;
 
-    if (highlightedIndex) {
-      document
-        .getElementById(`chord-${highlightedIndex}`)
-        ?.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    const timings = props.Song.Timings;
+    if (!timings) return;
+
+    const index = timings.findLastIndex((time) => time < currentTime);
+    setHighlightedIndex(index);
+  }, [currentTime, props.Song.Timings]);
+
+  useEffect(() => {
+    const chordEl = document.getElementById(`chord-${highlightedIndex}`);
+
+    if (chordEl && settings.autoscroll)
+      chordEl.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [highlightedIndex]);
 
   useEffect(() => {
-    if (isEditing) return;
+    if (!props.Song.Capo) return;
 
-    fetch("/api/updateSong", {
-      method: "POST",
-      body: JSON.stringify({
-        userId: 1,
-        songName: props.SongMeta.Name,
-        songArtist: props.SongMeta.Artist,
-        parts: song?.Parts,
-        timings: song?.Timings,
-        tabs: song?.Tabs,
-        capo: song?.Capo,
-        link: song?.Link,
-        slug: props.SongMeta.Name.toLowerCase().replaceAll(" ", "-"),
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-      });
-  }, [isEditing]);
+    const transpose = settings["transpose"] as number;
+
+    setCapo(props.Song.Capo - transpose);
+  }, [settings["transpose"]]);
+
+  const onSettingChange = (
+    setting?: Setting,
+    saveToStorage: boolean = true
+  ) => {
+    if (!setting) return;
+
+    setSettings({ ...settings, ...setting });
+
+    if (!saveToStorage) return;
+
+    const key = Object.keys(setting)[0];
+    localStorage.setItem(key, setting[key].toString());
+  };
 
   return (
     <div className={styles.container}>
@@ -236,167 +92,418 @@ export default function SongPage(props: TabPageProp) {
       <div className={styles.songContainer}>
         <h1>{props.SongMeta?.Name}</h1>
         <h2>{props.SongMeta?.Artist}</h2>
+        {capo > 0 && <h3>Capo: {capo}</h3>}
         <div className={styles.songDetails}>
-          {song?.Capo && song.Capo > 0 && <div>{`Capo: ${song?.Capo}`}</div>}
-          <div className={styles.songChordList}>
-            {allChords?.sort().map((item: string, index: number) => {
-              return (
-                <div key={index}>
-                  <span
-                    className={styles.chord}
-                    key={index}
-                    onMouseEnter={() => showChord(item)}
-                    onMouseLeave={() => {
-                      setShowChordModal(false);
-                      setShowTabModal(false);
-                    }}
-                  >
-                    {item}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+          {listChords()}
+          {partList &&
+            partList
+              .filter((part) => part.type == "section")
+              .map((section: PartObj, sectionIndex: number) => {
+                return (
+                  <section key={sectionIndex} className={styles.songSection}>
+                    <h4>{section.text}</h4>
+                    {writeLinesInSection(sectionIndex)}
+                  </section>
+                );
+              })}
         </div>
-        {getSong(props.Song.Parts)}
       </div>
-      <div className={styles.sidebar}>
-        {currentTab && showTabModal && (
-          <div className={styles.popup}>
-            <Tab tab={currentTab} />
-          </div>
+      <>
+        {activeChord && (
+          <DraggableContainer
+            containerId="chord-diagram-active"
+            width={10}
+            minWidth={130}
+            icon={<LibraryMusicIcon />}
+            minimisable
+          >
+            <ChordDiagram chord={activeChord} />
+          </DraggableContainer>
         )}
-        {currentChord && (showChordModal || pinnedChord) && (
-          <div className={styles.popup}>
-            <Chord chord={currentChord} />
-          </div>
+        {hoveredChord && (
+          <DraggableContainer
+            containerId="chord-diagram-hover"
+            width={10}
+            minWidth={130}
+          >
+            <ChordDiagram chord={hoveredChord} />
+          </DraggableContainer>
         )}
-        {song && (
-          <div className={styles.video}>
-            <VideoEmbed
-              embedId={song.Link}
-              chords={props.Chords}
-              tabs={song.Tabs as TabType}
-              timings={song.Timings as number[]}
-              onHighlightChord={(index) => highlightChord(index)}
-              currentChord={highlightedChord}
-              onToggleAutoscroll={(scroll) => setAutoscroll(scroll)}
-              currentTime={currentTime}
-              onTimeChange={(t) => setCurrentTime(t)}
-              getKeyFromChord={(c) => getKeyFromChord(c)}
-              getSuffixFromChord={(c) => getSuffixFromChord(c)}
+        <DraggableContainer
+          containerId="settings"
+          title="Settings"
+          width={11}
+          minWidth={200}
+          icon={<SettingsIcon />}
+          minimisable
+        >
+          <div>
+            <SettingToggle
+              value={{ "hidden-mode": settings["hidden-mode"] }}
+              onSettingChange={(setting) => onSettingChange(setting)}
+              settingText="Hidden Mode"
+              type="checkbox"
             />
+            <SettingToggle
+              value={{ ["autoscroll"]: settings["autoscroll"] }}
+              onSettingChange={(setting) => onSettingChange(setting)}
+              settingText="Autoscroll"
+              type="checkbox"
+            />
+            {/* <SettingToggle
+              value={{ ["editing"]: settings["editing"] }}
+              onSettingChange={(setting) => onSettingChange(setting, false)}
+              settingText="TODO: Edit Mode"
+              type="checkbox"
+            />
+            <SettingToggle
+              value={{ ["recording"]: settings["recording"] }}
+              onSettingChange={(setting) => onSettingChange(setting, false)}
+              settingText="TODO: Recording Mode"
+              type="checkbox"
+            /> */}
+            <SettingToggle
+              value={{ ["transpose"]: settings["transpose"] }}
+              onSettingChange={(setting) => onSettingChange(setting)}
+              settingText="Transpose"
+              type="spinner"
+              optionsValues={[-1, 1]}
+            />
+            {settings["editing"] && (
+              <SettingToggle
+                onSettingChange={props.onSongRefresh}
+                settingText="Refresh Song"
+                type="button"
+              />
+            )}
           </div>
+        </DraggableContainer>
+        {settings.editing && (
+          <DraggableContainer
+            containerClassName={styles.editContainer}
+            bodyClassName={draggableStyles.edit}
+            containerId="edit"
+            title="Editing"
+            width={25}
+            minWidth={200}
+          >
+            <>
+              {writeChordsAndTimings()}
+              {/* <button>Save</button>
+              <button onClick={() => onSettingChange({ ["editing"]: false })}>
+                Cancel
+              </button> */}
+            </>
+          </DraggableContainer>
         )}
-      </div>
-      <div
-        className={`${styles.timingContainer} ${
-          isEditing ? styles.isEditing : ""
-        }`}
-      >
-        {isEditing && (
-          <>
-            {" "}
-            <span>{song?.Timings?.map((t) => t.toFixed(2)).join(", ")}</span>
-            <button onClick={handleRemovedTiming}>Delete</button>
-            <button onClick={handleAddedTiming}>Add</button>
-            <button onClick={saveEditing}>Save</button>
-          </>
+        {settings.recording && (
+          <DraggableContainer
+            containerId="recording"
+            title="Record"
+            width={10}
+            minWidth={150}
+          >
+            <>
+              <button>Start</button>
+              <button>Pause</button>
+              <button>Stop</button>
+            </>
+          </DraggableContainer>
         )}
-        {!isEditing && <button onClick={saveEditing}>Edit Song</button>}
-      </div>
+        {settings.countdown && showCountdown()}
+        <DraggableContainer
+          containerId="video-player"
+          width={15}
+          minWidth={200}
+          title={`${props.SongMeta?.Name} - ${props.SongMeta?.Artist}`}
+        >
+          <VideoEmbed
+            embedId={props.Song.Link}
+            onTimeChange={(val) => setCurrentTime(val)}
+          />
+        </DraggableContainer>
+      </>
     </div>
   );
 
-  function getSong(parts: SongSection[]) {
-    return parts?.map((item: SongSection, partIndex: number) => {
-      return (
-        <div className={styles.section} key={partIndex}>
-          <h4>{item.Section}</h4>
-          <div>
-            {item.Lines.map((lineItem, lineIndex) => {
+  function writeLinesInSection(sectionIndex: number) {
+    return partList
+      .filter((part) => part.type == "line" && part.sectionId == sectionIndex)
+      .map((line: PartObj, linesIndex: number) => {
+        return (
+          <div key={linesIndex} className={styles.songLines}>
+            {writeLine(sectionIndex, linesIndex)}
+          </div>
+        );
+      });
+  }
+
+  function writeLine(sectionIndex: number, linesIndex: number) {
+    return partList
+      .filter(
+        (part) =>
+          part.sectionId == sectionIndex &&
+          part.lineId == linesIndex &&
+          part.type == "line"
+      )
+      .map((part: PartObj, lineIndex: number) => {
+        return (
+          <div key={lineIndex} className={styles.songLine}>
+            {writeWords(sectionIndex, linesIndex)}
+          </div>
+        );
+      });
+  }
+
+  function writeWords(sectionIndex: number, lineIndex: number) {
+    return (
+      <>
+        {partList
+          .filter(
+            (part) =>
+              part.type == "word" &&
+              part.sectionId == sectionIndex &&
+              part.lineId == lineIndex
+          )
+          .map((word: PartObj, wordIndex: number) => {
+            if (word.type == "word")
               return (
-                <div key={lineIndex} className={styles.line}>
-                  {lineItem.map((word: string, wordIndex) => {
-                    const c = getChords(word);
-                    const w = getWord(word);
-
-                    if (c.length > 0) {
-                      c.forEach((chord) => {
-                        chord = chord.replaceAll(" ", "");
-                        if (
-                          !allChords.includes(chord) &&
-                          !chord.toLowerCase().includes("tab")
-                        )
-                          setAllChords([chord, ...allChords]);
-                      });
-                    }
-
-                    return (
-                      <div key={wordIndex} className={styles.word}>
-                        {!isEditing && (
-                          <>
-                            <div className={styles.chords}>
-                              {c.map((chord: string, chordIndex: number) => {
-                                const currentChordIndex =
-                                  chordList.length - c.length + chordIndex;
-                                return (
-                                  <span
-                                    id={`chord-${currentChordIndex}`}
-                                    className={`${styles.chord} ${
-                                      currentChordIndex == highlightedIndex
-                                        ? styles.highlight
-                                        : ""
-                                    }`}
-                                    key={chordIndex}
-                                    onMouseEnter={() => showChord(chord)}
-                                    onMouseLeave={() => {
-                                      setShowChordModal(false);
-                                      setShowTabModal(false);
-                                    }}
-                                    onClick={() => setPinnedChord(!pinnedChord)}
-                                  >
-                                    {chord}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                            <span
-                              className={
-                                w.includes("_") ? styles.hidden : styles.word
-                              }
-                            >
-                              {w}
-                            </span>
-                          </>
-                        )}
-                        {isEditing && (
-                          <NewSongWord
-                            key={wordIndex}
-                            word={w}
-                            index={wordIndex}
-                            onChordChange={(chords) =>
-                              handleChordChange(
-                                partIndex,
-                                lineIndex,
-                                wordIndex,
-                                chords
-                              )
+                <div className={styles.wordGroup}>
+                  <div className={styles.chordGroup}>
+                    {partList
+                      .filter(
+                        (part: PartObj) =>
+                          (part.type == "chord" || part.type == "tab") &&
+                          part.sectionId == sectionIndex &&
+                          part.lineId == lineIndex &&
+                          part.wordId == word.wordId
+                      )
+                      .map((chord: PartObj, chordIndex: number) => {
+                        return (
+                          <Chord
+                            key={chordIndex}
+                            chordName={chord.text}
+                            isChordNameVisible={
+                              !settings["hidden-mode"] ||
+                              chord.chordId == highlightedIndex
                             }
-                            type="Lyric"
-                            songChords={allChords}
-                            existingChords={c}
+                            currentActiveChord={
+                              chord.chordId == highlightedIndex
+                            }
+                            className={styles.songChord}
+                            chordId={chord.chordId ?? undefined}
+                            onChordActive={(chord: string) =>
+                              setActiveChord(chord)
+                            }
+                            onChordHighlight={(chord: string) =>
+                              setHoveredChord(chord)
+                            }
+                            transpose={settings["transpose"] as number}
                           />
-                        )}
-                      </div>
-                    );
-                  })}
+                        );
+                      })}
+                  </div>
+
+                  {!settings["editing"] && word.text != "" && (
+                    <span key={wordIndex} className={styles.songWord}>
+                      {word.text}
+                    </span>
+                  )}
+                  {!settings["editing"] && word.text == "" && (
+                    <span
+                      key={wordIndex}
+                      className={`${styles.songWord} ${styles.hidden}`}
+                    >
+                      -
+                    </span>
+                  )}
+                  {settings["editing"] && (
+                    <button key={wordIndex} className={styles.songWord}>
+                      {word.text}
+                    </button>
+                  )}
                 </div>
+              );
+            return <></>;
+          })}
+      </>
+    );
+  }
+
+  function writeChordsAndTimings() {
+    let wordCount = -1;
+    const timings = props.Song.Timings;
+    const sections = partList.filter((part) => part.type == "section");
+
+    return sections.map((section: PartObj, sectionIndex: number) => {
+      const lines = partList.filter(
+        (part) => part.type == "line" && part.sectionId == sectionIndex
+      );
+
+      return lines.map((line: PartObj, lineIndex: number) => {
+        const words = partList.filter(
+          (part) =>
+            (part.type == "chord" || part.type == "tab") &&
+            part.lineId == lineIndex &&
+            part.sectionId == sectionIndex
+        );
+        return (
+          <div key={lineIndex} className={styles.editLine}>
+            {words.map((word: PartObj, wordIndex: number) => {
+              wordCount++;
+              return (
+                <>
+                  <Chord
+                    key={wordCount}
+                    chordName={word.text}
+                    chordTiming={timings ? timings[wordCount] : undefined}
+                    isChordNameVisible
+                    currentActiveChord={word.chordId == highlightedIndex}
+                    className={styles.songChord}
+                    chordId={word.chordId ?? undefined}
+                    // onChordActive={(chord: string) =>
+                    //   setActiveChord(chord)
+                    // }
+                    // onChordHighlight={(chord: string) =>
+                    //   setHoveredChord(chord)
+                    // }
+                    transpose={settings["transpose"] as number}
+                  />
+                </>
               );
             })}
           </div>
-        </div>
-      );
+        );
+      });
     });
+  }
+
+  function getAllParts(unique?: boolean, types?: string[]) {
+    let parts: PartObj[] = [];
+    let sectionCount = 0;
+    let chordCount = 0;
+    let wordCount = 0;
+
+    props.Song.Parts.forEach((part: SongSection) => {
+      const partObj = {
+        text: part.Section,
+        sectionId: sectionCount,
+        lineId: null,
+        chordId: null,
+        wordId: null,
+        type: "section",
+      } as PartObj;
+
+      parts.push(partObj);
+
+      let lineCount = 0;
+
+      part.Lines.forEach((line: string[]) => {
+        const lineObj = {
+          text: part.Lines[lineCount][0],
+          sectionId: sectionCount,
+          lineId: lineCount,
+          chordId: null,
+          wordId: null,
+          type: "line",
+        } as PartObj;
+
+        parts.push(lineObj);
+
+        line.forEach((line: string) => {
+          const wordChordArr = line.split(/[*^]/);
+
+          if (wordChordArr.length == 0) return;
+
+          wordChordArr.forEach((word: string, index: number) => {
+            const isWord = line[0] != "*" && line[0] != "^" && index == 0;
+            if (index == 0) wordCount++;
+
+            const chordObj = {
+              text: word,
+              sectionId: sectionCount,
+              lineId: lineCount,
+              chordId: chordCount,
+              wordId: wordCount,
+              type:
+                isWord || word == ""
+                  ? "word"
+                  : line[0] == "*"
+                  ? "chord"
+                  : "tab",
+            } as PartObj;
+
+            if (!isWord && word != "") chordCount++;
+
+            parts.push(chordObj);
+          });
+
+          return;
+        });
+
+        lineCount++;
+      });
+
+      sectionCount++;
+    });
+
+    if (!types) return parts;
+
+    const filteredArr = parts.filter((part) =>
+      types.some((t) => t == part.type)
+    );
+
+    if (!unique) return filteredArr;
+
+    const uniqueArr = filteredArr.filter(
+      (value, index, self) =>
+        index === self.findIndex((t) => t.text === value.text)
+    );
+
+    return uniqueArr;
+  }
+
+  function listChords() {
+    return (
+      <div className={`${styles.songChords} ${styles.header}`}>
+        {uniqueSongChords.sort().map((item, index) => {
+          return (
+            <Chord
+              key={index}
+              chordName={item.text}
+              isChordNameVisible={true}
+              currentActiveChord={false}
+              onChordHighlight={(chord: string) => setHoveredChord(chord)}
+              transpose={settings["transpose"] as number}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+
+  function showCountdown() {
+    if (!props.Song.Timings || currentTime > props.Song.Timings[0])
+      return <></>;
+
+    let timeTillFirstChord = currentTime - props.Song.Timings[0];
+    timeTillFirstChord = Math.abs(timeTillFirstChord);
+
+    if (timeTillFirstChord > 5) return <></>;
+
+    return (
+      <DraggableContainer
+        containerId="countdown"
+        title="Countdown"
+        width={1}
+        minWidth={150}
+        icon={<AlarmIcon />}
+        minimisable
+      >
+        <h1 style={{ textAlign: "center" }}>
+          {timeTillFirstChord.toFixed(1)}s
+        </h1>
+      </DraggableContainer>
+    );
   }
 }

@@ -1,0 +1,71 @@
+@import "./breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+
+  .songContainer {
+    flex: 1;
+    padding-left: 25%;
+
+    .songDetails {
+      .header {
+        display: flex;
+        gap: var(--padding-half);
+      }
+
+      .songSection {
+        margin-top: 5%;
+
+        .songLines {
+          display: flex;
+          gap: var(--padding-half);
+          margin-bottom: var(--padding);
+
+          .songLine {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            flex-wrap: wrap;
+
+            .wordGroup {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-end;
+              padding-left: var(--padding-quarter);
+
+              .chordGroup {
+                display: flex;
+                gap: var(--padding-quarter);
+              }
+
+              .songWord {
+                &:not(:first-of-type) {
+                  padding-left: var(--padding-quarter);
+                }
+
+                &.hidden {
+                  opacity: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @include max-breakpoint(md) {
+      padding: 0 10%;
+    }
+  }
+
+  .editContainer {
+    .editLine {
+      margin-bottom: var(--padding);
+
+      > div {
+        margin-right: var(--padding-half);
+      }
+    }
+  }
+}
