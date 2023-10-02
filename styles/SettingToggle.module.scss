@@ -7,7 +7,6 @@
   align-items: center;
   width: 100%;
   padding: var(--padding-half) var(--padding-quarter);
-  cursor: pointer;
 
   &:not(:last-of-type) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
@@ -24,6 +23,23 @@
 
     &.active {
       background-color: var(--accent);
+    }
+  }
+}
+
+.toggle {
+  cursor: pointer;
+
+  &.button {
+    background-color: var(--background);
+    color: black;
+    padding: var(--padding-quarter);
+    margin-top: var(--padding-half);
+    border-radius: var(--padding-quarter);
+    border: none;
+
+    & > span {
+      text-align: center;
     }
   }
 }

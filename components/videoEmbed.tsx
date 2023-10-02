@@ -12,6 +12,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { Setting } from "../types/interfaces";
 import { getSettingsFromStore } from "../lib/localStore";
 import SettingToggle from "./settingToggle";
+import { toMinutesAndSeconds } from "../lib/numbers";
 
 interface VideoEmbedProps {
   embedId: string;
@@ -26,8 +27,8 @@ export default function VideoEmbed(props: VideoEmbedProps) {
     url: `https://www.youtube.com/watch?v=${props.embedId}`,
     "settings-open": false,
     volume: getSettingsFromStore("volume", 50),
-    speed: getSettingsFromStore("speed", 100),
-    "show-video": true,
+    speed: getSettingsFromStore("speed", 1),
+    "show-video": getSettingsFromStore("show-video", true),
   });
   const [volumeHover, setVolumeHover] = useState<boolean>(false);
 
@@ -45,10 +46,15 @@ export default function VideoEmbed(props: VideoEmbedProps) {
 
   const seekTo = (amount: number) => {
     player.current.seekTo(amount, "seconds");
+    setCurrentTime(amount);
   };
 
-  const onSettingChange = (setting: Setting, saveToStorage: boolean = true) => {
-    console.log("settign", setting);
+  const onSettingChange = (
+    setting?: Setting,
+    saveToStorage: boolean = true
+  ) => {
+    if (!setting) return;
+
     setPlayerSettings({ ...playerSettings, ...setting });
 
     if (!saveToStorage) return;
@@ -56,10 +62,6 @@ export default function VideoEmbed(props: VideoEmbedProps) {
     const key = Object.keys(setting)[0];
     localStorage.setItem(key, setting[key].toString());
   };
-
-  useEffect(() => {
-    console.log(playerSettings);
-  }, [playerSettings]);
 
   useEffect(() => {
     props.onTimeChange(currentTime);
@@ -85,11 +87,17 @@ export default function VideoEmbed(props: VideoEmbedProps) {
         />
       </div>
       <div className={styles.scrubberContainer}>
+        <span className={styles.scrubberTime}>
+          {toMinutesAndSeconds(currentTime)}
+        </span>
         <Slider
           currentValue={currentTime}
           maxValue={maxTime}
           onSliderChange={(val) => seekTo(val)}
         />
+        <span className={styles.scrubberTime}>
+          {toMinutesAndSeconds(maxTime)}
+        </span>
       </div>
       <div className={styles.controlsContainer}>
         <button onClick={() => setPlaying(!playing)}>
@@ -142,7 +150,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
             <div className={styles.settings}>
               <SettingToggle
                 value={{ "show-video": playerSettings["show-video"] }}
-                onSettingChange={(setting) => onSettingChange(setting)}
+                onSettingChange={(setting) => onSettingChange(setting, true)}
                 settingText="Show Video"
                 type="checkbox"
               />
@@ -156,10 +164,6 @@ export default function VideoEmbed(props: VideoEmbedProps) {
             </div>
           )}
         </button>
-        {/*
-        speed: onClick={() => onSettingChange({ speed: 75 })}
-        showVideo
-        */}
       </div>
     </div>
   );

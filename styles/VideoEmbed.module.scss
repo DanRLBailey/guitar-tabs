@@ -23,6 +23,14 @@
   .scrubberContainer {
     margin: var(--padding) 0;
     width: 100%;
+    display: flex;
+    gap: var(--padding-quarter);
+    justify-content: center;
+
+    .scrubberTime {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
   }
 
   .controlsContainer {
@@ -47,12 +55,13 @@
       position: relative;
 
       .settings {
+        box-shadow: var(--shadow);
         padding: var(--padding-half);
         background-color: var(--background-dark);
         border-radius: var(--padding);
         position: absolute;
-        bottom: 0;
-        left: 2.25rem;
+        bottom: 2rem;
+        left: -5rem;
         width: 200px;
       }
     }

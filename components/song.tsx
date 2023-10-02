@@ -1,4 +1,5 @@
 import styles from "../styles/SongPage.module.scss";
+import draggableStyles from "../styles/DraggableContainer.module.scss";
 import {
   Song,
   SongMetaDetails,
@@ -14,6 +15,10 @@ import VideoEmbed from "./videoEmbed";
 import DraggableContainer from "./draggableContainer";
 import { getSettingsFromStore } from "../lib/localStore";
 import SettingToggle from "./settingToggle";
+
+import SettingsIcon from "@mui/icons-material/Settings";
+import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
+import AlarmIcon from "@mui/icons-material/Alarm";
 
 interface TabPageProp {
   Key: string;
@@ -32,12 +37,13 @@ export default function SongPage(props: TabPageProp) {
   const [hoveredChord, setHoveredChord] = useState<string>("");
   const [settings, setSettings] = useState<Setting>({
     "hidden-mode": getSettingsFromStore("hidden-mode", false),
-    "show-chord-popup": getSettingsFromStore("show-chord-popup", true),
     autoscroll: getSettingsFromStore("autoscroll", true),
     editing: false,
     recording: false,
     countdown: getSettingsFromStore("countdown", true),
+    transpose: 0,
   });
+  const [capo, setCapo] = useState(props.Song.Capo ?? 0);
 
   useEffect(() => {
     if (currentTime == 0) return;
@@ -56,7 +62,20 @@ export default function SongPage(props: TabPageProp) {
       chordEl.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [highlightedIndex]);
 
-  const onSettingChange = (setting: Setting, saveToStorage: boolean = true) => {
+  useEffect(() => {
+    if (!props.Song.Capo) return;
+
+    const transpose = settings["transpose"] as number;
+
+    setCapo(props.Song.Capo - transpose);
+  }, [settings["transpose"]]);
+
+  const onSettingChange = (
+    setting?: Setting,
+    saveToStorage: boolean = true
+  ) => {
+    if (!setting) return;
+
     setSettings({ ...settings, ...setting });
 
     if (!saveToStorage) return;
@@ -73,9 +92,7 @@ export default function SongPage(props: TabPageProp) {
       <div className={styles.songContainer}>
         <h1>{props.SongMeta?.Name}</h1>
         <h2>{props.SongMeta?.Artist}</h2>
-        {props.Song.Capo && props.Song.Capo > 0 && (
-          <h3>Capo: {props.Song.Capo}</h3>
-        )}
+        {capo > 0 && <h3>Capo: {capo}</h3>}
         <div className={styles.songDetails}>
           {listChords()}
           {partList &&
@@ -92,22 +109,13 @@ export default function SongPage(props: TabPageProp) {
         </div>
       </div>
       <>
-        <DraggableContainer
-          containerId="video-player"
-          width={15}
-          minWidth={200}
-          title={`${props.SongMeta?.Name} - ${props.SongMeta?.Artist}`}
-        >
-          <VideoEmbed
-            embedId={props.Song.Link}
-            onTimeChange={(val) => setCurrentTime(val)}
-          />
-        </DraggableContainer>
-        {settings["show-chord-popup"] && activeChord && (
+        {activeChord && (
           <DraggableContainer
             containerId="chord-diagram-active"
             width={10}
             minWidth={130}
+            icon={<LibraryMusicIcon />}
+            minimisable
           >
             <ChordDiagram chord={activeChord} />
           </DraggableContainer>
@@ -126,7 +134,8 @@ export default function SongPage(props: TabPageProp) {
           title="Settings"
           width={11}
           minWidth={200}
-          collapsable
+          icon={<SettingsIcon />}
+          minimisable
         >
           <div>
             <SettingToggle
@@ -136,20 +145,12 @@ export default function SongPage(props: TabPageProp) {
               type="checkbox"
             />
             <SettingToggle
-              value={{
-                ["show-chord-popup"]: settings["show-chord-popup"],
-              }}
-              onSettingChange={(setting) => onSettingChange(setting)}
-              settingText="Show Chord Popup"
-              type="checkbox"
-            />
-            <SettingToggle
               value={{ ["autoscroll"]: settings["autoscroll"] }}
               onSettingChange={(setting) => onSettingChange(setting)}
               settingText="Autoscroll"
               type="checkbox"
             />
-            <SettingToggle
+            {/* <SettingToggle
               value={{ ["editing"]: settings["editing"] }}
               onSettingChange={(setting) => onSettingChange(setting, false)}
               settingText="TODO: Edit Mode"
@@ -160,30 +161,38 @@ export default function SongPage(props: TabPageProp) {
               onSettingChange={(setting) => onSettingChange(setting, false)}
               settingText="TODO: Recording Mode"
               type="checkbox"
-            />
+            /> */}
             <SettingToggle
-              value={{ ["countdown"]: settings["countdown"] }}
+              value={{ ["transpose"]: settings["transpose"] }}
               onSettingChange={(setting) => onSettingChange(setting)}
-              settingText="Show Countdown"
-              type="checkbox"
+              settingText="Transpose"
+              type="spinner"
+              optionsValues={[-1, 1]}
             />
-            <button onClick={props.onSongRefresh}>Refresh</button>
-            <button>TODO: Transpose</button>
+            {settings["editing"] && (
+              <SettingToggle
+                onSettingChange={props.onSongRefresh}
+                settingText="Refresh Song"
+                type="button"
+              />
+            )}
           </div>
         </DraggableContainer>
         {settings.editing && (
           <DraggableContainer
+            containerClassName={styles.editContainer}
+            bodyClassName={draggableStyles.edit}
             containerId="edit"
             title="Editing"
-            width={10}
-            minWidth={150}
-            collapsable
+            width={25}
+            minWidth={200}
           >
             <>
-              <button>Save</button>
+              {writeChordsAndTimings()}
+              {/* <button>Save</button>
               <button onClick={() => onSettingChange({ ["editing"]: false })}>
                 Cancel
-              </button>
+              </button> */}
             </>
           </DraggableContainer>
         )}
@@ -193,7 +202,6 @@ export default function SongPage(props: TabPageProp) {
             title="Record"
             width={10}
             minWidth={150}
-            collapsable
           >
             <>
               <button>Start</button>
@@ -203,6 +211,17 @@ export default function SongPage(props: TabPageProp) {
           </DraggableContainer>
         )}
         {settings.countdown && showCountdown()}
+        <DraggableContainer
+          containerId="video-player"
+          width={15}
+          minWidth={200}
+          title={`${props.SongMeta?.Name} - ${props.SongMeta?.Artist}`}
+        >
+          <VideoEmbed
+            embedId={props.Song.Link}
+            onTimeChange={(val) => setCurrentTime(val)}
+          />
+        </DraggableContainer>
       </>
     </div>
   );
@@ -279,6 +298,7 @@ export default function SongPage(props: TabPageProp) {
                             onChordHighlight={(chord: string) =>
                               setHoveredChord(chord)
                             }
+                            transpose={settings["transpose"] as number}
                           />
                         );
                       })}
@@ -308,6 +328,54 @@ export default function SongPage(props: TabPageProp) {
           })}
       </>
     );
+  }
+
+  function writeChordsAndTimings() {
+    let wordCount = -1;
+    const timings = props.Song.Timings;
+    const sections = partList.filter((part) => part.type == "section");
+
+    return sections.map((section: PartObj, sectionIndex: number) => {
+      const lines = partList.filter(
+        (part) => part.type == "line" && part.sectionId == sectionIndex
+      );
+
+      return lines.map((line: PartObj, lineIndex: number) => {
+        const words = partList.filter(
+          (part) =>
+            (part.type == "chord" || part.type == "tab") &&
+            part.lineId == lineIndex &&
+            part.sectionId == sectionIndex
+        );
+        return (
+          <div key={lineIndex} className={styles.editLine}>
+            {words.map((word: PartObj, wordIndex: number) => {
+              wordCount++;
+              return (
+                <>
+                  <Chord
+                    key={wordCount}
+                    chordName={word.text}
+                    chordTiming={timings ? timings[wordCount] : undefined}
+                    isChordNameVisible
+                    currentActiveChord={word.chordId == highlightedIndex}
+                    className={styles.songChord}
+                    chordId={word.chordId ?? undefined}
+                    // onChordActive={(chord: string) =>
+                    //   setActiveChord(chord)
+                    // }
+                    // onChordHighlight={(chord: string) =>
+                    //   setHoveredChord(chord)
+                    // }
+                    transpose={settings["transpose"] as number}
+                  />
+                </>
+              );
+            })}
+          </div>
+        );
+      });
+    });
   }
 
   function getAllParts(unique?: boolean, types?: string[]) {
@@ -406,6 +474,7 @@ export default function SongPage(props: TabPageProp) {
               isChordNameVisible={true}
               currentActiveChord={false}
               onChordHighlight={(chord: string) => setHoveredChord(chord)}
+              transpose={settings["transpose"] as number}
             />
           );
         })}
@@ -428,6 +497,8 @@ export default function SongPage(props: TabPageProp) {
         title="Countdown"
         width={1}
         minWidth={150}
+        icon={<AlarmIcon />}
+        minimisable
       >
         <h1 style={{ textAlign: "center" }}>
           {timeTillFirstChord.toFixed(1)}s

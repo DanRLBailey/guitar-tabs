@@ -5,35 +5,71 @@ import { Dimension } from "../types/interfaces";
 
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 interface DraggableContainerProps {
+  containerClassName?: string;
+  bodyClassName?: string;
   containerId: string;
   pinned?: boolean;
   allowResize?: boolean;
-  collapsable?: boolean;
+  minimisable?: boolean;
   width: number;
   minWidth: number;
   title?: string;
   children?: React.ReactElement;
+  icon?: React.ReactElement;
+  taskbarIndex?: number;
 }
 
 export default function DraggableContainer(props: DraggableContainerProps) {
   const localPos = localStorage.getItem(`pos-${props.containerId}`);
-  const localExpand = localStorage.getItem(`expand-${props.containerId}`);
+  const localMinimised = localStorage.getItem(`minimised-${props.containerId}`);
   const ref = useRef<HTMLDivElement>(null);
+  const padding = { x: 1.09, y: 1.7 };
 
   const [mousePos, setMousePos] = useState<Dimension>({ x: 0, y: 0 });
   const [currentPos, setCurrentPos] = useState<Dimension>({
-    x: localPos ? JSON.parse(localPos).x : 0,
-    y: localPos ? JSON.parse(localPos).y : 0,
+    x: localPos ? JSON.parse(localPos).x : padding.x,
+    y: localPos ? JSON.parse(localPos).y : padding.y,
   });
   const [offset, setOffset] = useState<Dimension>({ x: 0, y: 0 });
   const [prevOffset, setPrevOffset] = useState<Dimension>({ x: 0, y: 0 });
   const [dragging, setDragging] = useState<boolean>(false);
 
-  const [expanded, setExpanded] = useState<boolean>(
-    localExpand ? localExpand == "true" : true
+  const [minimised, setMinimised] = useState<boolean>(
+    localMinimised ? localMinimised == "true" : false
+  );
+
+  const getTaskbarIndex = (containerId: string) => {
+    if (!props.minimisable) return;
+
+    const taskbarEls = document.getElementsByClassName(styles.taskbarIcon);
+    const elArr = Array.from(taskbarEls);
+    if (!elArr || elArr.length == 0) return;
+
+    const containerIdName = `draggable-${containerId}-taskbar`;
+    const index = elArr.findIndex((el) => el.id == containerIdName);
+
+    return index;
+  };
+
+  const taskbarIndex = getTaskbarIndex(props.containerId);
+  const taskbarPos = taskbarIndex ? taskbarIndex * 65 : 0;
+
+  const taskbarIcon = (
+    <div
+      className={`${styles.draggableContainer} ${popupStyles.popupContainer} ${
+        styles.taskbarIcon
+      } ${!minimised ? styles.maximised : ""}`}
+      id={`draggable-${props.containerId}-taskbar`}
+      style={{
+        bottom: `${16}px`,
+        right: `${16 + taskbarPos}px`,
+      }}
+      onClick={() => setMinimised(!minimised)}
+    >
+      {props.icon}
+    </div>
   );
 
   useEffect(() => {
@@ -49,10 +85,20 @@ export default function DraggableContainer(props: DraggableContainerProps) {
       setMousePos(mousePos);
     };
 
+    const handleTouchMove = (event: TouchEvent) => {
+      const touchPos = {
+        x: event.touches[0].clientX,
+        y: event.touches[0].clientY,
+      };
+      setMousePos(touchPos);
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove);
 
     return () => {
       window.removeEventListener("mousemove", (e) => handleMouseMove);
+      window.removeEventListener("touchmove", (e) => handleTouchMove);
     };
   }, [dragging]);
 
@@ -78,8 +124,11 @@ export default function DraggableContainer(props: DraggableContainerProps) {
   }, [mousePos, dragging]);
 
   useEffect(() => {
-    localStorage.setItem(`expand-${props.containerId}`, expanded.toString());
-  }, [expanded]);
+    localStorage.setItem(
+      `minimised-${props.containerId}`,
+      minimised.toString()
+    );
+  }, [minimised]);
 
   const percentConvert = (pos: Dimension, reverse?: boolean) => {
     const win = {
@@ -129,37 +178,50 @@ export default function DraggableContainer(props: DraggableContainerProps) {
 
   return (
     <>
-      <div
-        className={`${styles.draggableContainer} ${popupStyles.popupContainer}`}
-        id={`draggable-${props.containerId}`}
-        style={{
-          top: `${currentPos.y}%`,
-          left: `${currentPos.x}%`,
-          width: `${props.width}%`,
-          minWidth: props.minWidth,
-        }}
-        onMouseUp={() => {
-          setDragging(false);
-        }}
-        ref={ref}
-      >
-        <div className={styles.header}>
-          <div className={styles.drag} onMouseDown={() => setDragging(true)}>
-            <DragHandleIcon />
-            {props.title && <h4>{props.title}</h4>}
-          </div>
-          {props.collapsable && (
+      {!minimised && (
+        <div
+          className={`${styles.draggableContainer} ${popupStyles.popupContainer} ${props.containerClassName}`}
+          id={`draggable-${props.containerId}`}
+          style={{
+            top: `${currentPos.y}%`,
+            left: `${currentPos.x}%`,
+            width: `${props.width}%`,
+            minWidth: props.minWidth,
+            maxHeight: "96.5%",
+            userSelect: dragging ? "none" : "auto",
+          }}
+          onMouseUp={() => {
+            setDragging(false);
+          }}
+          onTouchEnd={() => {
+            setDragging(false);
+          }}
+          ref={ref}
+        >
+          <div className={styles.header}>
+            {props.minimisable && (
+              <div
+                className={styles.minimise}
+                onClick={() => setMinimised(!minimised)}
+              >
+                <ExpandMoreIcon />
+              </div>
+            )}
             <div
-              className={styles.expand}
-              onClick={() => setExpanded(!expanded)}
+              className={styles.drag}
+              onMouseDown={() => setDragging(true)}
+              onTouchStart={() => setDragging(true)}
             >
-              {expanded && <ExpandLessIcon />}
-              {!expanded && <ExpandMoreIcon />}
+              <DragHandleIcon />
+              {props.title && <h4>{props.title}</h4>}
             </div>
-          )}
+          </div>
+          <div className={`${styles.body} ${props.bodyClassName}`}>
+            {props.children}
+          </div>
         </div>
-        {expanded && <div className={styles.body}>{props.children}</div>}
-      </div>
+      )}
+      {props.minimisable && taskbarIcon}
     </>
   );
 }

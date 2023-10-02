@@ -1,3 +1,5 @@
+@import "./breakpoints.scss";
+
 .container {
   display: flex;
   flex-direction: row;
@@ -24,6 +26,7 @@
             display: flex;
             flex-direction: row;
             position: relative;
+            flex-wrap: wrap;
 
             .wordGroup {
               display: flex;
@@ -48,6 +51,20 @@
             }
           }
         }
+      }
+    }
+
+    @include max-breakpoint(md) {
+      padding: 0 10%;
+    }
+  }
+
+  .editContainer {
+    .editLine {
+      margin-bottom: var(--padding);
+
+      > div {
+        margin-right: var(--padding-half);
       }
     }
   }

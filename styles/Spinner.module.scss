@@ -1,0 +1,15 @@
+.spinnerContainer {
+  border-radius: var(--padding-quarter);
+  overflow: hidden;
+  padding: var(--padding-quarter) 0;
+
+  & > span {
+    background-color: var(--background);
+    padding: var(--padding-half);
+    color: black;
+
+    &:nth-of-type(2) {
+      background-color: var(--background-grey);
+    }
+  }
+}
