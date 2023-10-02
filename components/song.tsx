@@ -51,8 +51,11 @@ export default function SongPage(props: TabPageProp) {
     const timings = props.Song.Timings;
     if (!timings) return;
 
-    const index = timings.findLastIndex((time) => time < currentTime);
-    setHighlightedIndex(index);
+    const index = [...timings]
+      .reverse()
+      .findIndex((time) => time < currentTime);
+
+    setHighlightedIndex(timings.length - index - 1);
   }, [currentTime, props.Song.Timings]);
 
   useEffect(() => {
