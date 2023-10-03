@@ -5,7 +5,7 @@
   .chord {
     background-color: var(--background-dark);
     padding: 0 var(--padding-quarter);
-    border-radius: var(--padding-half) var(--padding-half) 0 0;
+    border-radius: var(--border-radius) var(--padding-half) 0 0;
     transition: var(--transition);
     cursor: pointer;
     min-width: 30px;

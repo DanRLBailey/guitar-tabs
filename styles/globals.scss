@@ -22,7 +22,7 @@
   --margin-large: calc(var(--margin) * 10);
   --margin-half: calc(var(--margin) * 0.5);
 
-  --border-radius: 1rem;
+  --border-radius: var(--padding-half);
   --font-size-small: 0.75rem;
 
   --transition: 0.3s ease;

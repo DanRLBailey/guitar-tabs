@@ -4,7 +4,7 @@
 
   .player {
     position: relative;
-    border-radius: var(--padding);
+    border-radius: var(--border-radius);
     overflow: hidden;
     flex: 1;
     display: flex;
@@ -40,7 +40,7 @@
       .volumeSliderContainer {
         padding: var(--padding-half);
         background-color: var(--background-dark);
-        border-radius: var(--padding);
+        border-radius: var(--border-radius);
         position: absolute;
         top: -60px;
         left: -30px;
@@ -58,7 +58,7 @@
         box-shadow: var(--shadow);
         padding: var(--padding-half);
         background-color: var(--background-dark);
-        border-radius: var(--padding);
+        border-radius: var(--border-radius);
         position: absolute;
         bottom: 2rem;
         left: -5rem;
