@@ -15,8 +15,11 @@ import SettingToggle from "./settingToggle";
 import { toMinutesAndSeconds } from "../lib/numbers";
 
 interface VideoEmbedProps {
+  className?: string;
   embedId: string;
   onTimeChange: (time: number) => void;
+  isMobile?: boolean;
+  extraSettings?: React.ReactElement;
 }
 
 export default function VideoEmbed(props: VideoEmbedProps) {
@@ -28,7 +31,9 @@ export default function VideoEmbed(props: VideoEmbedProps) {
     "settings-open": false,
     volume: getSettingsFromStore("volume", 50),
     speed: getSettingsFromStore("speed", 1),
-    "show-video": getSettingsFromStore("show-video", true),
+    "show-video": props.isMobile
+      ? false
+      : getSettingsFromStore("show-video", true),
   });
   const [volumeHover, setVolumeHover] = useState<boolean>(false);
 
@@ -68,7 +73,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
   }, [currentTime]);
 
   return (
-    <div className={styles.videoEmbedContainer}>
+    <div className={`${styles.videoEmbedContainer} ${props.className}`}>
       <div
         className={styles.player}
         style={{ display: playerSettings["show-video"] ? "block" : "none" }}
@@ -148,12 +153,15 @@ export default function VideoEmbed(props: VideoEmbedProps) {
           />
           {playerSettings["settings-open"] && (
             <div className={styles.settings}>
-              <SettingToggle
-                value={{ "show-video": playerSettings["show-video"] }}
-                onSettingChange={(setting) => onSettingChange(setting, true)}
-                settingText="Show Video"
-                type="checkbox"
-              />
+              {props.extraSettings}
+              {!props.isMobile && (
+                <SettingToggle
+                  value={{ "show-video": playerSettings["show-video"] }}
+                  onSettingChange={(setting) => onSettingChange(setting, true)}
+                  settingText="Show Video"
+                  type="checkbox"
+                />
+              )}
               <SettingToggle
                 value={{ speed: playerSettings["speed"] }}
                 onSettingChange={(setting) => onSettingChange(setting)}

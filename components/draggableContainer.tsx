@@ -94,11 +94,9 @@ export default function DraggableContainer(props: DraggableContainerProps) {
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove);
 
     return () => {
       window.removeEventListener("mousemove", (e) => handleMouseMove);
-      window.removeEventListener("touchmove", (e) => handleTouchMove);
     };
   }, [dragging]);
 
@@ -193,9 +191,6 @@ export default function DraggableContainer(props: DraggableContainerProps) {
           onMouseUp={() => {
             setDragging(false);
           }}
-          onTouchEnd={() => {
-            setDragging(false);
-          }}
           ref={ref}
         >
           <div className={styles.header}>
@@ -207,11 +202,7 @@ export default function DraggableContainer(props: DraggableContainerProps) {
                 <ExpandMoreIcon />
               </div>
             )}
-            <div
-              className={styles.drag}
-              onMouseDown={() => setDragging(true)}
-              onTouchStart={() => setDragging(true)}
-            >
+            <div className={styles.drag} onMouseDown={() => setDragging(true)}>
               <DragHandleIcon />
               {props.title && <h4>{props.title}</h4>}
             </div>
