@@ -54,9 +54,9 @@ export default function Home() {
         >
           Refresh
         </button>
-        <Link href={`addSong`} className={`${styles.button} button`}>
+        {/* <Link href={`addSong`} className={`${styles.button} button`}>
           Add Song
-        </Link>
+        </Link> */}
       </div>
 
       <div className={styles.songList}>
