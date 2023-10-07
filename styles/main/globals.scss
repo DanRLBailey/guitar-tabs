@@ -5,8 +5,11 @@
   --background-darker: #2b2b2b;
   --background-darkest: #242424;
   --background-input: #3b3b3b;
-  --accent: #2accc9;
-  --accent-dark: #22aaa8;
+  --accent: rgb(42, 204, 201);
+  --accent-transparent: rgba(42, 204, 201, 0.3);
+  --accent-dark: rgb(34, 170, 168);
+  --error: rgb(204, 42, 42);
+  --error-transparent: rgba(204, 42, 42, 0.3);
   --background-button: #6b6b6b;
 
   --padding: 1rem;

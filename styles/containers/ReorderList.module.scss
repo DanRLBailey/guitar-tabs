@@ -1,8 +1,10 @@
 .reorderListContainer {
   .listItem {
     display: flex;
-    padding: 0 var(--padding-half) var(--padding-half);
+    padding: var(--padding-half) var(--padding-half);
     border-radius: var(--border-radius);
+    transition: background-color var(--transition);
+    overflow: hidden;
 
     .beginning {
       user-select: none;
@@ -19,6 +21,7 @@
     }
 
     .ending {
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -27,17 +30,25 @@
     }
 
     &.active {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: var(--accent-transparent);
       position: absolute;
       pointer-events: none;
     }
 
     &.ghost {
-      color: grey;
+      color: rgba(255, 255, 255, 0.5);
 
       button {
-        color: grey;
+        color: rgba(255, 255, 255, 0.5);
       }
+    }
+
+    &.delete {
+      background: var(--error-transparent);
+    }
+
+    &.reorder {
+      background: var(--accent-transparent);
     }
   }
 }

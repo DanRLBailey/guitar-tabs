@@ -16,18 +16,27 @@ interface AddSongLyricsProp {
 
 export default function AddSongLyrics(props: AddSongLyricsProp) {
   const popupOffset = { top: -60 };
+  const popupRef = useRef<HTMLDivElement>(null);
+  const newSections = [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Bridge",
+    "Instrumental",
+    "Solo",
+    "Outro",
+  ];
+
   const [popupPos, setPopupPos] = useState<Dimension>({
     top: -100,
     left: -100,
   });
-  const [currentWord, setCurrentWord] = useState<number[]>([-1, -1, -1]);
+  const [currentWord, setCurrentWord] = useState<number[]>([-1, -1]);
   const [currentWordType, setCurrentWordType] = useState<string>("");
   const [parts, setParts] = useState<string[]>(props.parts);
   const [listItems, setListItems] = useState<React.ReactElement[]>(
     getListItems()
   );
-
-  const popupRef = useRef<HTMLDivElement>(null);
 
   const addNewSection = (text: string) => {
     props.onPartsChange([...parts, `[${text}]`]);
@@ -52,6 +61,7 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
         return;
       }
 
+      console.log([indeces[0], indeces[1]]);
       setCurrentWord([indeces[0], indeces[1]]);
       movePopup();
     };
@@ -75,7 +85,7 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
     };
 
     const resetPopup = () => {
-      setCurrentWord([-1, -1, -1]);
+      setCurrentWord([-1, -1]);
       setPopupPos({
         top: -100,
         left: -100,
@@ -114,16 +124,6 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
     props.onPartsChange(partList);
   };
 
-  const reorder = (oldLineId: number, newLineId: number) => {
-    const tempParts = [...parts];
-    const line = tempParts[oldLineId];
-
-    tempParts.splice(oldLineId, 1);
-    tempParts.splice(newLineId, 0, line);
-
-    props.onPartsChange(tempParts);
-  };
-
   const onListReorder = (elements: React.ReactElement[]) => {
     const list = elements.map((el) => {
       return getTextOfSongLine(el);
@@ -151,7 +151,7 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
 
   useEffect(() => {
     setListItems(getListItems());
-  }, [parts]);
+  }, [parts, popupPos]);
 
   return (
     <div className={styles.addSongLyricsContainer}>
@@ -164,52 +164,56 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
       </div>
       <DraggableContainer
         bodyClassName={styles.addSectionContainer}
-        containerId="addSection"
+        title="New Lyrics"
+        containerId="addLyrics"
         width={20}
         minWidth={20}
         ignoreLocal
       >
         <>
           <textarea
-            placeholder="New Section"
+            placeholder="New Lyrics"
             onChange={(e) => props.onCurrentLineChange(e.target.value)}
             value={props.currentLine}
           ></textarea>
           <div className={styles.buttonContainer}>
             <button onClick={addNewLines}>Add</button>
-            <button onClick={() => addNewSection("Intro")}>Intro</button>
-            <button onClick={() => addNewSection("Verse")}>Verse</button>
-            <button onClick={() => addNewSection("Chorus")}>Chorus</button>
-            <button onClick={() => addNewSection("Bridge")}>Bridge</button>
-            <button onClick={() => addNewSection("Instrumental")}>
-              Instrumental
-            </button>
-            <button onClick={() => addNewSection("Solo")}>Solo</button>
-            <button onClick={() => addNewSection("Outro")}>Outro</button>
+            {newSections.map((section, index) => {
+              return (
+                <button key={index} onClick={() => addNewSection(section)}>
+                  {section}
+                </button>
+              );
+            })}
           </div>
         </>
       </DraggableContainer>
-      <Popup style={{ top: popupPos.top, left: popupPos.left }} ref={popupRef}>
-        <>
-          {props.chords.map((chord, chordIndex) => {
-            return (
-              <button
-                key={chordIndex}
-                onClick={() => onPopupButtonPress(chord)}
-              >
-                {chord}
-              </button>
-            );
-          })}
-          {props.tabs.map((tab, tabIndex) => {
-            return (
-              <button key={tabIndex} onClick={() => onPopupButtonPress(tab)}>
-                {tab}
-              </button>
-            );
-          })}
-        </>
-      </Popup>
+      {[...props.chords, ...props.tabs].length > 0 && (
+        <Popup
+          style={{ top: popupPos.top, left: popupPos.left }}
+          ref={popupRef}
+        >
+          <>
+            {props.chords.map((chord, chordIndex) => {
+              return (
+                <button
+                  key={chordIndex}
+                  onClick={() => onPopupButtonPress(chord)}
+                >
+                  {chord}
+                </button>
+              );
+            })}
+            {props.tabs.map((tab, tabIndex) => {
+              return (
+                <button key={tabIndex} onClick={() => onPopupButtonPress(tab)}>
+                  {tab}
+                </button>
+              );
+            })}
+          </>
+        </Popup>
+      )}
     </div>
   );
 

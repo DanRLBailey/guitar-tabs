@@ -17,6 +17,8 @@ export default function ReorderList(props: ReorderListProp) {
   );
   const [mousePos, setMousePos] = useState<Dimension>({ x: 0, y: 0 });
   const [currentDragItem, setCurrentDragItem] = useState<number>(-1);
+  const [hovered, setHovered] = useState<number>(-1);
+  const [hoveredType, setHoveredType] = useState<string>("");
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -31,7 +33,7 @@ export default function ReorderList(props: ReorderListProp) {
     };
   }, []);
 
-  const orderTo = () => {
+  const orderItem = () => {
     if (currentDragItem == -1) return;
 
     const newIndex = document
@@ -52,6 +54,13 @@ export default function ReorderList(props: ReorderListProp) {
     setCurrentDragItem(-1);
   };
 
+  const removeItemFromList = (index: number) => {
+    const tempParts = [...listItems];
+    tempParts.splice(index, 1);
+    setListItems(tempParts);
+    if (props.onReorder) props.onReorder(tempParts);
+  };
+
   useEffect(() => {
     setListItems(props.listItems);
   }, [props.listItems]);
@@ -65,9 +74,23 @@ export default function ReorderList(props: ReorderListProp) {
               key={index}
               className={`${styles.listItem} ${props.className} ${
                 currentDragItem == index ? styles.active : ""
+              } ${
+                hovered == index
+                  ? hoveredType == "delete"
+                    ? styles.delete
+                    : styles.reorder
+                  : ""
               }`}
               style={{ top: mousePos.y - 10 }}
-              onMouseUp={() => orderTo()}
+              onMouseUp={() => orderItem()}
+              onMouseEnter={() => {
+                setHovered(index);
+                setHoveredType("reorder");
+              }}
+              onMouseLeave={() => {
+                setHovered(-1);
+                setHoveredType("");
+              }}
               data-listOrder={index}
             >
               <div
@@ -77,21 +100,37 @@ export default function ReorderList(props: ReorderListProp) {
                 <DragHandleIcon fontSize="small" />
               </div>
               {item}
-              <div className={styles.ending}>
-                <ClearIcon fontSize="small" />
-              </div>
+              {currentDragItem != index && (
+                <div
+                  className={styles.ending}
+                  onClick={() => removeItemFromList(index)}
+                  onMouseEnter={() => {
+                    setHovered(index);
+                    setHoveredType("delete");
+                  }}
+                  onMouseLeave={() => {
+                    setHovered(-1);
+                    setHoveredType("");
+                  }}
+                >
+                  <ClearIcon fontSize="small" />
+                </div>
+              )}
             </div>
             {currentDragItem == index && (
               <div
                 key={index}
                 className={`${styles.listItem} ${styles.ghost}`}
-                onMouseUp={() => orderTo()}
+                onMouseUp={() => orderItem()}
                 data-listOrder={index}
               >
                 <div className={styles.beginning}>
                   <DragHandleIcon fontSize="small" />
                 </div>
                 {item}
+                <div className={styles.ending}>
+                  <ClearIcon fontSize="small" />
+                </div>
               </div>
             )}
           </>
