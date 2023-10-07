@@ -5,18 +5,19 @@
   --background-darker: #2b2b2b;
   --background-darkest: #242424;
   --background-input: #3b3b3b;
+  --background-button: #6b6b6b;
   --accent: rgb(42, 204, 201);
   --accent-transparent: rgba(42, 204, 201, 0.3);
   --accent-dark: rgb(34, 170, 168);
   --error: rgb(204, 42, 42);
   --error-transparent: rgba(204, 42, 42, 0.3);
-  --background-button: #6b6b6b;
 
   --padding: 1rem;
   --padding-double: calc(var(--padding) * 2);
   --padding-triple: calc(var(--padding) * 3);
   --padding-half: calc(var(--padding) * 0.5);
   --padding-quarter: calc(var(--padding) * 0.25);
+  --padding-third: calc(var(--padding) * 0.33);
 
   --margin: 0.5rem;
   --margin-negative: calc(var(--margin) * -1);

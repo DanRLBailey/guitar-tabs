@@ -5,11 +5,14 @@ import {
   PartObj,
   SongMetaDetails,
   Song as SongType,
+  TabItem,
+  Tab as TabObj,
 } from "../types/interfaces";
 import AddSongLyrics from "../components/addSong/addSongLyrics";
 import SearchBox from "../components/containers/searchBox";
 import chordsJson from "../public/chords/chords.json";
 import InputComponent from "../components/containers/inputComponent";
+import AddSongTab from "../components/addSong/addSongTabs";
 
 export default function AddSong() {
   const [currentSongMeta, setCurrentSongMeta] = useState<SongMetaDetails>({
@@ -24,7 +27,7 @@ export default function AddSong() {
     Tabs: {},
   });
   const [chords, setChords] = useState<string[]>([]);
-  const [tabs, setTabs] = useState<string[]>([]);
+  const [tabNames, setTabNames] = useState<string[]>([]);
   const [parts, setParts] = useState<string[]>([]);
   const [currentLine, setCurrentLine] = useState<string>("");
 
@@ -46,6 +49,23 @@ export default function AddSong() {
     return allChords;
   };
 
+  const handleTabChange = (newTab: TabObj) => {
+    setCurrentSong({
+      ...currentSong,
+      Tabs: { ...currentSong.Tabs, ...newTab },
+    });
+  };
+
+  useEffect(() => {
+    if (!currentSong.Tabs) return;
+
+    Object.keys(currentSong.Tabs).forEach((tab) => {
+      if (!tabNames.some((tabName) => tabName == tab)) {
+        if (currentSong.Tabs) delete currentSong.Tabs[tab];
+      }
+    });
+  }, [tabNames]);
+
   return (
     <div className={styles.addSongContainer}>
       <title>Guitar Tabs - Add Song</title>
@@ -58,8 +78,11 @@ export default function AddSong() {
           setCurrentLine(newCurrentLine)
         }
         chords={chords}
-        tabs={tabs}
+        tabs={tabNames}
       />
+      {tabNames.length > 0 && (
+        <AddSongTab tabNames={tabNames} onTabChanged={handleTabChange} />
+      )}
     </div>
   );
 
@@ -109,7 +132,7 @@ export default function AddSong() {
           <SearchBox
             heading="Tabs"
             searchResults={[]}
-            onSelectedResultsChange={(res) => setTabs(res)}
+            onSelectedResultsChange={(res) => setTabNames(res)}
             allowMultiSelect
             allowCustomResult
           />

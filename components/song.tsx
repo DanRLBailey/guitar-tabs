@@ -20,6 +20,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import AlarmIcon from "@mui/icons-material/Alarm";
 import Popup from "./containers/popup";
+import { determineType } from "../lib/chords";
+import Tab from "./containers/tab";
 
 interface TabPageProp {
   Key: string;
@@ -31,7 +33,6 @@ interface TabPageProp {
 export default function SongPage(props: TabPageProp) {
   const uniqueSongChords = getAllParts(true, ["chord"]);
   const partList = getAllParts();
-  console.log(partList);
 
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
@@ -104,6 +105,10 @@ export default function SongPage(props: TabPageProp) {
     localStorage.setItem(key, setting[key].toString());
   };
 
+  const getTabByName = (tabName: string) => {
+    return props.Song.Tabs ? props.Song.Tabs[tabName] : [];
+  };
+
   return (
     <div className={styles.container}>
       <title>
@@ -130,7 +135,7 @@ export default function SongPage(props: TabPageProp) {
       </div>
       {!isMobile && (
         <>
-          {activeChord && (
+          {activeChord && determineType(activeChord) == "chord" && (
             <DraggableContainer
               containerId="chord-diagram-active"
               width={10}
@@ -141,13 +146,39 @@ export default function SongPage(props: TabPageProp) {
               <ChordDiagram chord={activeChord} />
             </DraggableContainer>
           )}
-          {hoveredChord && (
+          {activeChord && determineType(activeChord) == "tab" && (
+            <DraggableContainer
+              containerId="tab-diagram-active"
+              width={30}
+              minWidth={30}
+            >
+              <Tab
+                tabSections={getTabByName(activeChord)}
+                tabName={activeChord}
+                refreshTabs
+              />
+            </DraggableContainer>
+          )}
+          {hoveredChord && determineType(hoveredChord) == "chord" && (
             <DraggableContainer
               containerId="chord-diagram-hover"
               width={10}
               minWidth={130}
             >
               <ChordDiagram chord={hoveredChord} />
+            </DraggableContainer>
+          )}
+          {hoveredChord && determineType(hoveredChord) == "tab" && (
+            <DraggableContainer
+              containerId="tab-diagram-hover"
+              width={30}
+              minWidth={30}
+            >
+              <Tab
+                tabSections={getTabByName(hoveredChord)}
+                tabName={hoveredChord}
+                refreshTabs
+              />
             </DraggableContainer>
           )}
           <DraggableContainer

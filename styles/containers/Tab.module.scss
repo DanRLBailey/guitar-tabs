@@ -1,0 +1,40 @@
+.tabContainer {
+  margin-bottom: var(--padding-triple);
+
+  &:not(:first-of-type) {
+    margin-top: var(--padding-triple);
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .tab {
+    --border: 1px solid white;
+
+    display: grid;
+    grid-template-columns: 1fr repeat(10, 1fr) 1fr;
+
+    & > div {
+      display: grid;
+      grid-template-rows: repeat(7, 1fr);
+      text-align: center;
+
+      &:first-of-type {
+        border-right: var(--border);
+      }
+
+      &.ending {
+        border-left: var(--border);
+      }
+
+      .heading {
+        border-bottom: var(--border);
+      }
+
+      & > span {
+        padding: var(--padding-third);
+      }
+    }
+  }
+}

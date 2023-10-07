@@ -61,7 +61,6 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
         return;
       }
 
-      console.log([indeces[0], indeces[1]]);
       setCurrentWord([indeces[0], indeces[1]]);
       movePopup();
     };
@@ -190,7 +189,11 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
       </DraggableContainer>
       {[...props.chords, ...props.tabs].length > 0 && (
         <Popup
-          style={{ top: popupPos.top, left: popupPos.left }}
+          style={{
+            position: "absolute",
+            top: popupPos.top,
+            left: popupPos.left,
+          }}
           ref={popupRef}
         >
           <>

@@ -1,0 +1,16 @@
+.editableSpanContainer {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  & > input {
+    width: 2rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  & > span {
+    padding: var(--padding-third);
+  }
+}
