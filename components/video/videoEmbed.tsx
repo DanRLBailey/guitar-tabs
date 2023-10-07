@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "../styles/VideoEmbed.module.scss";
+import styles from "../../styles/video/VideoEmbed.module.scss";
 import ReactPlayer from "react-player/youtube";
-import Slider from "./slider";
+import Slider from "../slider";
 
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
@@ -9,10 +9,10 @@ import Replay10Icon from "@mui/icons-material/Replay10";
 import Forward10Icon from "@mui/icons-material/Forward10";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { Setting } from "../types/interfaces";
-import { getSettingsFromStore } from "../lib/localStore";
-import SettingToggle from "./settingToggle";
-import { toMinutesAndSeconds } from "../lib/numbers";
+import { Setting } from "../../types/interfaces";
+import { getSettingsFromStore } from "../../lib/localStore";
+import SettingToggle from "../settingToggle";
+import { toMinutesAndSeconds } from "../../lib/numbers";
 
 interface VideoEmbedProps {
   className?: string;

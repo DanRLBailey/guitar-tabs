@@ -1,4 +1,4 @@
-import styles from "../styles/Modal.module.scss";
+import styles from "../../styles/containers/Modal.module.scss";
 import { useEffect, useState } from "react";
 
 interface ModalProp {

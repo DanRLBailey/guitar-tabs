@@ -1,0 +1,43 @@
+.reorderListContainer {
+  .listItem {
+    display: flex;
+    padding: 0 var(--padding-half) var(--padding-half);
+    border-radius: var(--border-radius);
+
+    .beginning {
+      user-select: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--background-darkest);
+      padding-right: var(--padding-half);
+
+      & + div {
+        flex: 1;
+      }
+    }
+
+    .ending {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid var(--background-darkest);
+      padding-left: var(--padding-half);
+    }
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &.ghost {
+      color: grey;
+
+      button {
+        color: grey;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import styles from "../styles/SongPage.module.scss";
-import draggableStyles from "../styles/DraggableContainer.module.scss";
+import draggableStyles from "../styles/containers/DraggableContainer.module.scss";
 import {
   Song,
   SongMetaDetails,
@@ -8,18 +8,18 @@ import {
   Setting,
 } from "../types/interfaces";
 import { useEffect, useState } from "react";
-import ChordDiagram from "./chordDiagram";
-import Chord from "./chord";
+import ChordDiagram from "./chord/chordDiagram";
+import Chord from "./chord/chord";
 import React from "react";
-import VideoEmbed from "./videoEmbed";
-import DraggableContainer from "./draggableContainer";
+import VideoEmbed from "./video/videoEmbed";
+import DraggableContainer from "./containers/draggableContainer";
 import { getSettingsFromStore } from "../lib/localStore";
 import SettingToggle from "./settingToggle";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import AlarmIcon from "@mui/icons-material/Alarm";
-import Popup from "./popup";
+import Popup from "./containers/popup";
 
 interface TabPageProp {
   Key: string;
@@ -31,6 +31,7 @@ interface TabPageProp {
 export default function SongPage(props: TabPageProp) {
   const uniqueSongChords = getAllParts(true, ["chord"]);
   const partList = getAllParts();
+  console.log(partList);
 
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);

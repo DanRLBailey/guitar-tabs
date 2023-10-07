@@ -1,0 +1,65 @@
+.searchBoxContainer {
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  .searchBox {
+    margin-top: 0;
+    height: var(--padding-double);
+    border-radius: var(--border-radius);
+    border: none;
+    padding-left: var(--padding);
+    background-color: var(--background-input);
+    position: relative;
+
+    button {
+      background-color: transparent;
+      margin: 0;
+      width: 100%;
+      text-align: left;
+      padding: 0 var(--padding);
+      flex: 0;
+    }
+
+    &.active {
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    .inputContainer {
+      display: flex;
+
+      input {
+        margin-top: 0;
+        padding: 0;
+        flex: 1;
+      }
+
+      .selectedChord {
+        background-color: var(--accent);
+        border-radius: var(--border-radius);
+        padding: var(--padding-half);
+        margin-right: var(--padding-half);
+      }
+    }
+
+    .dropdown {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: fit-content;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      border: none;
+      background-color: var(--background-input);
+      border-top: 2px solid var(--background-dark);
+
+      button {
+        &:hover {
+          background-color: var(--accent);
+        }
+      }
+    }
+  }
+}

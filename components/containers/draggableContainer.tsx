@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "../styles/DraggableContainer.module.scss";
-import popupStyles from "../styles/Popup.module.scss";
-import { Dimension } from "../types/interfaces";
+import styles from "../../styles/containers/DraggableContainer.module.scss";
+import popupStyles from "../../styles/containers/Popup.module.scss";
+import { Dimension } from "../../types/interfaces";
 
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -19,11 +19,16 @@ interface DraggableContainerProps {
   children?: React.ReactElement;
   icon?: React.ReactElement;
   taskbarIndex?: number;
+  ignoreLocal?: boolean;
 }
 
 export default function DraggableContainer(props: DraggableContainerProps) {
-  const localPos = localStorage.getItem(`pos-${props.containerId}`);
-  const localMinimised = localStorage.getItem(`minimised-${props.containerId}`);
+  const localPos = !props.ignoreLocal
+    ? localStorage.getItem(`pos-${props.containerId}`)
+    : "";
+  const localMinimised = !props.ignoreLocal
+    ? localStorage.getItem(`minimised-${props.containerId}`)
+    : "";
   const ref = useRef<HTMLDivElement>(null);
   const padding = { x: 1.09, y: 1.7 };
 

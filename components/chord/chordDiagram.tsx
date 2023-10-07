@@ -1,10 +1,10 @@
-import styles from "../styles/ChordDiagram.module.scss";
-import { Chords, Position } from "../types/interfaces";
+import styles from "../../styles/chord/ChordDiagram.module.scss";
+import { Chords, Position } from "../../types/interfaces";
 import {
   determineType,
   getChordFromParts,
   separateChordParts,
-} from "../lib/chords";
+} from "../../lib/chords";
 
 interface ChordDiagramProps {
   chord: string | null;

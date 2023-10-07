@@ -71,8 +71,8 @@ export interface PartObj {
   text: string
   sectionId: number
   lineId: number | null
-  chordId: number | null
   wordId: number | null
+  chordId: number | null
   type: "section" | "line" | "word" | "chord" | "tab"
 }
 

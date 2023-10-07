@@ -1,0 +1,52 @@
+.addSongLyricsContainer {
+  .lyrics {
+    .songLine {
+      display: flex;
+
+      .wordGroup {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+    }
+
+    button {
+      text-align: left;
+      background-color: transparent;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      width: fit-content;
+      border-radius: var(--border-radius);
+
+      &.active {
+        background-color: var(--accent);
+      }
+    }
+  }
+
+  .addSectionContainer {
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+      height: 10rem;
+      resize: none;
+    }
+
+    .buttonContainer {
+      margin-top: var(--padding);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--padding);
+
+      button {
+        width: 100%;
+
+        &:first-of-type {
+          background-color: var(--accent);
+        }
+      }
+    }
+  }
+}

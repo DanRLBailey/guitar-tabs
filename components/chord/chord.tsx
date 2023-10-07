@@ -2,9 +2,9 @@ import {
   determineType,
   getChordBases as getChordRoots,
   separateChordParts,
-} from "../lib/chords";
-import { mod, toMinutesSecondsAndMilliseconds } from "../lib/numbers";
-import styles from "../styles/Chord.module.scss";
+} from "../../lib/chords";
+import { mod, toMinutesSecondsAndMilliseconds } from "../../lib/numbers";
+import styles from "../../styles/chord/Chord.module.scss";
 import { useEffect, useState } from "react";
 
 interface ChordProps {
@@ -13,9 +13,10 @@ interface ChordProps {
   chordName: string;
   chordTiming?: number;
   isChordNameVisible: boolean;
-  currentActiveChord: boolean;
+  currentActiveChord?: boolean;
   onChordActive?: (chord: string) => void;
   onChordHighlight?: (chord: string) => void;
+  onChordPress?: (chordId: number) => void;
   transpose: number;
 }
 
@@ -48,7 +49,11 @@ export default function Chord(props: ChordProps) {
   return (
     <div
       className={styles.chordContainer}
-      onClick={() => setIsPinned(!isPinned)}
+      onClick={() => {
+        props.onChordPress
+          ? props.onChordPress(props.chordId as number)
+          : setIsPinned(!isPinned);
+      }}
     >
       <span
         onMouseEnter={() => setIsDiagramShowing(true)}

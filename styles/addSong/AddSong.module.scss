@@ -1,0 +1,19 @@
+.addSongContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  > div {
+    width: 50%;
+  }
+
+  .metaDetails {
+    .inputs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--padding);
+    }
+  }
+}

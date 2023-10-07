@@ -6,25 +6,15 @@
     align-items: flex-end;
     gap: var(--padding);
 
-    input[type="text"] {
-      flex: 1;
-      height: var(--padding-double);
-      border-radius: var(--border-radius);
-      border: none;
-      padding-left: var(--padding);
-      margin-top: var(--padding);
-
-      &:focus {
-        outline: none;
-      }
+    button,
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    button {
-      height: var(--padding-double);
-      border-radius: var(--border-radius);
-      border: none;
-      width: 5rem;
-      cursor: pointer;
+    input {
+      flex: 1;
     }
   }
 
