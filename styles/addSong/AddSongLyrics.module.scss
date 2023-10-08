@@ -49,4 +49,14 @@
       }
     }
   }
+
+  .popup {
+    button {
+      width: fit-content;
+
+      &:not(:last-of-type) {
+        margin-right: var(--padding-quarter);
+      }
+    }
+  }
 }

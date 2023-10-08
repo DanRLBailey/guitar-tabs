@@ -15,6 +15,7 @@ interface DraggableContainerProps {
   minimisable?: boolean;
   width: number;
   minWidth: number;
+  maxHeight?: number;
   title?: string;
   children?: React.ReactElement;
   icon?: React.ReactElement;
@@ -88,14 +89,6 @@ export default function DraggableContainer(props: DraggableContainerProps) {
     const handleMouseMove = (event: MouseEvent) => {
       const mousePos = { x: event.clientX, y: event.clientY };
       setMousePos(mousePos);
-    };
-
-    const handleTouchMove = (event: TouchEvent) => {
-      const touchPos = {
-        x: event.touches[0].clientX,
-        y: event.touches[0].clientY,
-      };
-      setMousePos(touchPos);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -190,7 +183,7 @@ export default function DraggableContainer(props: DraggableContainerProps) {
             left: `${currentPos.x}%`,
             width: `${props.width}%`,
             minWidth: props.minWidth,
-            maxHeight: "96.5%",
+            maxHeight: `${props.maxHeight ?? 96.5}%`,
             userSelect: dragging ? "none" : "auto",
           }}
           onMouseUp={() => {
@@ -217,7 +210,7 @@ export default function DraggableContainer(props: DraggableContainerProps) {
           </div>
         </div>
       )}
-      {props.minimisable && taskbarIcon}
+      <div>{props.minimisable && taskbarIcon}</div>
     </>
   );
 }

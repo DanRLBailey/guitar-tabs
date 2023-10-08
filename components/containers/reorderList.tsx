@@ -16,6 +16,7 @@ export default function ReorderList(props: ReorderListProp) {
     props.listItems
   );
   const [mousePos, setMousePos] = useState<Dimension>({ x: 0, y: 0 });
+  const [scrollPos, setScrollPos] = useState<Dimension>({ top: 0 });
   const [currentDragItem, setCurrentDragItem] = useState<number>(-1);
   const [hovered, setHovered] = useState<number>(-1);
   const [hoveredType, setHoveredType] = useState<string>("");
@@ -23,6 +24,7 @@ export default function ReorderList(props: ReorderListProp) {
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       const mousePos = { x: event.clientX, y: event.clientY };
+      setScrollPos({ top: window.scrollY });
       setMousePos(mousePos);
     };
 
@@ -81,7 +83,7 @@ export default function ReorderList(props: ReorderListProp) {
                     : styles.reorder
                   : ""
               }`}
-              style={{ top: mousePos.y - 10 }}
+              style={{ top: mousePos.y - 10 + scrollPos.top }}
               onMouseUp={() => orderItem()}
               onMouseEnter={() => {
                 setHovered(index);

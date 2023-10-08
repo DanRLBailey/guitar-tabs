@@ -13,7 +13,7 @@
     --border: 1px solid white;
 
     display: grid;
-    grid-template-columns: 1fr repeat(10, 1fr) 1fr;
+    grid-template-columns: 1fr repeat(16, 1fr) 1fr;
 
     & > div {
       display: grid;

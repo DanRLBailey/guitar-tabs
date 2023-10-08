@@ -14,7 +14,7 @@ interface TabProp {
 
 export default function Tab(props: TabProp) {
   const strings: string[] = ["e", "B", "G", "D", "A", "E"];
-  const maxCols: number = props.maxCols ?? 10;
+  const maxCols: number = props.maxCols ?? 16;
 
   const [tabCols, setTabCols] = useState<TabItem[]>(props.tabSections);
 

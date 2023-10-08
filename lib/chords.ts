@@ -35,3 +35,18 @@ export function getChordFromParts(parts: string[]) {
 export function getChordBases() {
   return Object.keys(chords);
 }
+
+export function getAllChordVariations() {
+  let allChords: string[] = [];
+  const keys = Object.keys(chords);
+  const chordObjArr = chords as Chords;
+
+  keys.forEach((key, index) => {
+    chordObjArr[key].forEach((chord, chordIndex) => {
+      const suffix = chord.Suffix.replace("major", "").replace("minor", "m");
+      allChords.push(`${chord.Key}${suffix}`);
+    });
+  });
+
+  return allChords;
+};

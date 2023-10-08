@@ -4,6 +4,7 @@ import Popup from "../containers/popup";
 import { Dimension, PartObj } from "../../types/interfaces";
 import DraggableContainer from "../containers/draggableContainer";
 import ReorderList from "../containers/reorderList";
+import { getAllChordVariations } from "../../lib/chords";
 
 interface AddSongLyricsProp {
   parts: string[];
@@ -20,6 +21,7 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
   const newSections = [
     "Intro",
     "Verse",
+    "Pre-Chorus",
     "Chorus",
     "Bridge",
     "Instrumental",
@@ -113,6 +115,7 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
     if (!word.startsWith("*")) {
       chordId++;
     }
+
     const wordParts = word.split("*");
     wordParts.splice(chordId, 1);
 
@@ -129,6 +132,7 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
     });
 
     setParts(list);
+    props.onPartsChange(list);
   };
 
   const getTextOfSongLine = (songLine: React.ReactElement) => {
@@ -137,10 +141,23 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
 
     wordGroup.forEach((group) => {
       const wordButton = group.props.children[1];
-      words.push(wordButton.props.children);
+      const chords = getChordsOfSongLine(group.props.children[0]);
+      words.push(`${wordButton.props.children}${chords ? chords : ""}`);
     });
 
     return words.join(" ");
+  };
+
+  const getChordsOfSongLine = (chordGroup: React.ReactElement) => {
+    const chordButtons: React.ReactElement[] = chordGroup.props.children;
+    let chords: string[] = [];
+
+    chordButtons.forEach((button) => {
+      const chord = button.props.children;
+      chords.push(chord);
+    });
+
+    return chords.length > 0 ? `*${chords.join("*")}` : null;
   };
 
   useEffect(() => {
@@ -195,9 +212,10 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
             left: popupPos.left,
           }}
           ref={popupRef}
+          className={styles.popup}
         >
           <>
-            {props.chords.map((chord, chordIndex) => {
+            {props.chords.sort().map((chord, chordIndex) => {
               return (
                 <button
                   key={chordIndex}
