@@ -91,7 +91,7 @@ export default function Index() {
           heading="Email"
         />
         <InputComponent
-          type="string"
+          type="password"
           value={tempUser["password"] as string}
           onValueChange={(e) =>
             setTempUser({ ...tempUser, password: e.target.value })
