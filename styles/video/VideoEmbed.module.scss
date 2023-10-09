@@ -26,16 +26,26 @@
     display: flex;
     gap: var(--padding-quarter);
     justify-content: center;
+    align-items: center;
 
     .scrubberTime {
       font-size: 0.75rem;
       color: rgba(255, 255, 255, 0.5);
+    }
+
+    input {
+      margin-top: 0;
+      padding: 0;
     }
   }
 
   .controlsContainer {
     .volumeContainer {
       position: relative;
+
+      button {
+        width: auto;
+      }
 
       .volumeSliderContainer {
         padding: var(--padding-half);
@@ -47,6 +57,10 @@
         width: 100px;
         transform: rotate(270deg);
         display: flex;
+
+        > input {
+          margin: var(--padding-quarter);
+        }
       }
     }
 

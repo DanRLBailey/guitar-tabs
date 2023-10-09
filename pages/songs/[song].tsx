@@ -7,6 +7,7 @@ import {
   SongMetaDetails,
   Song as SongType,
 } from "../../types/interfaces";
+import { writeSettingToStore } from "../../lib/localStore";
 
 const Song = () => {
   const router = useRouter();
@@ -55,8 +56,39 @@ const Song = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        if (song) localStorage.setItem(song.toString(), JSON.stringify(json));
+        console.log(JSON.stringify(json));
+        if (song) writeSettingToStore(song.toString(), JSON.stringify(json));
         setSongDb(json[0]);
+      });
+  };
+
+  const updateSong = () => {
+    if (!currentSong || !currentSongMeta) return;
+
+    const slug = currentSongMeta.Name.toLowerCase().replace(" ", "-");
+
+    fetch("/api/updateSong", {
+      method: "POST",
+      body: JSON.stringify({
+        userId: 1,
+        songName: currentSongMeta.Name,
+        songArtist: currentSongMeta.Artist,
+        parts: JSON.parse(
+          JSON.stringify(currentSong.Parts).replaceAll("'", "")
+        ),
+        timings:
+          currentSong.Timings && currentSong.Timings.length > 0
+            ? currentSong.Timings
+            : null,
+        tabs: currentSong.Tabs,
+        capo: currentSong.Capo,
+        link: currentSong.Link,
+        slug: slug,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
       });
   };
 
@@ -69,6 +101,8 @@ const Song = () => {
         SongMeta={currentSongMeta}
         Song={currentSong}
         onSongRefresh={getSong}
+        onSongUpdate={(updatedSong) => setCurrentSong(updatedSong)}
+        onSongSave={updateSong}
       />
     );
 

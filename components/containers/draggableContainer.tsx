@@ -5,6 +5,7 @@ import { Dimension } from "../../types/interfaces";
 
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { writeSettingToStore } from "../../lib/localStore";
 
 interface DraggableContainerProps {
   containerClassName?: string;
@@ -113,17 +114,14 @@ export default function DraggableContainer(props: DraggableContainerProps) {
     const percentPosition = percentConvert(absolutePosition);
     setCurrentPos(percentPosition);
 
-    localStorage.setItem(
+    writeSettingToStore(
       `pos-${props.containerId}`,
       `{"x": ${percentPosition.x}, "y": ${percentPosition.y}}`
     );
   }, [mousePos, dragging]);
 
   useEffect(() => {
-    localStorage.setItem(
-      `minimised-${props.containerId}`,
-      minimised.toString()
-    );
+    writeSettingToStore(`minimised-${props.containerId}`, minimised.toString());
   }, [minimised]);
 
   const percentConvert = (pos: Dimension, reverse?: boolean) => {
@@ -187,6 +185,9 @@ export default function DraggableContainer(props: DraggableContainerProps) {
             userSelect: dragging ? "none" : "auto",
           }}
           onMouseUp={() => {
+            setDragging(false);
+          }}
+          onMouseLeave={() => {
             setDragging(false);
           }}
           ref={ref}

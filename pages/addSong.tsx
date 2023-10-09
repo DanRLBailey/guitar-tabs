@@ -15,11 +15,9 @@ import chordsJson from "../public/chords/chords.json";
 import InputComponent from "../components/containers/inputComponent";
 import AddSongTab from "../components/addSong/addSongTabs";
 import { getAllChordVariations } from "../lib/chords";
-import { useRouter } from "next/navigation";
+import Router from "next/router";
 
 export default function AddSong() {
-  const router = useRouter();
-
   const [currentSongMeta, setCurrentSongMeta] = useState<SongMetaDetails>({
     Name: "",
     Artist: "",
@@ -126,7 +124,7 @@ export default function AddSong() {
           console.error(json.error);
           return;
         }
-        router.push(`/songs/${slug}`);
+        Router.push(`/songs/${slug}`);
       });
   };
 

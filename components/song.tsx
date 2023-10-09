@@ -13,26 +13,29 @@ import Chord from "./chord/chord";
 import React from "react";
 import VideoEmbed from "./video/videoEmbed";
 import DraggableContainer from "./containers/draggableContainer";
-import { getSettingsFromStore } from "../lib/localStore";
+import { getSettingsFromStore, writeSettingToStore } from "../lib/localStore";
 import SettingToggle from "./settingToggle";
-
 import SettingsIcon from "@mui/icons-material/Settings";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import AlarmIcon from "@mui/icons-material/Alarm";
 import Popup from "./containers/popup";
 import { determineType } from "../lib/chords";
 import Tab from "./containers/tab";
+import { verifyUser } from "../lib/users";
 
 interface TabPageProp {
   Key: string;
   SongMeta: SongMetaDetails;
   Song: Song;
   onSongRefresh: () => void;
+  onSongUpdate: (updatedSong: Song) => void;
+  onSongSave: () => void;
 }
 
 export default function SongPage(props: TabPageProp) {
   const uniqueSongChords = getAllParts(true, ["chord"]);
   const partList = getAllParts();
+  const origSong = props.Song;
 
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
@@ -48,8 +51,9 @@ export default function SongPage(props: TabPageProp) {
     transpose: 0,
   });
   const [capo, setCapo] = useState(props.Song.Capo ?? 0);
-
   const [width, setWidth] = useState<number>(window.innerWidth);
+
+  const [allowEdit, setAllowEdit] = useState<boolean>(false);
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
@@ -102,12 +106,29 @@ export default function SongPage(props: TabPageProp) {
     if (!saveToStorage) return;
 
     const key = Object.keys(setting)[0];
-    localStorage.setItem(key, setting[key].toString());
+    writeSettingToStore(key, setting[key].toString());
   };
 
   const getTabByName = (tabName: string) => {
     return props.Song.Tabs ? props.Song.Tabs[tabName] : [];
   };
+
+  const getSongTimings = () => props.Song.Timings ?? [];
+
+  const removeLatestSongTiming = () => {
+    const timings = props.Song.Timings ? [...props.Song.Timings] : [];
+    if (timings.length == 0) return [];
+
+    timings.pop();
+    return timings;
+  };
+
+  useEffect(() => {
+    const localUser = verifyUser();
+    if (!localUser) return;
+
+    setAllowEdit(localUser.permissionLevel == "admin");
+  });
 
   return (
     <div className={styles.container}>
@@ -202,18 +223,20 @@ export default function SongPage(props: TabPageProp) {
                 settingText="Autoscroll"
                 type="checkbox"
               />
+              {allowEdit && (
+                <SettingToggle
+                  value={{ ["editing"]: settings["editing"] }}
+                  onSettingChange={(setting) => onSettingChange(setting, false)}
+                  settingText="TODO: Edit Mode"
+                  type="checkbox"
+                />
+              )}
               {/* <SettingToggle
-              value={{ ["editing"]: settings["editing"] }}
-              onSettingChange={(setting) => onSettingChange(setting, false)}
-              settingText="TODO: Edit Mode"
-              type="checkbox"
-            />
-            <SettingToggle
-              value={{ ["recording"]: settings["recording"] }}
-              onSettingChange={(setting) => onSettingChange(setting, false)}
-              settingText="TODO: Recording Mode"
-              type="checkbox"
-            /> */}
+                value={{ ["recording"]: settings["recording"] }}
+                onSettingChange={(setting) => onSettingChange(setting, false)}
+                settingText="TODO: Recording Mode"
+                type="checkbox"
+              /> */}
               <SettingToggle
                 value={{ ["transpose"]: settings["transpose"] }}
                 onSettingChange={(setting) => onSettingChange(setting)}
@@ -233,18 +256,44 @@ export default function SongPage(props: TabPageProp) {
           {settings.editing && (
             <DraggableContainer
               containerClassName={styles.editContainer}
-              bodyClassName={draggableStyles.edit}
               containerId="edit"
               title="Editing"
-              width={25}
-              minWidth={200}
+              width={20}
+              minWidth={20}
             >
               <>
-                {writeChordsAndTimings()}
-                {/* <button>Save</button>
-              <button onClick={() => onSettingChange({ ["editing"]: false })}>
-                Cancel
-              </button> */}
+                <div className={styles.editBody}>{writeChordsAndTimings()}</div>
+                <div className={styles.editFooter}>
+                  <button
+                    onClick={() =>
+                      props.onSongUpdate({
+                        ...props.Song,
+                        Timings: [...getSongTimings(), currentTime],
+                      })
+                    }
+                  >
+                    Add Current
+                  </button>
+                  <button
+                    onClick={() =>
+                      props.onSongUpdate({
+                        ...props.Song,
+                        Timings: [...removeLatestSongTiming()],
+                      })
+                    }
+                  >
+                    Remove Latest
+                  </button>
+                  <button onClick={props.onSongSave}>Save</button>
+                  <button
+                    onClick={() => {
+                      onSettingChange({ ["editing"]: false });
+                      props.onSongUpdate(origSong);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </>
             </DraggableContainer>
           )}
@@ -370,7 +419,7 @@ export default function SongPage(props: TabPageProp) {
           .map((word: PartObj, wordIndex: number) => {
             if (word.type == "word")
               return (
-                <div className={styles.wordGroup}>
+                <div className={styles.wordGroup} key={wordIndex}>
                   <div className={styles.chordGroup}>
                     {partList
                       .filter(
@@ -585,7 +634,12 @@ export default function SongPage(props: TabPageProp) {
   }
 
   function getCountdown() {
-    if (!props.Song.Timings || currentTime > props.Song.Timings[0]) return -1;
+    if (
+      !props.Song.Timings ||
+      props.Song.Timings.length == 0 ||
+      currentTime > props.Song.Timings[0]
+    )
+      return -1;
 
     let timeTillFirstChord = currentTime - props.Song.Timings[0];
     timeTillFirstChord = Math.abs(timeTillFirstChord);

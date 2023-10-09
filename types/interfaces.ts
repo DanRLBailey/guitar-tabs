@@ -83,3 +83,8 @@ export interface Setting {
 export interface Dimension {
   [key: string]: number;
 }
+
+export interface User {
+  email: string,
+  permissionLevel: "admin" | "user" | "none"
+}

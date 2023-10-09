@@ -1,0 +1,13 @@
+.container {
+  width: 50%;
+  margin: 10% auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-double);
+
+  .buttonContainer {
+    display: flex;
+    gap: var(--padding);
+  }
+}

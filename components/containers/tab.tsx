@@ -94,6 +94,15 @@ export default function Tab(props: TabProp) {
     setTabCols(tabs);
   };
 
+  const removeLatestTabColumn = () => {
+    const cols = [...tabCols];
+    if (cols.length == 0) return [];
+    console.log(cols);
+
+    cols.pop();
+    setTabCols(cols);
+  };
+
   useEffect(() => {
     if (props.onTabChanged) props.onTabChanged(tabCols);
   }, [tabCols]);
@@ -121,21 +130,23 @@ export default function Tab(props: TabProp) {
           return <div key={tabIndex}>{getDataFromTab(tab, tabIndex)}</div>;
         })}
         {props.editable && (
-          <div
-            onClick={() => {
-              if (tabCols.length < maxCols)
-                setTabCols([
-                  ...tabCols,
-                  {
-                    Beat: tabCols.length + 1,
-                    Notes: [],
-                    Chord: "",
-                  },
-                ]);
-            }}
-            className={styles.ending}
-          >
-            <span>Add</span>
+          <div className={styles.ending}>
+            <span
+              onClick={() => {
+                if (tabCols.length < maxCols)
+                  setTabCols([
+                    ...tabCols,
+                    {
+                      Beat: tabCols.length + 1,
+                      Notes: [],
+                      Chord: "",
+                    },
+                  ]);
+              }}
+            >
+              Add
+            </span>
+            <span onClick={removeLatestTabColumn}>Delete</span>
           </div>
         )}
       </div>

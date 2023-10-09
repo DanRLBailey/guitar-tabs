@@ -37,10 +37,6 @@
   .body {
     flex: 1;
     margin: var(--padding) 0;
-
-    &.edit {
-      overflow-y: scroll;
-    }
   }
 
   .footer {

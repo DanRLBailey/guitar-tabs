@@ -61,11 +61,27 @@
   }
 
   .editContainer {
-    .editLine {
-      margin-bottom: var(--padding);
+    .editBody {
+      max-height: 70vh;
+      overflow-y: auto;
 
-      > div {
-        margin-right: var(--padding-half);
+      .editLine {
+        margin-bottom: var(--padding);
+
+        > div {
+          margin-right: var(--padding-half);
+        }
+      }
+    }
+
+    .editFooter {
+      display: flex;
+      width: 100%;
+      margin-top: var(--padding);
+      gap: var(--padding);
+
+      > button {
+        flex: 1;
       }
     }
   }

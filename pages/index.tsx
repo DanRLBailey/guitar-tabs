@@ -1,99 +1,107 @@
-import styles from "../styles/Home.module.scss";
-import Link from "next/link";
-import { SongDB } from "../types/interfaces";
+import InputComponent from "../components/containers/inputComponent";
+import { getSettingsFromStore } from "../lib/localStore";
+import styles from "../styles/Index.module.scss";
 import { useEffect, useState } from "react";
+import { Setting, User } from "../types/interfaces";
+import { loginUser, verifyUser } from "../lib/users";
+import Router from "next/router";
+import { Url } from "url";
 
-export default function Home() {
-  const [filter, setFilter] = useState("");
+export default function Index() {
   const [loading, setLoading] = useState(true);
-  const [songList, setSongList] = useState<SongDB[]>([]);
+  const [user, setUser] = useState<User>({
+    email: "",
+    permissionLevel: "none",
+  });
+  const [tempUser, setTempUser] = useState<Setting>({
+    email: "",
+    password: "",
+  });
 
-  const getSongs = () => {
-    fetch("/api/getSongs")
-      .then((res) => res.json())
-      .then((json) => {
-        setSongList(json);
-        setLoading(false);
-        localStorage.setItem("songs", JSON.stringify(json));
-      });
+  const login = async () => {
+    if (tempUser["email"] == "" || tempUser["password"] == "") return;
+
+    const login = await loginUser(tempUser);
+    console.log("login", login);
+
+    if (login == null) {
+      console.log("not corrext");
+      return;
+    }
+
+    setUser(login as User);
+  };
+
+  const loginAsGuest = async () => {
+    setUser({
+      email: "guest",
+      permissionLevel: "user",
+    } as User);
+
+    setLoading(false);
   };
 
   useEffect(() => {
-    if (songList.length != 0) return;
+    if (!loading) return;
+    const localUser = verifyUser();
 
-    const localSongs = localStorage.getItem("songs");
-    const songs = localSongs ? JSON.parse(localSongs) : null;
-
-    if (!songs || songs.length == 0) getSongs();
-    else {
-      setSongList(songs);
+    if (!localUser) {
       setLoading(false);
+      return;
     }
-  }, [songList]);
+
+    setUser({
+      email: localUser.email,
+      permissionLevel: localUser.permissionLevel,
+    } as User);
+
+    setLoading(false);
+  });
 
   useEffect(() => {
-    setFilter(filter);
-  }, [filter]);
+    if (user.email == "" || user.permissionLevel == "none") return;
 
-  return (
-    <div className={styles.container}>
-      <title>Guitar Tabs - Home</title>
-      <div className={styles.filterContainer}>
-        <input
-          type="text"
-          onChange={(v) => {
-            setFilter(v.target.value);
-          }}
-          placeholder="Filter"
-        />
-        <button
-          onClick={() => {
-            getSongs();
-            setLoading(true);
-          }}
-        >
-          Refresh
-        </button>
-        {/* <Link href={`addSong`} className={`${styles.button} button`}>
-          Add Song
-        </Link> */}
-      </div>
+    const routerPath = { pathname: `/home` } as Url;
 
-      <div className={styles.songList}>
-        {loading && <span>Loading...</span>}
-        {!loading &&
-          songList.length != 0 &&
-          songList
-            .filter(
-              (key, index) =>
-                songList[index].song_name
-                  .toLowerCase()
-                  .includes(filter.toLowerCase()) ||
-                songList[index].song_artist
-                  .toLowerCase()
-                  .includes(filter.toLowerCase())
-            )
-            .sort((a, b) => a.song_name.localeCompare(b.song_name))
-            .map((song, index) => {
-              return (
-                <Link
-                  href={`songs/${song.song_name
-                    .toLowerCase()
-                    .replaceAll(" ", "-")}`}
-                  className={styles.song}
-                  key={index}
-                >
-                  <div className={styles.details}>
-                    <span>{song.song_name}</span>
-                    <span>{song.song_artist}</span>
-                    {(song.timings == "null" || song.timings == "[null]") && (
-                      <span className={styles.details}>Timings Missing</span>
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
-      </div>
-    </div>
+    Router.push(routerPath);
+  }, [user]);
+
+  const title = (title?: string) => (
+    <title>Guitar Tabs{title ? ` - ${title}` : ""}</title>
   );
+
+  if (loading)
+    return (
+      <>
+        {title()}
+        <span>Loading...</span>
+      </>
+    );
+
+  if (user.email == "" || user.permissionLevel == "none")
+    return (
+      <div className={styles.container}>
+        {title("Login")}
+        <InputComponent
+          type="string"
+          value={tempUser["email"] as string}
+          onValueChange={(e) =>
+            setTempUser({ ...tempUser, email: e.target.value })
+          }
+          heading="Email"
+        />
+        <InputComponent
+          type="string"
+          value={tempUser["password"] as string}
+          onValueChange={(e) =>
+            setTempUser({ ...tempUser, password: e.target.value })
+          }
+          heading="Password"
+        />
+        <div className={styles.buttonContainer}>
+          <button onClick={login}>Login</button>
+          <button onClick={loginAsGuest}>Use as Guest</button>
+        </div>
+      </div>
+    );
 }
