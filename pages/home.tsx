@@ -20,6 +20,11 @@ export default function Home() {
         setSongList(json);
         setLoading(false);
         writeSettingToStore("songs", JSON.stringify(json));
+
+        (json as SongDB[]).forEach((song) => {
+          const slug = song.song_name.toLowerCase().replaceAll(" ", "-");
+          writeSettingToStore(slug, JSON.stringify(song));
+        });
       });
   };
 
