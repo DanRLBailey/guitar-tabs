@@ -93,7 +93,7 @@ export default function AddSong() {
   };
 
   const onNextButtonPress = () => {
-    const slug = currentSongMeta.Name.toLowerCase().replace(" ", "-");
+    const slug = currentSongMeta.Name.toLowerCase().replaceAll(" ", "-");
 
     fetch("/api/postSong", {
       method: "POST",
