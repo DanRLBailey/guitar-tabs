@@ -184,7 +184,6 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
         containerId="addLyrics"
         width={20}
         minWidth={20}
-        ignoreLocal
       >
         <>
           <textarea

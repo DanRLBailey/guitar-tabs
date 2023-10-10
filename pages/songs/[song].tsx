@@ -45,21 +45,44 @@ const Song = () => {
     const slug = song.toString();
 
     let store = localStorage.getItem(slug);
-    if (store) setSongDb(JSON.parse(store)[0]);
-    else getSong();
+    let localSong = store ? (JSON.parse(store)[0] as SongDB) : null;
+
+    if (!localSong) {
+      getSongFromDb();
+      return;
+    }
+
+    getTimeFromDb().then((time) => {
+      if (!localSong) return;
+      if (localSong.last_updated < time.last_updated) {
+        getSongFromDb();
+        return;
+      }
+
+      setSongDb(localSong);
+      setLoading(false);
+    });
   }, [song]);
 
-  const getSong = () => {
+  const getSongFromDb = () => {
     fetch("/api/getSong", {
       method: "POST",
       body: JSON.stringify({ songName: song }),
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(JSON.stringify(json));
         if (song) writeSettingToStore(song.toString(), JSON.stringify(json));
         setSongDb(json[0]);
       });
+  };
+
+  const getTimeFromDb = async () => {
+    let data = await fetch("/api/getSongUpdatedTime", {
+      method: "POST",
+      body: JSON.stringify({ songName: song }),
+    });
+    const json = await data.json();
+    return json[0];
   };
 
   const updateSong = () => {
@@ -100,7 +123,7 @@ const Song = () => {
         Key={song as string}
         SongMeta={currentSongMeta}
         Song={currentSong}
-        onSongRefresh={getSong}
+        onSongRefresh={getSongFromDb}
         onSongUpdate={(updatedSong) => setCurrentSong(updatedSong)}
         onSongSave={updateSong}
       />

@@ -20,8 +20,7 @@ export default async (req, res) => {
         parts
       )}', '${JSON.stringify(timings)}', '${
         tabs ? JSON.stringify(tabs) : null
-      }', ${capo ? parseInt(capo) : null}, '${link}', '${slug}')`,
-      //values: [req.body.content],
+      }', ${capo ? parseInt(capo) : null}, '${link}', '${slug}', NOW(), false)`,
     });
 
     res.send(result);

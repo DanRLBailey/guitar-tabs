@@ -4,7 +4,8 @@ import excuteQuery from "../../../lib/db";
 export default async (req, res) => {
   try {
     const result = await excuteQuery({
-      query: "SELECT * FROM songs WHERE user_id = 1 AND deleted = false",
+      query:
+        "SELECT last_updated, slug FROM songs where user_id = 1 AND deleted = false",
     });
 
     res.send(result);

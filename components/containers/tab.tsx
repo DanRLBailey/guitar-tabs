@@ -3,6 +3,9 @@ import styles from "../../styles/containers/Tab.module.scss";
 import { TabItem } from "../../types/interfaces";
 import EditableSpan from "./editableSpan";
 
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+
 interface TabProp {
   tabSections: TabItem[];
   tabName: string;
@@ -37,7 +40,7 @@ export default function Tab(props: TabProp) {
       )
     );
 
-    strings.map((string) => {
+    strings.map((string, index) => {
       spans.push(
         props.editable ? (
           <EditableSpan
@@ -52,6 +55,7 @@ export default function Tab(props: TabProp) {
             isEditing={false}
             onSpanEdited={(val) => editTabNotes(`${string}${val}`, tabIndex)}
             defaultSpan="-"
+            key={index}
           />
         ) : (
           <span>
@@ -144,9 +148,11 @@ export default function Tab(props: TabProp) {
                   ]);
               }}
             >
-              Add
+              <AddIcon />
             </span>
-            <span onClick={removeLatestTabColumn}>Delete</span>
+            <span onClick={removeLatestTabColumn}>
+              <RemoveIcon />
+            </span>
           </div>
         )}
       </div>

@@ -8,6 +8,8 @@ export interface SongDB {
   capo: number
   link: string
   slug: string
+  last_updated: Date
+  deleted: boolean
 }
 
 export interface Song {

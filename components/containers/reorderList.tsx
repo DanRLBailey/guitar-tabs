@@ -71,7 +71,7 @@ export default function ReorderList(props: ReorderListProp) {
     <div className={styles.reorderListContainer}>
       {listItems.map((item, index) => {
         return (
-          <>
+          <div key={index}>
             <div
               key={index}
               className={`${styles.listItem} ${props.className} ${
@@ -135,7 +135,7 @@ export default function ReorderList(props: ReorderListProp) {
                 </div>
               </div>
             )}
-          </>
+          </div>
         );
       })}
     </div>

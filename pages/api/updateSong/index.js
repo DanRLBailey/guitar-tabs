@@ -22,7 +22,7 @@ export default async (req, res) => {
         tabs ? JSON.stringify(tabs) : null
       }', capo = ${
         capo ? parseInt(capo) : null
-      }, link = '${link}' WHERE slug = '${slug}'`,
+      }, link = '${link}', last_updated = NOW() WHERE slug = '${slug}'`,
     });
 
     res.send(result);

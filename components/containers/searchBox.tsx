@@ -7,6 +7,7 @@ interface SearchBoxProp {
   noOfResults?: number;
   allowMultiSelect?: boolean;
   allowCustomResult?: boolean;
+  allowDuplicates?: boolean;
   heading?: string;
 }
 
@@ -29,11 +30,23 @@ export default function SearchBox(props: SearchBoxProp) {
   };
 
   const onSearchResultPress = (item: string) => {
-    if (props.allowMultiSelect) setSelectedResults([...selectedResults, item]);
-    else setSelectedResults([item]);
+    if (
+      !selectedResults.some((result) => result == item) ||
+      props.allowDuplicates
+    ) {
+      if (props.allowMultiSelect)
+        setSelectedResults([...selectedResults, item]);
+      else setSelectedResults([item]);
+    }
 
     setTextVal("");
     setSearchResults([]);
+  };
+
+  const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key == "Enter" && searchResults.length > 0) {
+      onSearchResultPress(searchResults[0]);
+    }
   };
 
   const onSearchSelectedPress = (index: number) => {
@@ -60,6 +73,7 @@ export default function SearchBox(props: SearchBoxProp) {
             placeholder={props.heading}
             value={textVal}
             onChange={(e) => onTextValChange(e.target.value)}
+            onKeyDown={onEnterPress}
           ></input>
           {selectedResults.map((item, index) => {
             return (

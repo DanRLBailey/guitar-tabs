@@ -30,10 +30,8 @@ export default function AddSong() {
     Tabs: {},
   });
   const [chords, setChords] = useState<string[]>([]);
-  const [tabNames, setTabNames] = useState<string[]>([]);
   const [parts, setParts] = useState<string[]>([]);
   const [currentLine, setCurrentLine] = useState<string>("");
-  const [debugOnly, setDebugOnly] = useState<boolean>(true);
 
   const handleTabChange = (newTab: TabObj) => {
     setCurrentSong({
@@ -90,16 +88,11 @@ export default function AddSong() {
     });
 
     sections.push({ ...currentSection });
-    console.log("asdasdasd", sections);
 
     setCurrentSong({ ...currentSong, Parts: sections });
   };
 
   const onNextButtonPress = () => {
-    if (debugOnly) {
-      return;
-    }
-
     const slug = currentSongMeta.Name.toLowerCase().replace(" ", "-");
 
     fetch("/api/postSong", {
@@ -128,15 +121,22 @@ export default function AddSong() {
       });
   };
 
-  useEffect(() => {
-    if (!currentSong.Tabs) return;
+  const onNewTab = (newTabs: string[]) => {
+    let tempTabs = { ...currentSong.Tabs } as TabObj;
 
-    Object.keys(currentSong.Tabs).forEach((tab) => {
-      if (!tabNames.some((tabName) => tabName == tab)) {
-        if (currentSong.Tabs) delete currentSong.Tabs[tab];
-      }
+    Object.keys(tempTabs).forEach((tempTab) => {
+      if (!newTabs.some((t) => t == tempTab)) delete tempTabs[tempTab];
     });
-  }, [tabNames]);
+
+    newTabs.map((tab: string, index) => {
+      if (!tempTabs[tab]) tempTabs[tab] = [];
+    });
+
+    setCurrentSong({
+      ...currentSong,
+      Tabs: { ...tempTabs },
+    });
+  };
 
   useEffect(() => {
     console.log(currentSong.Parts);
@@ -154,10 +154,13 @@ export default function AddSong() {
           setCurrentLine(newCurrentLine)
         }
         chords={chords}
-        tabs={tabNames}
+        tabs={currentSong.Tabs ? Object.keys(currentSong.Tabs) : []}
       />
-      {tabNames.length > 0 && (
-        <AddSongTab tabNames={tabNames} onTabChanged={handleTabChange} />
+      {currentSong.Tabs && Object.keys(currentSong.Tabs).length > 0 && (
+        <AddSongTab
+          tabs={currentSong.Tabs ?? null}
+          onTabChanged={handleTabChange}
+        />
       )}
       {currentSongMeta.Name != "" &&
         currentSongMeta.Artist != "" &&
@@ -208,13 +211,13 @@ export default function AddSong() {
           <SearchBox
             heading="Chords"
             searchResults={getAllChordVariations()}
-            onSelectedResultsChange={(res) => setChords(res)}
+            onSelectedResultsChange={setChords}
             allowMultiSelect
           />
           <SearchBox
             heading="Tabs"
             searchResults={[]}
-            onSelectedResultsChange={(res) => setTabNames(res)}
+            onSelectedResultsChange={onNewTab}
             allowMultiSelect
             allowCustomResult
           />

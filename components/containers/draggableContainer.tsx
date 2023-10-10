@@ -21,23 +21,18 @@ interface DraggableContainerProps {
   children?: React.ReactElement;
   icon?: React.ReactElement;
   taskbarIndex?: number;
-  ignoreLocal?: boolean;
 }
 
 export default function DraggableContainer(props: DraggableContainerProps) {
-  const localPos = !props.ignoreLocal
-    ? localStorage.getItem(`pos-${props.containerId}`)
-    : "";
-  const localMinimised = !props.ignoreLocal
-    ? localStorage.getItem(`minimised-${props.containerId}`)
-    : "";
+  const [localPos, setLocalPos] = useState<string | null>(null);
+  const [localMinimised, setLocalMinimised] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const padding = { x: 1.09, y: 1.7 };
 
   const [mousePos, setMousePos] = useState<Dimension>({ x: 0, y: 0 });
   const [currentPos, setCurrentPos] = useState<Dimension>({
-    x: localPos ? JSON.parse(localPos).x : padding.x,
-    y: localPos ? JSON.parse(localPos).y : padding.y,
+    x: padding.x,
+    y: padding.y,
   });
   const [offset, setOffset] = useState<Dimension>({ x: 0, y: 0 });
   const [prevOffset, setPrevOffset] = useState<Dimension>({ x: 0, y: 0 });
@@ -46,6 +41,22 @@ export default function DraggableContainer(props: DraggableContainerProps) {
   const [minimised, setMinimised] = useState<boolean>(
     localMinimised ? localMinimised == "true" : false
   );
+
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setLocalPos(localStorage.getItem(`pos-${props.containerId}`));
+    setLocalMinimised(localStorage.getItem(`minimised-${props.containerId}`));
+  });
+
+  useEffect(() => {
+    setCurrentPos({
+      x: localPos ? JSON.parse(localPos).x : padding.x,
+      y: localPos ? JSON.parse(localPos).y : padding.y,
+    });
+
+    setLoading(false);
+  }, [localPos]);
 
   const getTaskbarIndex = (containerId: string) => {
     if (!props.minimisable) return;
@@ -170,48 +181,51 @@ export default function DraggableContainer(props: DraggableContainerProps) {
     return percentPos;
   };
 
-  return (
-    <>
-      {!minimised && (
-        <div
-          className={`${styles.draggableContainer} ${popupStyles.popupContainer} ${props.containerClassName}`}
-          id={`draggable-${props.containerId}`}
-          style={{
-            top: `${currentPos.y}%`,
-            left: `${currentPos.x}%`,
-            width: `${props.width}%`,
-            minWidth: props.minWidth,
-            maxHeight: `${props.maxHeight ?? 96.5}%`,
-            userSelect: dragging ? "none" : "auto",
-          }}
-          onMouseUp={() => {
-            setDragging(false);
-          }}
-          onMouseLeave={() => {
-            setDragging(false);
-          }}
-          ref={ref}
-        >
-          <div className={styles.header}>
-            {props.minimisable && (
+  if (!loading)
+    return (
+      <>
+        {!minimised && (
+          <div
+            className={`${styles.draggableContainer} ${popupStyles.popupContainer} ${props.containerClassName}`}
+            id={`draggable-${props.containerId}`}
+            style={{
+              top: `${currentPos.y}%`,
+              left: `${currentPos.x}%`,
+              width: `${props.width}%`,
+              minWidth: props.minWidth,
+              maxHeight: `${props.maxHeight ?? 96.5}%`,
+              userSelect: dragging ? "none" : "auto",
+            }}
+            onMouseUp={() => {
+              setDragging(false);
+            }}
+            ref={ref}
+          >
+            <div className={styles.header}>
+              {props.minimisable && (
+                <div
+                  className={styles.minimise}
+                  onClick={() => setMinimised(!minimised)}
+                >
+                  <ExpandMoreIcon />
+                </div>
+              )}
               <div
-                className={styles.minimise}
-                onClick={() => setMinimised(!minimised)}
+                className={styles.drag}
+                onMouseDown={() => setDragging(true)}
               >
-                <ExpandMoreIcon />
+                <DragHandleIcon />
+                {props.title && <h4>{props.title}</h4>}
               </div>
-            )}
-            <div className={styles.drag} onMouseDown={() => setDragging(true)}>
-              <DragHandleIcon />
-              {props.title && <h4>{props.title}</h4>}
+            </div>
+            <div className={`${styles.body} ${props.bodyClassName}`}>
+              {props.children}
             </div>
           </div>
-          <div className={`${styles.body} ${props.bodyClassName}`}>
-            {props.children}
-          </div>
-        </div>
-      )}
-      <div>{props.minimisable && taskbarIcon}</div>
-    </>
-  );
+        )}
+        <div>{props.minimisable && taskbarIcon}</div>
+      </>
+    );
+
+  return <></>;
 }

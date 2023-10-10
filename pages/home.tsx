@@ -12,7 +12,8 @@ export default function Home() {
 
   const [allowEdit, setAllowEdit] = useState<boolean>(false);
 
-  const getSongs = () => {
+  const getSongsFromDb = () => {
+    console.log("getting songs");
     fetch("/api/getSongs")
       .then((res) => res.json())
       .then((json) => {
@@ -22,17 +23,38 @@ export default function Home() {
       });
   };
 
+  const getTimesFromDb = async () => {
+    let data = await fetch("/api/getSongUpdatedTimes");
+    const json = await data.json();
+    return json;
+  };
+
   useEffect(() => {
     if (songList.length != 0) return;
 
     const localSongs = localStorage.getItem("songs");
-    const songs = localSongs ? JSON.parse(localSongs) : null;
+    const songs = localSongs ? (JSON.parse(localSongs) as SongDB[]) : null;
+    if (!songs) {
+      getSongsFromDb();
+      return;
+    }
 
-    if (!songs || songs.length == 0) getSongs();
-    else {
+    getTimesFromDb().then((times) => {
+      if (times.length != songs.length) {
+        getSongsFromDb();
+        return;
+      }
+
+      songs?.forEach((song, index) => {
+        if (song.last_updated < times[index].last_updated) {
+          getSongsFromDb();
+          return;
+        }
+      });
+
       setSongList(songs);
       setLoading(false);
-    }
+    });
   }, [songList]);
 
   useEffect(() => {
@@ -57,14 +79,6 @@ export default function Home() {
           }}
           placeholder="Filter"
         />
-        <button
-          onClick={() => {
-            getSongs();
-            setLoading(true);
-          }}
-        >
-          Refresh
-        </button>
         {allowEdit && (
           <Link href={`addSong`} className={`${styles.button} button`}>
             Add Song
