@@ -75,7 +75,7 @@ export default function Chord(props: ChordProps) {
 
   function transposeOriginalChord(amount: number) {
     const chordParts = separateChordParts(props.chordName);
-    const roots = getChordRoots().filter((root) => !root.includes("b"));
+    const roots = getChordRoots();
 
     const prefixIndex = roots.indexOf(chordParts[0]);
     let prefixIncrement = mod(prefixIndex + amount, roots.length);

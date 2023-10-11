@@ -16,6 +16,7 @@ import InputComponent from "../components/containers/inputComponent";
 import AddSongTab from "../components/addSong/addSongTabs";
 import { getAllChordVariations } from "../lib/chords";
 import Router from "next/router";
+import NavBar from "../components/navBar";
 
 export default function AddSong() {
   const [currentSongMeta, setCurrentSongMeta] = useState<SongMetaDetails>({
@@ -138,37 +139,36 @@ export default function AddSong() {
     });
   };
 
-  useEffect(() => {
-    console.log(currentSong.Parts);
-  }, [currentSong.Parts]);
-
   return (
-    <div className={styles.addSongContainer}>
-      <title>Guitar Tabs - Add Song</title>
-      {getMetaDetails()}
-      <AddSongLyrics
-        parts={parts}
-        currentLine={currentLine}
-        onPartsChange={handlePartsChange}
-        onCurrentLineChange={(newCurrentLine: string) =>
-          setCurrentLine(newCurrentLine)
-        }
-        chords={chords}
-        tabs={currentSong.Tabs ? Object.keys(currentSong.Tabs) : []}
-      />
-      {currentSong.Tabs && Object.keys(currentSong.Tabs).length > 0 && (
-        <AddSongTab
-          tabs={currentSong.Tabs ?? null}
-          onTabChanged={handleTabChange}
+    <>
+      <NavBar />
+      <div className={styles.addSongContainer}>
+        <title>Guitar Tabs - Add Song</title>
+        {getMetaDetails()}
+        <AddSongLyrics
+          parts={parts}
+          currentLine={currentLine}
+          onPartsChange={handlePartsChange}
+          onCurrentLineChange={(newCurrentLine: string) =>
+            setCurrentLine(newCurrentLine)
+          }
+          chords={chords}
+          tabs={currentSong.Tabs ? Object.keys(currentSong.Tabs) : []}
         />
-      )}
-      {currentSongMeta.Name != "" &&
-        currentSongMeta.Artist != "" &&
-        currentSong.Link != "" &&
-        currentSong.Parts.length > 0 && (
-          <button onClick={onNextButtonPress}>Next</button>
+        {currentSong.Tabs && Object.keys(currentSong.Tabs).length > 0 && (
+          <AddSongTab
+            tabs={currentSong.Tabs ?? null}
+            onTabChanged={handleTabChange}
+          />
         )}
-    </div>
+        {currentSongMeta.Name != "" &&
+          currentSongMeta.Artist != "" &&
+          currentSong.Link != "" &&
+          currentSong.Parts.length > 0 && (
+            <button onClick={onNextButtonPress}>Next</button>
+          )}
+      </div>
+    </>
   );
 
   function getMetaDetails() {
@@ -184,6 +184,7 @@ export default function AddSong() {
               setCurrentSongMeta({ ...currentSongMeta, Name: e.target.value })
             }
           />
+          {/* TODO: Change artist to a search box of all the artists */}
           <InputComponent
             type="text"
             heading="Artist"

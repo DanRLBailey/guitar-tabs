@@ -12,9 +12,9 @@ export function determineType(chord: string) {
 export function separateChordParts(chord: string) {
   const keys = Object.keys(chords);
   const matching = keys.filter((key) => chord.startsWith(key));
-
+  
   if (!matching || matching.length == 0) return [];
-
+  
   const prefix = matching[matching.length - 1];
   const suffix = chord.slice(prefix.length);
 

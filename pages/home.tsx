@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import { writeSettingToStore } from "../lib/localStore";
 import { logoutUser, verifyUser } from "../lib/users";
 
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import NavBar from "../components/navBar";
+
 export default function Home() {
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
@@ -76,21 +80,25 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <title>Guitar Tabs - Home</title>
-      <div className={styles.filterContainer}>
-        <input
-          type="text"
-          onChange={(v) => {
-            setFilter(v.target.value);
-          }}
-          placeholder="Filter"
-        />
-        {allowEdit && (
-          <Link href={`addSong`} className={`${styles.button} button`}>
-            Add Song
-          </Link>
-        )}
-        <button onClick={logoutUser}>Logout</button>
-      </div>
+      <NavBar>
+        <div className={styles.filterContainer}>
+          <input
+            type="text"
+            onChange={(v) => {
+              setFilter(v.target.value);
+            }}
+            placeholder="Filter"
+          />
+          {allowEdit && (
+            <Link href={`addSong`} className={`${styles.button}`}>
+              <AddCircleIcon />
+            </Link>
+          )}
+          <button onClick={logoutUser}>
+            <LogoutIcon />
+          </button>
+        </div>
+      </NavBar>
 
       <div className={styles.songList}>
         {loading && <span>Loading...</span>}

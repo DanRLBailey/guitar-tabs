@@ -237,13 +237,13 @@ export default function SongPage(props: TabPageProp) {
                 settingText="TODO: Recording Mode"
                 type="checkbox"
               /> */}
-              <SettingToggle
+              {/* <SettingToggle
                 value={{ ["transpose"]: settings["transpose"] }}
                 onSettingChange={(setting) => onSettingChange(setting)}
-                settingText="Transpose"
+                settingText="TODO: Fix the Transpose"
                 type="spinner"
                 optionsValues={[-1, 1]}
-              />
+              /> */}
               {settings["editing"] && (
                 <SettingToggle
                   onSettingChange={props.onSongRefresh}

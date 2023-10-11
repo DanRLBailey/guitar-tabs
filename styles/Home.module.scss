@@ -1,20 +1,25 @@
 .container {
-  padding: 0 var(--padding-double);
+  padding: var(--padding-triple) var(--padding-double);
 
   .filterContainer {
     display: flex;
     align-items: flex-end;
     gap: var(--padding);
+    justify-content: center;
+    align-items: center;
 
     button,
     .button {
       display: flex;
       justify-content: center;
       align-items: center;
+      width: fit-content;
+      background-color: transparent;
     }
 
     input {
       flex: 1;
+      margin: 0;
     }
   }
 

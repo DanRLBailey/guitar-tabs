@@ -8,6 +8,7 @@ import {
   Song as SongType,
 } from "../../types/interfaces";
 import { writeSettingToStore } from "../../lib/localStore";
+import NavBar from "../../components/navBar";
 
 const Song = () => {
   const router = useRouter();
@@ -115,18 +116,27 @@ const Song = () => {
       });
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <>
+        <NavBar />
+        <p>Loading...</p>
+      </>
+    );
 
   if (currentSongMeta !== null && currentSong !== null)
     return (
-      <SongPage
-        Key={song as string}
-        SongMeta={currentSongMeta}
-        Song={currentSong}
-        onSongRefresh={getSongFromDb}
-        onSongUpdate={(updatedSong) => setCurrentSong(updatedSong)}
-        onSongSave={updateSong}
-      />
+      <>
+        <NavBar />
+        <SongPage
+          Key={song as string}
+          SongMeta={currentSongMeta}
+          Song={currentSong}
+          onSongRefresh={getSongFromDb}
+          onSongUpdate={(updatedSong) => setCurrentSong(updatedSong)}
+          onSongSave={updateSong}
+        />
+      </>
     );
 
   return <p>No song found.</p>;

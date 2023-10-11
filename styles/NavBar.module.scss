@@ -1,0 +1,17 @@
+.navBarContainer {
+  position: fixed;
+  width: 100%;
+  padding: var(--padding) var(--padding-double);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: black;
+  z-index: 1;
+
+  .childrenContainer {
+    flex: 1;
+    margin-left: var(--padding);
+  }
+}

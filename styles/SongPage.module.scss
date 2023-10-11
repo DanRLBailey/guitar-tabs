@@ -3,6 +3,7 @@
 .container {
   display: flex;
   flex-direction: row;
+  padding-top: var(--padding-triple);
 
   .songContainer {
     flex: 1;

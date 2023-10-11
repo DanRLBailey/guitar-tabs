@@ -35,16 +35,22 @@
     }
 
     .buttonContainer {
-      margin-top: var(--padding);
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--padding);
+      h3 {
+        margin: var(--padding-triple) 0 0 0;
+      }
 
-      button {
-        width: 100%;
+      .buttons {
+        margin-top: var(--padding);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--padding);
 
-        &:first-of-type {
-          background-color: var(--accent);
+        button {
+          width: 100%;
+
+          &:first-of-type {
+            background-color: var(--accent);
+          }
         }
       }
     }

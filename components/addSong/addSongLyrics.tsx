@@ -34,14 +34,18 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
     left: -100,
   });
   const [currentWord, setCurrentWord] = useState<number[]>([-1, -1]);
-  const [currentWordType, setCurrentWordType] = useState<string>("");
   const [parts, setParts] = useState<string[]>(props.parts);
   const [listItems, setListItems] = useState<React.ReactElement[]>(
     getListItems()
   );
+  const [existingSections, setExistingSections] = useState<[string[]]>([[]]);
 
   const addNewSection = (text: string) => {
     props.onPartsChange([...parts, `[${text}]`]);
+  };
+
+  const addExistingSection = (section: string[]) => {
+    props.onPartsChange([...parts, ...section]);
   };
 
   const addNewLines = () => {
@@ -163,11 +167,47 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
   useEffect(() => {
     setParts(props.parts);
     setListItems(getListItems());
+
+    let sections: [string[]] = [[]];
+    let currentSection: string[] = [];
+
+    props.parts.forEach((part) => {
+      if (part.startsWith("[")) {
+        if (currentSection.length > 0) {
+          sections.push(currentSection);
+        }
+
+        currentSection = [];
+        currentSection.push(part);
+        return;
+      }
+
+      currentSection.push(part);
+    });
+
+    if (currentSection.length > 0) {
+      sections.push(currentSection);
+    }
+
+    let uniqueSections: [string[]] = [[]];
+
+    sections.forEach((section) => {
+      if (uniqueSections.some((us) => us[0] == section[0])) return;
+      uniqueSections.push(section);
+    });
+
+    setExistingSections(
+      uniqueSections.filter((section) => section.length > 0) as [string[]]
+    );
   }, [props.parts]);
 
   useEffect(() => {
     setListItems(getListItems());
   }, [parts, popupPos]);
+
+  useEffect(() => {
+    console.log(existingSections);
+  }, [existingSections]);
 
   return (
     <div className={styles.addSongLyricsContainer}>
@@ -192,14 +232,33 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
             value={props.currentLine}
           ></textarea>
           <div className={styles.buttonContainer}>
-            <button onClick={addNewLines}>Add</button>
-            {newSections.map((section, index) => {
-              return (
-                <button key={index} onClick={() => addNewSection(section)}>
-                  {section}
-                </button>
-              );
-            })}
+            <div className={styles.buttons}>
+              <button onClick={addNewLines}>Add</button>
+              {newSections.map((section, index) => {
+                return (
+                  <button key={index} onClick={() => addNewSection(section)}>
+                    {section}
+                  </button>
+                );
+              })}
+            </div>
+            {existingSections.length > 0 && (
+              <>
+                <h3>Repeat Sections</h3>
+                <div className={styles.buttons}>
+                  {existingSections.map((section, index) => {
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => addExistingSection(section)}
+                      >
+                        {section[0]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </>
       </DraggableContainer>
