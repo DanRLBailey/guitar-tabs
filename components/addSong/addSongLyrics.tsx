@@ -178,7 +178,7 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
         }
 
         currentSection = [];
-        currentSection.push(part);
+        currentSection.push(part.split("*")[0]);
         return;
       }
 

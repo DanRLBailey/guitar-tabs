@@ -27,8 +27,8 @@ export default function AddSongTab(props: AddSongTabsProp) {
     <DraggableContainer
       title="Add Tabs"
       containerId="addTabs"
-      width={30}
-      minWidth={30}
+      width={45}
+      minWidth={45}
       maxHeight={50}
       minimisable
       icon={<ViewListIcon />}

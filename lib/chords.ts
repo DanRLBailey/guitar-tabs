@@ -2,8 +2,8 @@ import chords from "../public/chords/chords.json";
 import { Chords } from "../types/interfaces";
 
 export function determineType(chord: string) {
-  const keys = Object.keys(chords);
-  const matching = keys.filter((key) => chord.startsWith(key));
+  const chordVariations = getAllChordVariations();
+  const matching = chordVariations.filter((variation) => chord == variation);
 
   if (!matching || matching.length == 0) return "tab";
   return "chord";

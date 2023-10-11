@@ -170,8 +170,8 @@ export default function SongPage(props: TabPageProp) {
           {activeChord && determineType(activeChord) == "tab" && (
             <DraggableContainer
               containerId="tab-diagram-active"
-              width={30}
-              minWidth={30}
+              width={45}
+              minWidth={45}
             >
               <Tab
                 tabSections={getTabByName(activeChord)}
@@ -192,8 +192,8 @@ export default function SongPage(props: TabPageProp) {
           {hoveredChord && determineType(hoveredChord) == "tab" && (
             <DraggableContainer
               containerId="tab-diagram-hover"
-              width={30}
-              minWidth={30}
+              width={45}
+              minWidth={45}
             >
               <Tab
                 tabSections={getTabByName(hoveredChord)}
