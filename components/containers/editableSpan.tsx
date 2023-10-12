@@ -6,12 +6,19 @@ interface EditableSpanProp {
   isEditing: boolean;
   className?: string;
   onSpanEdited?: (newValue: string) => void;
+  onStartEditing: (index: number) => void;
   defaultSpan: string;
+  spanIndex: number;
 }
 
 export default function EditableSpan(props: EditableSpanProp) {
   const [value, setValue] = useState<string>(props.value);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  const onStartEditing = () => {
+    setIsEditing(true);
+    props.onStartEditing(props.spanIndex);
+  };
 
   const onFinishedEditing = (e: React.KeyboardEvent) => {
     if (e.key == "Enter") {
@@ -27,6 +34,8 @@ export default function EditableSpan(props: EditableSpanProp) {
 
   useEffect(() => {
     setIsEditing(props.isEditing);
+    if (value == "") setValue(props.defaultSpan);
+    if (props.onSpanEdited) props.onSpanEdited(value);
   }, [props.isEditing]);
 
   useEffect(() => {
@@ -48,7 +57,7 @@ export default function EditableSpan(props: EditableSpanProp) {
 
   return (
     <div className={`${styles.editableSpanContainer} ${props.className}`}>
-      <span onClick={() => setIsEditing(true)}>{value}</span>
+      <span onClick={onStartEditing}>{value}</span>
     </div>
   );
 }

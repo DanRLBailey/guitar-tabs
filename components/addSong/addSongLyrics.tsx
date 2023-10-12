@@ -205,10 +205,6 @@ export default function AddSongLyrics(props: AddSongLyricsProp) {
     setListItems(getListItems());
   }, [parts, popupPos]);
 
-  useEffect(() => {
-    console.log(existingSections);
-  }, [existingSections]);
-
   return (
     <div className={styles.addSongLyricsContainer}>
       <h1>Lyrics</h1>
