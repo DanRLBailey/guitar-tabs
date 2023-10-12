@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/containers/Toaster.module.scss";
+import Toast from "./toast";
 
 interface ToasterProp {
   newToast?: string;
@@ -28,13 +29,12 @@ export default function Toaster(props: ToasterProp) {
     <div className={styles.toasterContainer}>
       {toasts.map((toast, toastIndex) => {
         return (
-          <div
+          <Toast
             key={toastIndex}
-            className={styles.toast}
-            onClick={() => removeToast(toastIndex)}
-          >
-            {toast}
-          </div>
+            toastIndex={toastIndex}
+            toast={toast}
+            onToastClick={() => removeToast(toastIndex)}
+          />
         );
       })}
     </div>

@@ -19,7 +19,7 @@ const Song = () => {
   const [currentSong, setCurrentSong] = useState<SongType | null>(null);
   const [loading, setLoading] = useState(true);
   const [songDb, setSongDb] = useState<SongDB>();
-  const [newToast, setNewToast] = useState<string | null>(null);
+  const [newToast, setNewToast] = useState<string | null>("null");
 
   useEffect(() => {
     if (!songDb) return;

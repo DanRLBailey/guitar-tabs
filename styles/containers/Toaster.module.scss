@@ -4,10 +4,7 @@
   right: 0;
   padding: var(--padding);
   z-index: 10;
-
-  .toast {
-    padding: var(--padding);
-    border-radius: var(--border-radius);
-    background-color: var(--success);
-  }
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding);
 }
