@@ -9,6 +9,7 @@ import {
 } from "../../types/interfaces";
 import { writeSettingToStore } from "../../lib/localStore";
 import NavBar from "../../components/navBar";
+import Toaster from "../../components/containers/toaster";
 
 const Song = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const Song = () => {
   const [currentSong, setCurrentSong] = useState<SongType | null>(null);
   const [loading, setLoading] = useState(true);
   const [songDb, setSongDb] = useState<SongDB>();
+  const [newToast, setNewToast] = useState<string | null>(null);
 
   useEffect(() => {
     if (!songDb) return;
@@ -89,7 +91,7 @@ const Song = () => {
   const updateSong = () => {
     if (!currentSong || !currentSongMeta) return;
 
-    const slug = currentSongMeta.Name.toLowerCase().replace(" ", "-");
+    const slug = currentSongMeta.Name.toLowerCase().replaceAll(" ", "-");
 
     fetch("/api/updateSong", {
       method: "POST",
@@ -112,7 +114,10 @@ const Song = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
+        setNewToast("Song Updated!");
+      })
+      .catch((err) => {
+        setNewToast(err);
       });
   };
 
@@ -128,6 +133,10 @@ const Song = () => {
     return (
       <>
         <NavBar />
+        <Toaster
+          newToast={newToast ?? ""}
+          onNewToastAdded={() => setNewToast(null)}
+        />
         <SongPage
           Key={song as string}
           SongMeta={currentSongMeta}

@@ -17,6 +17,7 @@ import AddSongTab from "../components/addSong/addSongTabs";
 import { getAllChordVariations } from "../lib/chords";
 import Router from "next/router";
 import NavBar from "../components/navBar";
+import Toaster from "../components/containers/toaster";
 
 export default function AddSong() {
   const [currentSongMeta, setCurrentSongMeta] = useState<SongMetaDetails>({
@@ -33,6 +34,7 @@ export default function AddSong() {
   const [chords, setChords] = useState<string[]>([]);
   const [parts, setParts] = useState<string[]>([]);
   const [currentLine, setCurrentLine] = useState<string>("");
+  const [newToast, setNewToast] = useState<string | null>(null);
 
   const handleTabChange = (newTab: TabObj) => {
     setCurrentSong({
@@ -142,6 +144,10 @@ export default function AddSong() {
   return (
     <>
       <NavBar />
+      <Toaster
+        newToast={newToast ?? ""}
+        onNewToastAdded={() => setNewToast(null)}
+      />
       <div className={styles.addSongContainer}>
         <title>Guitar Tabs - Add Song</title>
         {getMetaDetails()}
