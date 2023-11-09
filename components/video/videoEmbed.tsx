@@ -166,7 +166,7 @@ export default function VideoEmbed(props: VideoEmbedProps) {
                 value={{ speed: playerSettings["speed"] }}
                 onSettingChange={(setting) => onSettingChange(setting)}
                 settingText="Speed"
-                optionsValues={[0.75, 1, 1.5]}
+                optionsValues={[0.65, 0.75, 1, 1.5]}
                 type="radio"
               />
             </div>

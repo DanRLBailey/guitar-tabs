@@ -6,7 +6,7 @@ export function getSettingsFromStore(setting: string, fallback?: number | boolea
       case "boolean":
         return local == "true";
       case "number":
-        return parseInt(local);
+        return parseFloat(local);
       default:
         return local
     }
